@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import cookie from 'js-cookie';
 
 const Loginfrm = () => {
 
@@ -18,7 +19,7 @@ const Loginfrm = () => {
     try {
       const url = "http://localhost:8080/api/auth";
       const { data: res } = await axios.post(url, data);
-      localStorage.setItem("token", res.data);
+      cookie.set("jwtoken", res.data, {expires: 7});
       window.location = "/dashboard";
       console.log(res.message);
     } catch (error) {

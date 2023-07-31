@@ -5,6 +5,7 @@ const passwordComplexity = require("joi-password-complexity");
 const Joi = require('joi');
 const dotenv = require("dotenv")
 
+//Defining User Schema in Database
 const userSchema = new mongoose.Schema({
     name: {type: String, required: true},
     enrollment: {type: String, required: true},
@@ -13,6 +14,7 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: true},
 })
 
+//Generating or Creating JWT Token
 userSchema.methods.generateAuthToken = function () {
 	const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
 		expiresIn: "7d",
@@ -22,6 +24,8 @@ userSchema.methods.generateAuthToken = function () {
 
 const User = mongoose.model('user', userSchema);
 
+
+//Validating Data of User
 const validate = (data) => {
     const schema = Joi.object({
         name: Joi.string().required().label("Name"),

@@ -9,15 +9,19 @@ router.post("/", async (req, res) => {
 			console.log(error)
 			return res.status(400).send({ message: error.details[0].message });
 		}
+
+		//Checking if email already exist
 		const user = await User.findOne({ email: req.body.email });
 		if (user)
 			return res
 				.status(409)
 				.send({ message: "User with given email already Exist!" });
 
+		// Password Hashing
 		const salt = await bcrypt.genSalt(Number(process.env.SALT));
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
 
+		//Updating Hashed Password and Saving in Database
 		await new User({ ...req.body, password: hashPassword }).save();
 		res.status(201).send({ message: "User created successfully" });
 	} catch (error) {

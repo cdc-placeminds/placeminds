@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-// const dotenv = require("dotenv");
 require ("dotenv").config();
 
 
@@ -10,9 +9,7 @@ module.exports = () => {
         useUnifiedTopology: true
     };
 
-    const uri = 'mongodb+srv://'+ process.env.SALT+':'+process.env.MONGO_PASS+'@cluster0.7gseivw.mongodb.net/firstdatabase?retryWrites=true&w=majority'
-    
-    console.log(uri)
+    const uri = 'mongodb+srv://'+ process.env.MONGO_USER+':'+process.env.MONGO_PASS+'@cluster0.7gseivw.mongodb.net/firstdatabase?retryWrites=true&w=majority'
     
     try {
         mongoose.connect(uri, connectionParams);
