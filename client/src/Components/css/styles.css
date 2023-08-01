@@ -1,0 +1,514 @@
+body {
+    background-color: #f6f9ff;
+
+}
+
+
+.profile {
+    background-color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    padding-top: 3%;
+    text-align: center;
+    border: 1px solid rgba(96, 96, 96, 0.255);
+    border-radius: 12px;
+    margin-top: 1%;
+}
+
+.profimg {
+
+    border-radius: 10%;
+}
+
+ /* Profile Accordian  */
+
+.accordion-item {
+    margin: 8px;
+    border: 0.3px solid #676767;
+    border-radius: 4px;
+}
+
+.accordion-title {
+    width: 100%;
+    background-color: white;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    color: black;
+    letter-spacing: 0.3px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.accordion-content {
+    display: block;
+    padding: 5px;
+    background-color: #f6f9ff;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    color: black;
+    letter-spacing: 0.3px;
+}
+
+.stddetails{
+    margin-top: 10%
+}
+
+/* Student Profile */
+
+.stdprfl{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+.stdprfl_head{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stdprfl_head p{
+    margin-bottom: 4px !important;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #676767;
+}
+
+.stdprfl_body{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stdprfl_body p{
+    margin-bottom: 4px !important;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: black;
+    letter-spacing: 0.3px;
+}
+
+/* drive section  */
+
+
+.drivesecheading {
+    font-family: 'Outfit', sans-serif;
+    padding: 4%;
+    display: flex;
+    color: #1f3b66;
+}
+
+.drivesecheading span {
+    font-size: 43px;
+    display: flex;
+    align-items: center;
+
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
+}
+
+/* statusbar */
+
+.statusbar {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: white;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(96, 96, 96, 0.255);
+    border-radius: 12px;
+}
+
+.verline {
+    border-right: 1.5px solid rgba(96, 96, 96, 0.255);
+    margin: 2% 0;
+}
+
+.countdiv p {
+    margin-bottom: 0 !important;
+}
+
+.countdiv {
+    margin: 1% 0;
+}
+
+.subheading {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.subcount {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    font-size: 30px;
+    color: #1f3b66;
+}
+
+.disccount .subcount {
+    border: 3px solid green;
+    border-radius: 12px;
+    margin: 0 -7%;
+}
+
+/* DriveCard */
+
+.drivecard {
+    background-color: white;
+    border-radius: 12px;
+    border: 1px solid rgba(96, 96, 96, 0.255);
+    margin: 2% 0;
+    padding: 2% 3%;
+}
+
+.drivecard p {
+    margin-bottom: 0 !important;
+}
+
+.horline {
+    border-top: 2px solid rgba(96, 96, 96, 0.422);
+    margin: 0 2%;
+}
+
+.drivecard .compdet {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3% 1%;
+
+}
+
+.comprole {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: black;
+    letter-spacing: 0.3px;
+}
+
+.compname {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #676767;
+}
+
+.comptime {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #676767;
+}
+
+.drivecard .compdisc {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.drivecard .compbtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 3% 1%;
+}
+
+.comphead {
+    display: flex;
+    align-items: center;
+}
+
+.compbtn .stdapl {
+    display: flex;
+    align-items: flex-end;
+}
+
+.stdapl p {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #676767;
+    margin-bottom: 0 !important;
+    margin-top: 1%;
+}
+
+.compdiscdiv p {
+    margin-bottom: 0 !important;
+}
+
+.compdiscdiv {
+    margin: 1% 0;
+}
+
+.compdisc .head {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #676767;
+}
+
+.compdisc .subhead {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: black;
+    letter-spacing: 0.3px;
+}
+
+.groupicon {
+    padding-top: 15px;
+    font-size: 22px;
+    margin-right: 7px;
+}
+
+.complogo {
+    width: 78px;
+    padding: 4px;
+}
+
+.imgborder {
+    display: flex;
+    border: 2px solid rgba(0, 0, 0, 0.433);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 7px;
+}
+
+.drvbtns {
+    width: 25%;
+}
+
+.viewdtl {
+    background-color: white;
+    border: 2px solid #1f3b66;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 400px;
+    color: #676767;
+    margin-right: 7px;
+    padding: 2% 3%;
+}
+
+.apnow {
+    background-color: #1f3b66;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 400px;
+    color: white;
+    padding: 2% 6.5%;
+}
+
+
+/* home page  */
+
+.homebody {
+    /* background-image: url("../images/cdcbck.jpg"); */
+    /* backdrop-filter: brightness(0.7) blur(3px); */
+    /* filter: grayscale(1) opacity(0.5); */
+    min-height: 100vh;
+    /* background-size: 110%;
+    background-position-x: 78%; */
+}
+
+.homebody::before {
+    min-height: 100vh;
+    background-size: 110%;
+    background-position-x: 78%;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("../images/cdcbck.jpg");
+    filter: brightness(0.7) blur(3px);
+    z-index: -1;
+}
+
+
+
+.homhead {
+    height: 100vh;
+    padding-top: 6%;
+}
+
+.homelogo {
+    width: 70px;
+}
+
+.cdchead {
+    display: flex;
+}
+
+.cdcline {
+    border-right: 4px solid white;
+}
+
+.cdcttl {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 45px;
+    color: white;
+    margin-left: 15px;
+    line-height: 50px;
+}
+
+.cdcttl span {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 200;
+    font-size: 45px;
+    color: white;
+}
+
+.homettl {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.loginsec {
+    min-height: 500px;
+}
+
+.homettl p {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: white;
+    line-height: 35px;
+}
+
+.homettl p span {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+    color: white;
+}
+
+.cdchrline {
+    border-bottom: 1.5px solid white;
+    margin-right: 70px;
+    margin-top: -10px;
+}
+
+/* login form */
+
+.signinsec {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    padding: 0 10%;
+    margin: 5% 15%;
+    background-color: white;
+    border: 1px solid #676767;
+    border-radius: 12px;
+}
+
+.lgnhead {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: #676767;
+    letter-spacing: 0.3px;
+}
+
+.lgnform {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 125px;
+}
+
+.lgnform p {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #676767;
+    margin-bottom: 0;
+}
+
+.lgnbtns p {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #1f3b66;
+}
+
+/* SignUp Form  */
+
+.signupsec {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: white;
+    border: 1px solid #676767;
+    border-radius: 12px;
+    padding: 1% 5%;
+    margin: 5% 15%;
+    height: 450px;
+}
+
+.sgnhead {
+    display: flex;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: #676767;
+    letter-spacing: 0.3px;
+}
+
+.sgnbody {
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.sgnbody div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 200px;
+}
+
+.sgnbody p {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #676767;
+    margin-bottom: 0;
+}
+
+.sgnbtn {
+    display: flex;
+    justify-content: center;
+}
+
+#inptbox {
+    border-radius: 5px;
+    border: 0.5px solid #676767;
+    height: 30px;
+    width: 220px;
+    padding: 2%;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+/* #inptbox :active{
+    border: 0.5px solid red;
+} */
