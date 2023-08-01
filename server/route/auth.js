@@ -34,6 +34,8 @@ router.post("/", async (req, res) => {
 			path: "/dashboard",
 			secure: false
 		})
+
+		console.log(user.name,user.email,user.enrollment,user.contact)
 		res.status(200).send({ data: token, message: "logged in successfully" });
 
 	} catch (error) {
