@@ -4,26 +4,27 @@ const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res) => {
 	try {
+		//Validating if all fields are filled or not
 		const { error } = validate(req.body);
-		if (error){
-			console.log(error)
-			return res.status(400).send({ message: error.details[0].message });
+		//All fields not filled properly
+		if (error) {
+			return res.status(422).json({ error: "Please Fill All Fields Properly" });
 		}
 
 		//Checking if email already exist
 		const user = await User.findOne({ email: req.body.email });
-		if (user)
-			return res
-				.status(409)
-				.send({ message: "User with given email already Exist!" });
+		if (user) {
+			return res.status(422).json({ error: "User with given email already Exist!" });
+		}
 
-		// Password Hashing
-		const salt = await bcrypt.genSalt(Number(process.env.SALT));
-		const hashPassword = await bcrypt.hash(req.body.password, salt);
+		else {
+			// Password Hashing
+			const hashPassword = await bcrypt.hash(req.body.password, 10);
 
-		//Updating Hashed Password and Saving in Database
-		await new User({ ...req.body, password: hashPassword }).save();
-		res.status(201).send({ message: "User created successfully" });
+			//Updating Hashed Password and Saving in Database
+			await new User({ ...req.body, password: hashPassword }).save();
+			res.status(201).json({ message: "User created successfully" });
+		}
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
 		console.log(error)
