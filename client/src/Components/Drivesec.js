@@ -15,6 +15,8 @@ business_center
 
    {/* statusbar   */}
    <Statusbar/>
+
+   {/* DriveCard  */}
    <DriveCard/>
    <DriveCard/>
    <DriveCard/>

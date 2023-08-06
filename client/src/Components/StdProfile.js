@@ -1,6 +1,6 @@
 import React from 'react'
 
-const StdProfile = () => {
+const StdProfile = ({userData}) => {
     return (
         <div className='stdprfl'>
 
@@ -13,10 +13,10 @@ const StdProfile = () => {
                 <p>Passing Year     :</p>
             </div>
             <div className="stdprfl_body">
-                <p>Kavya Singhal</p>
-                <p>0611234567</p>
-                <p>91234567890</p>
-                <p>ksinghal@gmail.com</p>
+                <p>{userData.name}</p>
+                <p>{userData.enrollment}</p>
+                <p>{userData.contact}</p>
+                <p>{userData.email}</p>
                 <p>IT</p>
                 <p>2024</p>
             </div>

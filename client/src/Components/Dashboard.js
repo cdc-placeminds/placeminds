@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Profile from './Profile';
 import Drivesec from './Drivesec';
 import { useNavigate } from 'react-router-dom';
 
+
 const Dashboard = () => {
+
+  const [userData, setUserData] = useState({});
 
   const navigate = useNavigate();
 
@@ -18,7 +21,9 @@ const Dashboard = () => {
       })
 
       const data = await res.json();
-      console.log(data);
+
+      setUserData(data);
+
 
       if (res.status === 401) {
         const error = new Error(res.error);
@@ -44,7 +49,7 @@ const Dashboard = () => {
 
           <div className="container-fluid dashboard">
             <div className="row">
-              <Profile />
+              <Profile userData={userData} />
               <Drivesec />
             </div>
           </div>

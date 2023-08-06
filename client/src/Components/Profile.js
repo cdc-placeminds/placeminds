@@ -1,17 +1,17 @@
 import React from 'react'
-import profileImage from './images/profileimg.png'; // Make sure the path to your image is correct
+import profileImage from './images/userpic.png'; // Make sure the path to your image is correct
 import './css/styles.css'
 import ProfileAccordian from './ProfileAccordian';
 
-const Profile = () => {
+const Profile = ({ userData }) => {
   return (
     <div className="col-md-4 profile">
       <div className="profimgdiv">
         <img src={profileImage} alt="profile_image" className="profimg" />
-        <h1 className="prname"> Kavya Singhal</h1>
+        <h1 className="prname"> {userData.name}</h1>
       </div>
       <div className="stddetails">
-        <ProfileAccordian/>
+        <ProfileAccordian userData={userData} />
       </div>
 
 

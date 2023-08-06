@@ -38,7 +38,6 @@ const Loginfrm = () => {
     //Converting String Data to JSON
     const userData = await res.json();
 
-    console.log(userData.userGetData)
 
     //Checking for any error or credentials dont match
     if (res.status === 400 || !userData) {

@@ -18,11 +18,11 @@ const AccordionItem = ({ title, content }) => {
     );
 };
 
-const ProfileAccordian = () => {
+const ProfileAccordian = ({userData}) => {
     return (
         <div className="accordion">
             <AccordionItem title="View QR Code" content="Here QR Code will be displayed" />
-            <AccordionItem title="Student Profile" content={<StdProfile/>} />
+            <AccordionItem title="Student Profile" content={<StdProfile userData = {userData}/>} />
             <AccordionItem title="Placement Details" content="Content for Section 2" />
         </div>
     )
