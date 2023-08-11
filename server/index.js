@@ -6,6 +6,7 @@ const cors = require("cors");
 const connection = require("./database");
 const userRoutes = require("./route/users");
 const authRoutes = require("./route/auth");
+const driveRoutes = require("./route/drive")
 const DashboardAccess = require("./route/DashboardAccess");
 const cookieParser = require("cookie-parser");
 
@@ -25,6 +26,7 @@ app.use(
 //Routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/createdrive", driveRoutes);
 app.use("/api/dashboard", DashboardAccess)
 
 //Listen to port

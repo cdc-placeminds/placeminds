@@ -1,11 +1,13 @@
 import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
 
 const Loginfrm = () => {
 
   //Navigate function to redirect user after successful login
   const navigate = useNavigate();
+  const { setisLoggedin } = useAuth();
 
   //update data that user is entering
   const [data, setData] = useState({
@@ -49,6 +51,11 @@ const Loginfrm = () => {
       window.alert("Login Successful")
       console.log("Login Successful")
       //Redirecting to Dashboard
+
+      
+      setisLoggedin(true);
+
+
       Cookies.set("jwtoken", userData.data, { expires: 7 });
       navigate('/dashboard')
 

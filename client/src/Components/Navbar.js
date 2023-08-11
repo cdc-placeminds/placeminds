@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import "./Navbar.css";
 import maitbluelogo from "../Components/images/maitbluelogo.png"
-// var isLoggedin = true;
+import { useAuth } from './context/AuthContext';
 
 const Navbar = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [isLoggedin, setisLoggedin] = useState(true);
-
+    const [menuOpen, setMenuOpen] = useState(true);
+    const {isLoggedin} = useAuth();
+    const {setisLoggedin} = useAuth();
+    
     const handleLogout = () => {
-        setisLoggedin(false);
+        setMenuOpen(true)
+        setisLoggedin(false)
     }
 
     return (
@@ -26,10 +28,9 @@ const Navbar = () => {
                 {!isLoggedin ? <><li><NavLink to='/signup'>Signup</NavLink></li>
                     <li><NavLink to='/'>Login</NavLink></li></> : <>
                     <li><NavLink to='/dashboard'>Dashboard</NavLink></li><li><NavLink to='/' onClick={handleLogout}>Logout</NavLink></li></>}
-
             </ul>
         </nav>
     )
 }
 
-export default Navbar
+export default Navbar   

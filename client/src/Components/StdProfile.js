@@ -1,6 +1,8 @@
 import React from 'react'
+import { useUserData } from './context/UserDataContext'
 
-const StdProfile = ({userData}) => {
+const StdProfile = () => {
+    const {userData} = useUserData();
     return (
         <div className='stdprfl'>
 

@@ -1,27 +1,34 @@
 import React from 'react'
 import Statusbar from './Statusbar'
 import DriveCard from './DriveCard'
+import { useDriveData } from './context/DriveDataContext'
 
 
-const Drivesec = () => {
+const Drivesec = ({user_year}) => {
+  const {driveData} = useDriveData();
+  const drivesArray = Object.keys(driveData).map(key => driveData[key])
+
+
   return (
     <div className="col-md-8 dash">
-    <div className="drivesecheading">
-    <span className="material-symbols-outlined">
-business_center
-</span>
-    <h1> PLACEMENT DRIVES</h1>
-    </div>
+      <div className="drivesecheading">
+        <span className="material-symbols-outlined">
+          business_center
+        </span>
+        <h1> PLACEMENT DRIVES</h1>
+      </div>
 
-   {/* statusbar   */}
-   <Statusbar/>
+      {/* statusbar   */}
+      
+      <Statusbar user_year = {user_year}/>
 
-   {/* DriveCard  */}
-   <DriveCard/>
-   <DriveCard/>
-   <DriveCard/>
+      {/* DriveCard  */}
 
-    
+      {drivesArray.filter(drive => drive.year === user_year).reverse().map((drive, index) => (
+        <DriveCard key={index} drive={drive} />
+      ))}
+
+
     </div>
   )
 }
