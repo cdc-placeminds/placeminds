@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import StdProfile from './StdProfile';
 import { useNavigate } from 'react-router-dom';
 import { useAdmin } from '../context/AdminContext';
-
+import QRCodeGenerator from './Qrcode';
 const AccordionItem = ({ title, content }) => {
 
 
@@ -34,6 +34,9 @@ const ProfileAccordian = () => {
     const editdrivepanel = () => {
         navigate('/editdrive')
     }
+    const qrScanner =() =>{
+        navigate('/qrscanner')
+    }
 
     return (
 
@@ -45,7 +48,7 @@ const ProfileAccordian = () => {
                     </span>
                     <p>View QR Code</p>
                 </>
-            } content="Here QR Code will be displayed" />
+            } content=<QRCodeGenerator/> />
 
             <AccordionItem title={
                 <>
@@ -77,7 +80,7 @@ const ProfileAccordian = () => {
                 <div>
                     <button onClick={adddrivepanel} className='btn btn-primary btn-sm my-1 mx-1'>Add Drive</button>
                     <button onClick={editdrivepanel} className='btn btn-primary btn-sm my-1 mx-1'>Edit Drive</button>
-                    <button className='btn btn-primary btn-sm my-1 mx-1'>Scan QR</button>
+                    <button onClick={qrScanner} className='btn btn-primary btn-sm my-1 mx-1'>Scan QR</button>
                 </div>
             } />)}
         </div>

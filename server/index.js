@@ -12,6 +12,7 @@ const GoogleAPI = require("./route/googleapi");
 const ApplyAPI = require("./route/applyapi");
 const UpdateApply = require("./route/updateapply");
 const cookieParser = require("cookie-parser");
+const Mailsender=require("./route/Mailsender")
 
 // database connection 
 connection();
@@ -34,6 +35,8 @@ app.use("/api/dashboard", DashboardAccess)
 app.use("/api/googleapi", GoogleAPI)
 app.use("/api/applyapi", ApplyAPI)
 app.use("/api/updateapply", UpdateApply)
+// api for sending mail 
+app.use("/api/mailsend",Mailsender);
 
 //Listen to port
 const port = 8080;

@@ -11,7 +11,7 @@ import { AdminProvider } from "../context/AdminContext";
 import { UserDataProvider } from "../context/UserDataContext";
 import { DriveDataProvider } from "../context/DriveDataContext";
 import { AlertProvider } from "../context/AlertContext";
-
+import QRScanner from "../Dashboard/AdminPanel/Qrscanner";
 
 function App() {
   return (
@@ -28,6 +28,8 @@ function App() {
                   <Route path='/dashboard' element={<Dashboard />} />
                   <Route path="/adddrive" element={<AdminDash />} />
                   <Route path="/editdrive" element={<EditDriveDash />} />
+                  <Route path="/qrscanner" element={<QRScanner/>} />
+
                 </Routes>
               </AlertProvider>
             </AdminProvider>
