@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const { User } = require("../models/userSchema");
-const Drive  = require("../models/driveSchema");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 
@@ -39,9 +38,8 @@ router.post("/", async (req, res) => {
 					contact: user.contact,
 					enrollment: user.enrollment,
 				};
-				const drive = await Drive.find({year: "2024"});
 				//Sending response with Token and UserData
-				res.status(200).send({ data: token, userGetData: userGetData, driveData: drive, message: "Logged in successfully" });
+				res.status(200).send({ data: token, userGetData: userGetData, message: "Logged in successfully" });
 			}
 		}
 	} catch (error) {

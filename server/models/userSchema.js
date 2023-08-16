@@ -12,11 +12,12 @@ const userSchema = new mongoose.Schema({
     contact: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    // tokens: [
-    //     {
-    //         token: { type: String, required: true }
-    //     }
-    // ]
+    drives: [
+        {
+            drivecode: { type: String, required: true },
+            applied: { type: Boolean, default: false }
+        }
+    ]
 })
 
 //Generating or Creating JWT Token

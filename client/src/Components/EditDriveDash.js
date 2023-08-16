@@ -1,8 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDriveData } from './context/DriveDataContext'
 import DriveCard from './DriveCard';
+import { useAdmin } from './context/AdminContext';
+import { useNavigate } from 'react-router-dom';
 
 const EditDriveDash = () => {
+
+    const navigate = useNavigate();
+    const {isAdmin} = useAdmin();
+
+    const checkisAdmin = () => {
+        if(!isAdmin ){
+            navigate('/')
+        } 
+    } 
+
+    useEffect(() => {
+        checkisAdmin();
+        // eslint-disable-next-line
+    }, [])
+    
 
     const { driveData } = useDriveData();
     const drivesArray = Object.keys(driveData).map(key => driveData[key])

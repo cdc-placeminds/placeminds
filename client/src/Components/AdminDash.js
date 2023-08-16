@@ -1,6 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useAdmin } from './context/AdminContext';
+import { useAlert } from './context/AlertContext';
+import Alert from './Alert';
 
 const AdminDash = () => {
+
+    const navigate = useNavigate();
+    const {isAdmin} = useAdmin();
+    const {alert, showalert} = useAlert();
+
+    const checkisAdmin = () => {
+
+        if(!isAdmin){
+            navigate('/')
+        }
+    } 
+
+    useEffect(() => {
+        checkisAdmin();
+        // eslint-disable-next-line
+    }, [])
 
     const [data, setData] = useState({
         name: "", location: "", profile: "", ctc: "", branch: "", year: ""
@@ -30,15 +50,41 @@ const AdminDash = () => {
 
         //Calling Fetch API
         const res = await fetch(url, fetchMethods);
+        
+        // -----------------------------------------------------------------------------------
+        
+        const sheeturl = "http://localhost:8080/api/googleapi"
+        const fetchMethod = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name, location, profile, ctc, branch, year
+            })
+        }
+        const addtosheet = await fetch(sheeturl, fetchMethod);
+
+        if (addtosheet.status === 201) {
+            console.log("Add to sheet successful")
+        } else {
+            console.log("Error")
+        }
+
+
+
+
+        // -----------------------------------------------------------------------------------
+
 
         //Checking If any error occured 
         if (res.status === 201) {
-            window.alert("Drive Created Successfully")
+            showalert("Success: ","Drive Added Successfully", "success")
             console.log("Drive Created Successfully")
         }
         //If registration is successfull
         else {
-            window.alert("Unsuccessful")
+            showalert("Error: ","Fill Details Correctly", "warning")
             console.log("Unsuccessful")
         }
 
@@ -48,6 +94,7 @@ const AdminDash = () => {
         <div className="container-fluid homebody">
 
             <div className="col-md-6 md-12 mx-auto signupsec">
+                <Alert alert={alert} />
                 <div className="sgnhead">Create New Drive</div>
                 <form className='register_frm' id='register_frm' method="POST" >
                     <div className="sgnbody">
@@ -65,7 +112,7 @@ const AdminDash = () => {
                             <input id='inptbox' value={data.profile} onChange={handleInputs} name='profile' type='text' inputMode='numeric'></input>
                             <p>BRANCH ELIGIBLE</p>
                            
-                            <select class='select' id='inptbox' value={data.branch} onChange={handleInputs} name='branch'>
+                            <select className='select' id='inptbox' value={data.branch} onChange={handleInputs} name='branch' >
                                 <option value="CSE">CSE</option>
                                 <option value="IT">IT</option>
                                 <option value="CST">CST</option>

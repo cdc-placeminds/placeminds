@@ -2,12 +2,15 @@ import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
+import { useAlert } from './context/AlertContext';
+import Alert from './Alert';
 
 const Loginfrm = () => {
 
   //Navigate function to redirect user after successful login
   const navigate = useNavigate();
   const { setisLoggedin } = useAuth();
+  const { showalert, alert } = useAlert();
 
   //update data that user is entering
   const [data, setData] = useState({
@@ -43,16 +46,18 @@ const Loginfrm = () => {
 
     //Checking for any error or credentials dont match
     if (res.status === 400 || !userData) {
-      window.alert("Invalid Credentials")
+      showalert("Error:", "Invalid Details", "warning")
       console.log("Invalid Credentials")
     }
     //Login Successful
     else {
-      window.alert("Login Successful")
+
+      showalert("Success:", "Log In Successful", "success")
+
       console.log("Login Successful")
       //Redirecting to Dashboard
 
-      
+
       setisLoggedin(true);
 
 
@@ -72,6 +77,7 @@ const Loginfrm = () => {
         <div className='lgnform'>
           <form className='signin_frm' id='signin_frm' method="POST" onSubmit={handleSubmit}>
             <div>
+              <Alert alert={alert} />
               <p>EMAIL</p>
               <input id='inptbox' name="email" type='email' inputMode='numeric' value={data.email} onChange={handleInputs}></input>
             </div>

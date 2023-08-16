@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const Drive = require("../models/driveSchema");
 const { User, validate } = require("../models/userSchema");
 const bcrypt = require("bcrypt");
 
@@ -22,7 +23,15 @@ router.post("/", async (req, res) => {
 			const hashPassword = await bcrypt.hash(req.body.password, 10);
 
 			//Updating Hashed Password and Saving in Database
-			await new User({ ...req.body, password: hashPassword }).save();
+			const drives = await Drive.find();
+
+			const drivecodes = [];
+			for (const drive of drives) {
+				// console.log(drive.drivecode)
+				drivecodes.push({drivecode: drive.drivecode, applied: false})
+			}
+
+			await new User({ ...req.body, password: hashPassword, drives: drivecodes}).save();
 			res.status(201).json({ message: "User created successfully" });
 		}
 	} catch (error) {

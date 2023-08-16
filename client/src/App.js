@@ -11,6 +11,7 @@ import { AuthProvider } from "./Components/context/AuthContext";
 import { AdminProvider } from "./Components/context/AdminContext";
 import { UserDataProvider } from "./Components/context/UserDataContext";
 import { DriveDataProvider } from "./Components/context/DriveDataContext";
+import { AlertProvider } from "./Components/context/AlertContext";
 
 
 function App() {
@@ -20,15 +21,17 @@ function App() {
         <UserDataProvider>
           <DriveDataProvider>
             <AdminProvider>
-              <Navbar />
-              <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/signup' element={<Signupfrm />} />
-                <Route path='/about' element={<About />} />
-                <Route path='/dashboard' element={<Dashboard />} />
-                <Route path="/adddrive" element={<AdminDash />} />
-                <Route path="/editdrive" element={<EditDriveDash/>} />
-              </Routes>
+              <AlertProvider>
+                <Navbar />
+                <Routes>
+                  <Route path='/' element={<Home />} />
+                  <Route path='/signup' element={<Signupfrm />} />
+                  <Route path='/about' element={<About />} />
+                  <Route path='/dashboard' element={<Dashboard />} />
+                  <Route path="/adddrive" element={<AdminDash />} />
+                  <Route path="/editdrive" element={<EditDriveDash />} />
+                </Routes>
+              </AlertProvider>
             </AdminProvider>
           </DriveDataProvider>
         </UserDataProvider>

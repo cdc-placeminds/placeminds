@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Profile from './Profile';
 import Drivesec from './Drivesec';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import { useAdmin } from './context/AdminContext';
-import { useUserData} from './context/UserDataContext';
+import { useUserData } from './context/UserDataContext';
 import { useDriveData } from './context/DriveDataContext';
-
+import { useAlert } from './context/AlertContext';
+import Alert from './Alert';
 
 
 const Dashboard = () => {
 
   const { setisLoggedin } = useAuth();
   const { setisAdmin } = useAdmin();
-  const {setuserData} = useUserData();
-  const {setdriveData} = useDriveData();
-  
-  const user_year = "2024";
+  const { setuserData } = useUserData();
+  const { setdriveData } = useDriveData();
+  const { alert } = useAlert();
+  const user_year = "2023";
 
   const navigate = useNavigate();
 
@@ -32,12 +33,12 @@ const Dashboard = () => {
 
       const data = await res.json();
 
-      setuserData(data.userDatasB);
-      setdriveData(data.driveData);
+      setisLoggedin(true);
       if (data.userDatasB.email === "ksingh@gmail.com") {
         setisAdmin(true)
       }
-      setisLoggedin(true);
+      setuserData(data.userDatasB);
+      setdriveData(data.driveData);
 
 
 
@@ -58,22 +59,20 @@ const Dashboard = () => {
   }, [])
 
 
-
   return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-10 col-12 mx-auto">
-
-            <div className="container-fluid dashboard">
-              <div className="row">
-                <Profile/>
-                <Drivesec user_year={user_year} />
-              </div>
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-10 col-12 mx-auto">
+          <div className="container-fluid dashboard">
+            <Alert alert={alert} />
+            <div className="row">
+              <Profile />
+              <Drivesec user_year={user_year} />
             </div>
-
           </div>
         </div>
       </div>
+    </div>
   )
 
 }

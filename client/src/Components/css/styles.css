@@ -24,6 +24,7 @@ body {
 }
 
  /* Profile Accordian  */
+ 
 
 .accordion-item {
     margin: 8px;
@@ -32,17 +33,32 @@ body {
 }
 
 .accordion-title {
+
+    display: flex;
+    align-items: center;
+
     width: 100%;
     background-color: white;
     font-family: 'Outfit', sans-serif;
     font-weight: 400;
     color: black;
     letter-spacing: 0.3px;
-    padding: 10px;
+    padding: 6px 10px;
     cursor: pointer;
     text-align: left;
     border: 0.3px solid #676767 ;
     border-radius: 4px ;
+}
+
+
+.accordion-title span {
+    font-size: 30px;
+    color: #1f3b66;
+    margin: 0 5px 0 0;
+}
+
+.accordion-title p {
+    margin-bottom: 0 !important;
 }
 
 .accordion-content {
@@ -113,13 +129,6 @@ body {
 
 }
 
-.material-symbols-outlined {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 48
-}
 
 /* statusbar */
 
@@ -287,6 +296,14 @@ body {
     margin-right: 7px;
 }
 
+.imgborder span{
+    margin-left: 0;
+    font-size: 27px;
+    color: #67676749;
+    height: 40px;
+    
+}
+
 .drvbtns {
     width: 25%;
 }
@@ -303,7 +320,7 @@ body {
     padding: 2% 3%;
 }
 
-.apnow {
+.apnow_btn {
     background-color: #1f3b66;
     border-radius: 5px;
     font-family: 'Outfit', sans-serif;
@@ -313,6 +330,15 @@ body {
     padding: 2% 6.5%;
 }
 
+.applied_btn {
+    background-color: #0f7e0b;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 400px;
+    color: white;
+    padding: 2% 6.5%;
+}
 
 /* home page  */
 

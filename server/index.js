@@ -6,8 +6,11 @@ const cors = require("cors");
 const connection = require("./database");
 const userRoutes = require("./route/users");
 const authRoutes = require("./route/auth");
-const driveRoutes = require("./route/drive")
+const driveRoutes = require("./route/drive");
 const DashboardAccess = require("./route/DashboardAccess");
+const GoogleAPI = require("./route/googleapi");
+const ApplyAPI = require("./route/applyapi");
+const UpdateApply = require("./route/updateapply");
 const cookieParser = require("cookie-parser");
 
 // database connection 
@@ -28,6 +31,9 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/createdrive", driveRoutes);
 app.use("/api/dashboard", DashboardAccess)
+app.use("/api/googleapi", GoogleAPI)
+app.use("/api/applyapi", ApplyAPI)
+app.use("/api/updateapply", UpdateApply)
 
 //Listen to port
 const port = 8080;

@@ -24,10 +24,10 @@ const AccordionItem = ({ title, content }) => {
 
 const ProfileAccordian = () => {
 
-    const {isAdmin} = useAdmin();
-    
+    const { isAdmin } = useAdmin();
+
     const navigate = useNavigate();
-    
+
     const adddrivepanel = () => {
         navigate('/adddrive')
     }
@@ -38,13 +38,46 @@ const ProfileAccordian = () => {
     return (
 
         <div className="accordion my-1 mx-4 ">
-            <AccordionItem title="View QR Code" content="Here QR Code will be displayed" />
-            <AccordionItem title="Student Profile" content={<StdProfile/>} />
-            <AccordionItem title="Placement Details" content="Content for Section 2" />
-            {isAdmin && (<AccordionItem title="Admin Panel" content={
+            <AccordionItem title={
+                <>
+                    <span className="material-symbols-outlined accordian-item-icon">
+                        qr_code_scanner
+                    </span>
+                    <p>View QR Code</p>
+                </>
+            } content="Here QR Code will be displayed" />
+
+            <AccordionItem title={
+                <>
+                    <span className="material-symbols-outlined">
+                        badge
+                    </span>
+                    <p>Student Profile</p>
+                </>
+            } content={<StdProfile />} />
+
+            <AccordionItem title={
+                <>
+                    <span className="material-symbols-outlined">
+                        business_center
+                    </span>
+                    <p>Placement Details</p>
+                </>
+            } content="Content for Section 2" />
+
+            {/* For Admin  */}
+            {isAdmin && (<AccordionItem title={
+                <>
+                    <span className="material-symbols-outlined">
+                        admin_panel_settings
+                    </span>
+                    <p>Admin Panel</p>
+                </>
+            } content={
                 <div>
-                    <button onClick={adddrivepanel} className='btn btn-primary btn-sm my-1 mx-3'>Add Drive</button>
-                    <button onClick={editdrivepanel} className='btn btn-primary btn-sm my-1 mx-3'>Edit Drive</button>
+                    <button onClick={adddrivepanel} className='btn btn-primary btn-sm my-1 mx-1'>Add Drive</button>
+                    <button onClick={editdrivepanel} className='btn btn-primary btn-sm my-1 mx-1'>Edit Drive</button>
+                    <button className='btn btn-primary btn-sm my-1 mx-1'>Scan QR</button>
                 </div>
             } />)}
         </div>

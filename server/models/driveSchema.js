@@ -6,7 +6,8 @@ const driveSchema = new mongoose.Schema({
     location: { type: String, required: true },
     ctc: { type: String, required: true },
     branch: { type: String, required: true },
-    year: { type: String, required: true }
+    year: { type: String, required: true },
+    drivecode: { type: String, required: true }
 })
 
 const Drive = mongoose.model('drive', driveSchema);

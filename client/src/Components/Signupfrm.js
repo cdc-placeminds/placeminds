@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import { useAlert } from './context/AlertContext';
+import Alert from './Alert';
+
 // const dotenv = require("dotenv")
 
 const Signupfrm = () => {
     //Navigate function to redirect user after successful signup
+
+
     const navigate = useNavigate();
+    const { showalert, alert } = useAlert();
 
     //update data that user is entering
     const [data, setData] = useState({
@@ -39,12 +45,12 @@ const Signupfrm = () => {
 
         //Checking If any error occured 
         if (res.status === 422 || !userData) {
-            window.alert("Registration Unsuccessful")
+            showalert("Error:", "Invalid Details", "warning")
             console.log("Registration Unsuccessful")
         }
         //If registration is successfull
         else {
-            window.alert("Registration Successful")
+            showalert("Success:", "Log In Successful", "success")
             console.log("Registration Successful")
 
             navigate("/");
@@ -59,10 +65,12 @@ const Signupfrm = () => {
     return <div className="container-fluid homebody">
 
         <div className="col-md-6 md-12 mx-auto signupsec">
+        <p><Alert alert={alert} /></p>
             <div className="sgnhead">Signup to CDC MAIT</div>
             <form className='register_frm' id='register_frm' method="POST" onSubmit={handleSubmit}>
                 <div className="sgnbody">
                     <div>
+
                         <p>FULL NAME</p>
                         <input id='inptbox' name='name' value={data.name} onChange={handleInputs} type='text'></input>
                         <p>EMAIL ADDRESS</p>

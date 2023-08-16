@@ -26,10 +26,21 @@ nav .title {
 nav ul {
     display: flex;
     margin-bottom: 0;
+    padding-right: 20px;
 }
 
 nav ul li {
    list-style: none; 
+   display: flex;
+   align-items: center;
+}
+
+nav ul li p {
+    margin-bottom: 0 !important; 
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #1f3b66;
 }
 
 nav ul li a {
@@ -64,6 +75,23 @@ nav .menu span {
     background-color: #fff;
     border-radius: 0.2rem;
 }
+
+.material-symbols-outlined {
+    display: flex;
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48;
+    color: #1f3b66;
+    font-size: 32px;
+    align-items: center;
+    justify-content: center;
+    width: 41.6px;
+    height: 41.6px;
+    margin-left: 20px;
+}
+
 
 
 @media (max-width: 768px) {
