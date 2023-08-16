@@ -1,5 +1,5 @@
 import React from 'react'
-import { useUserData } from './context/UserDataContext'
+import { useUserData } from '../context/UserDataContext'
 import { useNavigate } from 'react-router-dom';
 
 const StdProfile = () => {

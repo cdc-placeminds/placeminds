@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import StdProfile from './StdProfile';
 import { useNavigate } from 'react-router-dom';
-import { useAdmin } from './context/AdminContext';
+import { useAdmin } from '../context/AdminContext';
 
 const AccordionItem = ({ title, content }) => {
 

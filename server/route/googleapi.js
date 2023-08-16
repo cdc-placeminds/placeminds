@@ -3,91 +3,85 @@ const { google } = require("googleapis");
 
 router.post("/", async (req, res) => {
 
-    const auth = new google.auth.GoogleAuth({
-        keyFile: "credentials.json",
-        scopes: "https://www.googleapis.com/auth/spreadsheets"
-    })
+    try {
+        const auth = new google.auth.GoogleAuth({
+            keyFile: "credentials.json",
+            scopes: "https://www.googleapis.com/auth/spreadsheets"
+        })
 
-    var compname = req.body.name;
+        // Getting company name to which edit is to be made
+        var compname = req.body.name;
 
-    const client = await auth.getClient();
+        //Setting up API, authorizing client
+        const client = await auth.getClient();
+        const googleSheets = google.sheets({ version: "v4", auth: client });
 
-    const googleSheets = google.sheets({ version: "v4", auth: client });
+        // ID of spreadsheet on which edit is to be made
+        const spreadsheetId = "14B4o0Fdj4_PSy3i8dRZ26Wc7d_2aBnqPvF8x2e8bOpE"
 
-    const spreadsheetId = "14B4o0Fdj4_PSy3i8dRZ26Wc7d_2aBnqPvF8x2e8bOpE"
 
+        //Getting Values of Master Sheet to get total no of rows, and set serial no
+        const sheetData = await googleSheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId,
+            range: "Master Company Sheet"
+        })
 
-    //Getting Values of Master Sheet
-    const sheetData = await googleSheets.spreadsheets.values.get({
-        auth,
-        spreadsheetId,
-        range: "Master Company Sheet"
-    })
+        //Getting total rows
+        const numRows = sheetData.data.values.length;
 
-    //Getting total rows
-    const numRows = sheetData.data.values.length;
+        //Adding Drive Name to Master Sheet
+        await googleSheets.spreadsheets.values.append({
+            auth,
+            spreadsheetId,
+            range: "Master Company Sheet",
+            valueInputOption: "USER_ENTERED",
+            resource: {
+                values: [
+                    // Adding drive details to Master Company Sheet
+                    [numRows, compname, req.body.profile, req.body.ctc, req.body.location, req.body.year]
+                ]
+            }
+        })
 
-    //Adding Drive Name to Master Sheet
-    await googleSheets.spreadsheets.values.append({
-        auth,
-        spreadsheetId,
-        range: "Master Company Sheet",
-        valueInputOption: "USER_ENTERED",
-        resource: {
-            values: [
-                [numRows, compname, req.body.profile, req.body.ctc, req.body.location, req.body.year]
-            ]
-        }
-    })
-
-    // Adding Company/Drive Sheet
-    await googleSheets.spreadsheets.batchUpdate({
-        auth,
-        spreadsheetId,
-        resource: {
-            requests: [
-                {
-                    addSheet: {
-                        properties: {
-                            title: compname
+        // Creating Individual Company/Drive Sheet
+        await googleSheets.spreadsheets.batchUpdate({
+            auth,
+            spreadsheetId,
+            resource: {
+                requests: [
+                    {
+                        addSheet: {
+                            properties: {
+                                title: compname
+                            }
                         }
                     }
-                }
-            ]
-        }
-    })
+                ]
+            }
+        })
 
-    // Adding Header of Latest Drive Sheet Created
-    await googleSheets.spreadsheets.values.append({
-        auth,
-        spreadsheetId,
-        range: compname,
-        valueInputOption: "USER_ENTERED",
-        resource: {
-            values: [
-                ['S. No', "Name", "Enrollment No", "Contact", "Email", "Attendance"]
-            ]
-        }
+        // Adding Header Details of Latest Drive Sheet like Name, Enrollment, Contact
+        await googleSheets.spreadsheets.values.append({
+            auth,
+            spreadsheetId,
+            range: compname,
+            valueInputOption: "USER_ENTERED",
+            resource: {
+                values: [
+                    ['S. No', "Name", "Enrollment No", "Contact", "Email", "Attendance"]
+                ]
+            }
 
-    })
+        })
 
-    // await googleSheets.spreadsheets.values.append({
-    //     auth,
-    //     spreadsheetId,
-    //     range: compname,
-    //     valueInputOption: "USER_ENTERED",
-    //     resource: {
-    //         values: [
-    //             ["S. No", "Name", "Enrollment", "Contact", "Email"],
-    //             ["1", "Kavya", "1234", "7654", "nhgfdcv"],
-    //             ["2", "Kavya", "12345", "3456", "Emgfvbail"]
-    //         ]
-    //     }
-
-    // })
-
-
-    res.status(201).send({ message: "Successful" })
+        //Sending response of successfully added
+        res.status(201).send({ message: "Drive Added Successfully" })
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).send({ message: "Internal Server Error" })
+    }
 
 })
 

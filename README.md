@@ -1,2 +1,0 @@
-# PRM
-Placement Resource Management

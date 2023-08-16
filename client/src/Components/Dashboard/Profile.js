@@ -1,8 +1,8 @@
 import React from 'react'
-import profileImage from './images/userpic.png'; // Make sure the path to your image is correct
-import './css/styles.css'
+import profileImage from '../images/userpic.png'; // Make sure the path to your image is correct
+import '../css/styles.css'
 import ProfileAccordian from './ProfileAccordian';
-import { useUserData } from './context/UserDataContext';
+import { useUserData } from '../context/UserDataContext';
 
 const Profile = () => {
   const {userData} = useUserData();

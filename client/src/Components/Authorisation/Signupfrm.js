@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { useAlert } from './context/AlertContext';
-import Alert from './Alert';
+import { useAlert } from '../context/AlertContext';
+import Alert from '../Additonal/Alert';
 
 // const dotenv = require("dotenv")
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { useDriveData } from './context/DriveDataContext'
-import DriveCard from './DriveCard';
-import { useAdmin } from './context/AdminContext';
+import { useDriveData } from '../../context/DriveDataContext'
+import DriveCard from '../DriveCard';
+import { useAdmin } from '../../context/AdminContext';
 import { useNavigate } from 'react-router-dom';
 
 const EditDriveDash = () => {

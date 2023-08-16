@@ -1,9 +1,9 @@
 import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './context/AuthContext';
-import { useAlert } from './context/AlertContext';
-import Alert from './Alert';
+import { useAuth } from '../context/AuthContext';
+import { useAlert } from '../context/AlertContext';
+import Alert from '../Additonal/Alert';
 
 const Loginfrm = () => {
 

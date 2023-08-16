@@ -1,5 +1,5 @@
 import React from "react";
-import Loginfrm from "../Loginfrm";
+import Loginfrm from "../Authorisation/Loginfrm";
 import maitlogo from "../images/maitlogo.png"
 
 const Home = () => {

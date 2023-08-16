@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import Profile from './Profile';
 import Drivesec from './Drivesec';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './context/AuthContext';
-import { useAdmin } from './context/AdminContext';
-import { useUserData } from './context/UserDataContext';
-import { useDriveData } from './context/DriveDataContext';
-import { useAlert } from './context/AlertContext';
-import Alert from './Alert';
+import { useAuth } from '../context/AuthContext';
+import { useAdmin } from '../context/AdminContext';
+import { useUserData } from '../context/UserDataContext';
+import { useDriveData } from '../context/DriveDataContext';
+import { useAlert } from '../context/AlertContext';
+import Alert from '../Additonal/Alert';
 
 
 const Dashboard = () => {

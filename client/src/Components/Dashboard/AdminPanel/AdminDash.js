@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useAdmin } from './context/AdminContext';
-import { useAlert } from './context/AlertContext';
-import Alert from './Alert';
+import { useAdmin } from '../../context/AdminContext';
+import { useAlert } from '../../context/AlertContext';
+import Alert from '../../Additonal/Alert';
 
 const AdminDash = () => {
 

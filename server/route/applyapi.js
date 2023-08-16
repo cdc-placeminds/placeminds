@@ -3,45 +3,54 @@ const { google } = require("googleapis");
 
 router.post("/", async (req, res) => {
 
-    const auth = new google.auth.GoogleAuth({
-        keyFile: "credentials.json",
-        scopes: "https://www.googleapis.com/auth/spreadsheets"
-    })
+    try {
+        const auth = new google.auth.GoogleAuth({
+            keyFile: "credentials.json",
+            scopes: "https://www.googleapis.com/auth/spreadsheets"
+        })
 
-    var compname = req.body.datadrive.name;
+        // Getting company name to which edit is to be made
+        // Body have two variables: 1. datadrive 2. userData sent from DriveCard.js when user clicks on apply now
+        var compname = req.body.datadrive.name;
 
-    const client = await auth.getClient();
+        //Setting up API, authorizing client
+        const client = await auth.getClient();
+        const googleSheets = google.sheets({ version: "v4", auth: client });
 
-    const googleSheets = google.sheets({ version: "v4", auth: client });
+        // ID of spreadsheet on which edit is to be made
+        const spreadsheetId = "14B4o0Fdj4_PSy3i8dRZ26Wc7d_2aBnqPvF8x2e8bOpE"
 
-    const spreadsheetId = "14B4o0Fdj4_PSy3i8dRZ26Wc7d_2aBnqPvF8x2e8bOpE"
+        //Getting Values of Company Sheet to get total no of rows, and set serial no
+        const sheetData = await googleSheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId,
+            range: compname
+        })
 
-    //Getting Values of Master Sheet
-    const sheetData = await googleSheets.spreadsheets.values.get({
-        auth,
-        spreadsheetId,
-        range: compname
-    })
+        //Getting total rows
+        const numRows = sheetData.data.values.length;
 
-    //Getting total rows
-    const numRows = sheetData.data.values.length;
+        // Adding user details to company sheet that applied for drive
+        await googleSheets.spreadsheets.values.append({
+            auth,
+            spreadsheetId,
+            range: compname,
+            valueInputOption: "USER_ENTERED",
+            resource: {
+                values: [
+                    [numRows, req.body.userData.name, req.body.userData.enrollment, req.body.userData.contact, req.body.userData.email]
+                ]
+            }
 
+        })
 
-    await googleSheets.spreadsheets.values.append({
-        auth,
-        spreadsheetId,
-        range: compname,
-        valueInputOption: "USER_ENTERED",
-        resource: {
-            values: [
-                [numRows,req.body.userData.name,req.body.userData.enrollment,req.body.userData.contact,req.body.userData.email]
-            ]
-        }
-
-    })
-
-
-    res.status(201).send({ message: "Successful" })
+        //Sending response of successfully applied
+        res.status(201).send({ message: "Applied Successfully" })
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).send({ message: "Internal Server Error" });
+    }
 
 })
 

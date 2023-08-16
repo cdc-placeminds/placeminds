@@ -1,13 +1,12 @@
 import React from 'react'
 import Statusbar from './Statusbar'
 import DriveCard from './DriveCard'
-import { useDriveData } from './context/DriveDataContext'
+import { useDriveData } from '../context/DriveDataContext'
 
 
-const Drivesec = ({user_year}) => {
-  const {driveData} = useDriveData();
+const Drivesec = ({ user_year }) => {
+  const { driveData } = useDriveData();
   const drivesArray = Object.keys(driveData).map(key => driveData[key])
-  // const datadif = drivesArray.aggregate()
 
   return (
     <div className="col-md-8 dash">
@@ -18,12 +17,10 @@ const Drivesec = ({user_year}) => {
         <h1> PLACEMENT DRIVES</h1>
       </div>
 
-      {/* statusbar   */}
-      
-      <Statusbar user_year = {user_year}/>
+      {/* Statusbar   */}
+      <Statusbar user_year={user_year} />
 
       {/* DriveCard  */}
-
       {drivesArray.filter(drive => drive.year === user_year).reverse().map((datadrive, index) => (
         <DriveCard key={index} datadrive={datadrive} />
       ))}

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import "./Navbar.css";
-import maitbluelogo from "../Components/images/maitbluelogo.png"
-import { useAuth } from './context/AuthContext';
-import { useAlert } from './context/AlertContext';
-import { useUserData } from './context/UserDataContext';
-import { useAdmin } from './context/AdminContext';
+import maitbluelogo from "../images/maitbluelogo.png"
+import { useAuth } from '../context/AuthContext';
+import { useAlert } from '../context/AlertContext';
+import { useUserData } from '../context/UserDataContext';
+import { useAdmin } from '../context/AdminContext';
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(true);

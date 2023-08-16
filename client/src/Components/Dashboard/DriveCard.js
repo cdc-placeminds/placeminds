@@ -1,65 +1,67 @@
 import React, { useState } from 'react'
 // import complogo from './images/complogo.png';
-import { useUserData } from './context/UserDataContext';
-import { useAlert } from './context/AlertContext';
+import { useUserData } from '../context/UserDataContext';
+import { useAlert } from '../context/AlertContext';
 
 const DriveCard = ({ datadrive }) => {
-    
-    
+
     const { userData } = useUserData();
     const { showalert } = useAlert();
 
+    //Here we are checking if user is applied to this drive initially or not, below expression return True or False
     const isDriveAppliedInitially = userData.drives.some(drive => drive.drivecode === datadrive.drivecode && drive.applied);
     const [isDriveApplied, setisDriveApplied] = useState(isDriveAppliedInitially);
 
     const handleSubmit = async (e) => {
 
+        try {
 
-        const sheeturl = "http://localhost:8080/api/applyapi"
-        const fetchMethod = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                datadrive, userData
-            })
-        }
-        const addtosheet = await fetch(sheeturl, fetchMethod);
-        // -------------------------------------------------------------
+            // ---------------------------Fetch API for Adding User Details to Google Sheet----------------------------------
 
-        const url = "http://localhost:8080/api/updateapply"
-        const fetchMethods = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                datadrive, userData
-            })
-        }
-        const updateApplied = await fetch(url, fetchMethods);
+            const sheeturl = "http://localhost:8080/api/applyapi"
+            const fetchMethod = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    datadrive, userData
+                })
+            }
+            const addtosheet = await fetch(sheeturl, fetchMethod);
 
+            // ---------------------------Fetch API for Updating Applied = True in Database----------------------------------
 
+            const url = "http://localhost:8080/api/updateapply"
+            const fetchMethods = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    datadrive, userData
+                })
+            }
+            const updateApplied = await fetch(url, fetchMethods);
 
-        // -------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------------------------
 
-
-        if (addtosheet.status === 201) {
-            if (updateApplied.status === 201) {
-                setisDriveApplied(true);
-                showalert("Success: ", "Applied to Drive Successfully", "success")
-                console.log("Add to sheet successful")
+            if (addtosheet.status === 201) {
+                if (updateApplied.status === 201) {
+                    setisDriveApplied(true); // To change button from Apply now to Applied
+                    showalert("Success: ", "Applied to Drive Successfully", "success") // Showing Alert of Successful Applied
+                    console.log("Add to sheet successful")
+                }
             }
 
-        } else {
-            console.log("Error")
+            e.preventDefault();
+
         }
-
-
-        e.preventDefault();
+        catch (error) {
+            console.log(error)
+            showalert("Error: ", "Try Again", "warning")
+        }
     }
-
 
     return (
         <div className="drivecard">
@@ -109,7 +111,7 @@ const DriveCard = ({ datadrive }) => {
                 </div>
                 <div className="drvbtns">
                     <button className="viewdtl">View Details</button>
-                    {isDriveApplied
+                    {isDriveApplied //To toggle Apply now and applied button
                         ? (<button className="applied_btn" disabled>Applied</button>)
                         : (<button className="apnow_btn" onClick={handleSubmit}>Apply Now</button>)}
 
