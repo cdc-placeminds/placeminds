@@ -100,6 +100,9 @@ fetch('http://localhost:8080/api/mailsend', {
             margin-top: 10px;
             color: red;
           }
+          video {
+            transform: scaleX(-1);
+            }
         `}
       </style>
       <main>

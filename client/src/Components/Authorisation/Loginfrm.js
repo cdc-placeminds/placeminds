@@ -89,7 +89,7 @@ const Loginfrm = () => {
         </div>
         <div className='lgnbtns'>
           <button type="submit" className='btn btn-primary' onClick={handleSubmit}>Login</button>
-          <p>Forgot Password?</p>
+          <a href='/res-pass'>Forgot Password?</a>
         </div>
       </div>
     </div>
