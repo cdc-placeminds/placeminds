@@ -13,6 +13,8 @@ const ApplyAPI = require("./route/applyapi");
 const UpdateApply = require("./route/updateapply");
 const cookieParser = require("cookie-parser");
 const Mailsender=require("./route/Mailsender")
+const FindUser=require("./route/FindUser");
+const ResetPassword =require("./route/ResetPassword");
 
 // database connection 
 connection();
@@ -37,6 +39,11 @@ app.use("/api/applyapi", ApplyAPI)
 app.use("/api/updateapply", UpdateApply)
 // api for sending mail 
 app.use("/api/mailsend",Mailsender);
+// for checking if user exist 
+app.use("/api/check-user",FindUser);
+// for reset password 
+app.use("/api/resetpassword",ResetPassword);
+
 
 //Listen to port
 const port = 8080;

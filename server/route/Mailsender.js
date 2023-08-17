@@ -1,8 +1,12 @@
 // getting router 
 const router = require("express").Router();
+const {User}=require("../models/userSchema");
 const dotenv=require("dotenv");
 const nodemailer=require("nodemailer");
-const {User}=require("../models/userSchema");
+const genOtp = require("./genOtp");
+// requiring node cache for storing otp 
+const NodeCache =require('node-cache');
+
 
 var i =0;
 
@@ -24,6 +28,7 @@ const transporter = nodemailer.createTransport({
 router.post("/",async(req,res)=>{
 
   try{
+
     const user = await User.findOne({enrollment: req.body.text});
     
     var mailOptions = {
@@ -66,6 +71,114 @@ router.post("/",async(req,res)=>{
     }
 
 })
+
+
+
+// ----------------------------------------------------------------
+
+// intiating new cache 
+const otpCache = new NodeCache();
+const OTP_EXPIRATION_SECONDS = 180; // 3 minutes
+
+
+router.post("/sendotp",async(req,res)=>{
+
+  try{
+    const otp = genOtp();
+    console.log(otp +" otp");
+    
+    // generating otp time set and saving everything in cache 
+
+    const otpCreationTime =Date.now();
+    //  cache saved 
+    otpCache.set(req.body.email,{otp,creationTime:otpCreationTime},OTP_EXPIRATION_SECONDS);
+    
+    // finding user with same mail 
+    const user = await User.findOne({email: req.body.email});
+    
+    var mailOptions = {
+        from: process.env.SMTP_MAIL,
+        to: req.body.email,
+        subject: " OTP for Reset Password PRM",
+        html: `
+        <h1>Hello there!</h1>
+        <h2>${user.name}</h2>
+        <p> As per your request to rest passwor here is </p>
+        <p> OTP to reset your password is : ${otp}</p>
+      `,
+      };
+    
+      transporter.sendMail(mailOptions, function (error, info) {
+      i++;
+
+        if (error) {
+          console.log(error);
+          res.json({ otpSent: false });
+        } 
+        
+        else {
+           
+          console.log("Email sent successfully for otp for  the "+i+" time !");
+          res.json({ otpSent: true });
+        }
+      });
+    
+    
+    console.log("inside otpmailer router");
+    }
+    catch(error){
+      console.log(error);
+      res.status(500).json({ error: 'Server error' });
+    }
+
+})
+
+
+
+// veriy otp 
+
+router.post('/verifyotp', async (req, res) => {
+
+  console.log("inside otp verification");
+
+  // getting email and enterend otp 
+
+  try {
+    const { email, enteredOtp } = req.body;
+
+    // fetched cacehd email for otp
+
+    const cachedOtpData = otpCache.get(email);
+    
+
+    if (!cachedOtpData) {
+      return res.status(400).json({ message: 'OTP not found or expired' });
+    }
+    // fetching otp and creation time 
+    const { otp, creationTime } = cachedOtpData;
+    console.log("found otp for user");
+    console.log(cachedOtpData);
+    console.log("entered otp is "+enteredOtp);
+    const currentTime = Date.now();
+    const timeElapsedInSeconds = Math.floor((currentTime - creationTime) / 1000);
+
+    if (timeElapsedInSeconds > OTP_EXPIRATION_SECONDS) {
+      otpCache.del(email); // Remove expired OTP from the cache
+      return res.json({status: 400, message: 'OTP has expired' });
+    }
+
+    if (enteredOtp === otp) {
+      otpCache.del(email); // Remove verified OTP from the cache
+      return res.json({status: 200, message: 'OTP verified successfully' });
+    } else {
+      return res.json({status: 400, message: 'Invalid OTP' });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ status: 500,message: 'Internal server error' });
+  }
+});
+
 
 
 module.exports=router
