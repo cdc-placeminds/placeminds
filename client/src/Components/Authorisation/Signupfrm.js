@@ -27,7 +27,7 @@ const Signupfrm = () => {
 
         const { name, email, contact, enrollment, password, cpassword } = data;
         //Backend URL
-        const url = "http://localhost:8080/api/users";
+        const url = "http://localhost:8080/api/users/signup";
         //Fetch Api Methods Defining
         const fetchMethods = {
             method: "POST",

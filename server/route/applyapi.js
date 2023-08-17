@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
             valueInputOption: "USER_ENTERED",
             resource: {
                 values: [
-                    [numRows, req.body.userData.name, req.body.userData.enrollment, req.body.userData.contact, req.body.userData.email]
+                    ["'" + numRows, req.body.userData.name, "'" + req.body.userData.enrollment, "'" + req.body.userData.contact, req.body.userData.email]
                 ]
             }
 

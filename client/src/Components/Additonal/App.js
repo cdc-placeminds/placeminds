@@ -11,7 +11,9 @@ import { AdminProvider } from "../context/AdminContext";
 import { UserDataProvider } from "../context/UserDataContext";
 import { DriveDataProvider } from "../context/DriveDataContext";
 import { AlertProvider } from "../context/AlertContext";
+import { ScannerProvider } from "../context/ScannerContext";
 import QRScanner from "../Dashboard/AdminPanel/Qrscanner";
+import DrivesScanner from "../Dashboard/AdminPanel/DrivesScanner";
 
 function App() {
   return (
@@ -20,23 +22,25 @@ function App() {
         <UserDataProvider>
           <DriveDataProvider>
             <AdminProvider>
-              <AlertProvider>
-                <Navbar />
-                <Routes>
-                  <Route path='/' element={<Home />} />
-                  <Route path='/signup' element={<Signupfrm />} />
-                  <Route path='/dashboard' element={<Dashboard />} />
-                  <Route path="/adddrive" element={<AdminDash />} />
-                  <Route path="/editdrive" element={<EditDriveDash />} />
-                  <Route path="/qrscanner" element={<QRScanner/>} />
-
-                </Routes>
-              </AlertProvider>
+              <ScannerProvider>
+                <AlertProvider>
+                  <Navbar />
+                  <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/signup' element={<Signupfrm />} />
+                    <Route path='/dashboard' element={<Dashboard />} />
+                    <Route path="/adddrive" element={<AdminDash />} />
+                    <Route path="/editdrive" element={<EditDriveDash />} />
+                    <Route path="/qrscanner" element={<QRScanner />} />
+                    <Route path="/drivescanner" element={<DrivesScanner />} />
+                  </Routes>
+                </AlertProvider>
+              </ScannerProvider>
             </AdminProvider>
           </DriveDataProvider>
         </UserDataProvider>
       </AuthProvider>
-    </div>
+    </div >
 
   );
 }
