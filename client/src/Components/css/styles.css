@@ -75,6 +75,67 @@ body {
     margin-top: 10%
 }
 
+/* Qr Scanner Popup */
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Light background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.421);
+    border: 1px solid #67676735;
+    width: 500px;
+    max-height: 80%;
+    overflow: auto;
+}
+
+.popup-content .compdesc {
+    margin-top: 20px;
+}
+
+.popup-content .compdesc form {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-content .compdesc label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.popup-content .compdesc select {
+    /* width: 100%; */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.popup-content .compdesc input[type="radio"] {
+    margin-right: 5px;
+}
+
+.popup-content .compdesc input[type="radio"] + label {
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.popup-content .compdesc .radio-group {
+    display: flex;
+    align-items: center;
+}
+
 /* Student Profile */
 
 .stdprfl{
@@ -110,6 +171,35 @@ body {
     font-size: 14px;
     color: black;
     letter-spacing: 0.3px;
+}
+
+/* Update Profile  */
+ 
+.updateprfl{
+    padding: 2px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin: 10px 2px;
+}
+
+.updateprfl p{
+    margin-bottom: 0 !important;
+    margin-right: 20px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 20px
+
+}
+
+.updateprfl span{
+    cursor: pointer;
+    margin-left: 0;
+    margin-right: 70px;
+    width: 10px;
+    height: 10px;
+    font-size: 20px;
+    align-items: center;
 }
 
 /* drive section  */

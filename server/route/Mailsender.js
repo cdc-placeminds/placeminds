@@ -33,7 +33,7 @@ router.post("/",async(req,res)=>{
     
     var mailOptions = {
         from: process.env.SMTP_MAIL,
-        to: 'dmkavya.singhal@gmail.com',
+        to: user.email,
         subject: req.body.subject,
         html: `
         <h1>Hello there!</h1>

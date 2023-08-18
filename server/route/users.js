@@ -3,7 +3,7 @@ const Drive = require("../models/driveSchema");
 const { User, validate } = require("../models/userSchema");
 const bcrypt = require("bcrypt");
 
-router.post("/", async (req, res) => {
+router.post("/signup", async (req, res) => {
 	try {
 
 		//Validating if all fields are filled or not
@@ -50,5 +50,37 @@ router.post("/", async (req, res) => {
 		console.log(error)
 	}
 });
+
+router.post("/update", async (req, res) => {
+	try {
+
+		const {data} = req.body
+
+		//Checking if email already exist
+		const user = await User.findOne({_id: data.id});
+
+		//If user exists then show error
+		if (!user) {
+			return res.status(422).json({ error: "User Not Found" });
+		}
+
+		else {
+
+			user.name = data.name
+			user.email = data.email
+			user.enrollment = data.enrollment
+			user.contact = data.contact
+
+			await user.save();
+
+			// Sending respose of user created successfully
+			res.status(201).json({ message: "User Details Updated successfully" });
+		}
+	} catch (error) {
+		res.status(500).send({ message: "Internal Server Error" });
+		console.log(error)
+	}
+});
+
 
 module.exports = router;

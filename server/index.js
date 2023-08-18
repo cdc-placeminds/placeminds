@@ -11,6 +11,8 @@ const DashboardAccess = require("./route/DashboardAccess");
 const GoogleAPI = require("./route/googleapi");
 const ApplyAPI = require("./route/applyapi");
 const UpdateApply = require("./route/updateapply");
+const FindAPI = require("./route/findapi")
+const SheetNames = require("./route/sheetnames")
 const cookieParser = require("cookie-parser");
 const Mailsender=require("./route/Mailsender")
 const FindUser=require("./route/FindUser");
@@ -37,6 +39,8 @@ app.use("/api/dashboard", DashboardAccess)
 app.use("/api/googleapi", GoogleAPI)
 app.use("/api/applyapi", ApplyAPI)
 app.use("/api/updateapply", UpdateApply)
+app.use("/api/findapi", FindAPI)
+app.use("/api/sheetnames", SheetNames)
 // api for sending mail 
 app.use("/api/mailsend",Mailsender);
 // for checking if user exist 
