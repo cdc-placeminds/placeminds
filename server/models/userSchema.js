@@ -12,6 +12,11 @@ const userSchema = new mongoose.Schema({
     contact: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
+    branch: { type: String, required: true },
+    year: { type: String, required: true },
+    gender: { type: String, required: true },
+    dob: {type: String, required: true},
+    isAdmin: {type: Boolean, default: false},
     drives: [
         {
             drivecode: { type: String, required: true },
@@ -48,6 +53,10 @@ const validate = (data) => {
         contact: Joi.string().required().label("Contact"),
         email: Joi.string().email().required().label("Email"),
         password: passwordComplexity().required().label("Password"),
+        branch: Joi.string().required().label("Branch"),
+        year: Joi.string().required().label("Year"),
+        gender: Joi.string().required().label("Gender"),
+        dob: Joi.string().required().label("DOB"),
         cpassword: passwordComplexity().required().label("Password")
     });
 

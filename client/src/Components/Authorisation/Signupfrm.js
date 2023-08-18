@@ -14,7 +14,7 @@ const Signupfrm = () => {
 
     //update data that user is entering
     const [data, setData] = useState({
-        name: "", email: "", enrollment: "", contact: "", password: "", cpassword: ""
+        name: "", email: "", enrollment: "", contact: "", password: "", cpassword: "", branch: "", year: "", gender: "", dob: ""
     })
 
 
@@ -65,37 +65,45 @@ const Signupfrm = () => {
     return <div className="container-fluid homebody">
 
         <div className="col-md-6 md-12 mx-auto signupsec">
-        <p><Alert alert={alert} /></p>
+            <p><Alert alert={alert} /></p>
             <div className="sgnhead">Signup to CDC MAIT</div>
             <form className='register_frm' id='register_frm' method="POST" onSubmit={handleSubmit}>
                 <div className="sgnbody">
                     <div>
-
-                        <p>FULL NAME</p>
-                        <input id='inptbox' name='name' value={data.name} onChange={handleInputs} type='text'></input>
-                        <p>EMAIL ADDRESS</p>
-                        <input id='inptbox' name='email' value={data.email} onChange={handleInputs} type='email'></input>
-                        <p>PASSWORD</p>
-                        <input id='inptbox' name='password' value={data.password} onChange={handleInputs} type='password'></input>
-
+                        <div class="form-floating">
+                            <input id='inptbox' name='name' value={data.name} onChange={handleInputs} type='text'></input>
+                            <label for="name">FULL NAME</label>
+                        </div>
+                        <div class="form-floating">
+                            <input id='inptbox' name='email' value={data.email} onChange={handleInputs} type='email'></input>
+                            <label for="email">EMAIL ADDRESS</label>
+                        </div>
+                        <div class="form-floating">
+                            <input id='inptbox' name='password' value={data.password} onChange={handleInputs} type='password'></input>
+                            <label for="password">PASSWORD</label>
+                        </div>
                     </div>
                     <div>
-                        <p>ENROLLMENT NO</p>
-                        <input id='inptbox' name='enrollment' value={data.enrollment} onChange={handleInputs} type='text' inputMode='numeric'></input>
-                        <p>CONTACT NO</p>
-                        <input id='inptbox' name='contact' value={data.contact} onChange={handleInputs} type='text' inputMode='numeric'></input>
-                        <p>CONFIRM PASSWORD</p>
-                        <input id='inptbox' name='cpassword' value={data.cpassword} onChange={handleInputs} type='password'></input>
+                        <div class="form-floating">
+                            <input id='inptbox' name='enrollment' value={data.enrollment} onChange={handleInputs} type='text' inputMode='numeric'></input>
+                            <label for="enrollment">ENROLLMENT NO</label>
+                        </div>
+                        <div class="form-floating">
+                            <input id='inptbox' name='contact' value={data.contact} onChange={handleInputs} type='text' inputMode='numeric'></input>
+                            <label for="contact">CONTACT NO</label>
+                        </div>
+                        <div class="form-floating">
+                            <input id='inptbox' name='cpassword' value={data.cpassword} onChange={handleInputs} type='password'></input>
+                            <label for="cpassword">CONFIRM PASSWORD</label>
+                        </div>
                     </div>
                 </div>
+                <div className="sgnbtn">
+                    <button type='submit' className='btn btn-primary' onClick={handleSubmit}>Sign Up</button>
+                </div>
             </form>
-            <div className="sgnbtn">
-
-                <button type='submit' className='btn btn-primary' onClick={handleSubmit} >Sign Up</button>
-            </div>
-        </div>
-
-    </div>;
+        </div >
+    </div >
 }
 
 export default Signupfrm

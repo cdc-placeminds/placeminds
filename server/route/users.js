@@ -15,14 +15,14 @@ router.post("/signup", async (req, res) => {
 		}
 
 		//Checking if email already exist
-		const user = await User.findOne({ email: req.body.email });
+		// const user = await User.findOne({ email: req.body.email });
 
-		//If user exists then show error
-		if (user) {
-			return res.status(422).json({ error: "User with given email already Exist!" });
-		}
+		// //If user exists then show error
+		// if (user) {
+		// 	return res.status(422).json({ error: "User with given email already Exist!" });
+		// }
 
-		else {
+		// else {
 			// Password Hashing
 			const hashPassword = await bcrypt.hash(req.body.password, 10);
 
@@ -45,7 +45,7 @@ router.post("/signup", async (req, res) => {
 			// Sending respose of user created successfully
 			res.status(201).json({ message: "User created successfully" });
 		}
-	} catch (error) {
+	catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
 		console.log(error)
 	}
@@ -53,11 +53,13 @@ router.post("/signup", async (req, res) => {
 
 router.post("/update", async (req, res) => {
 	try {
-
-		const {data} = req.body
+		console.log("Inside Check")
+		console.log(req.body)
+		const {updateddata} = req.body
+		console.log(updateddata)
 
 		//Checking if email already exist
-		const user = await User.findOne({_id: data.id});
+		const user = await User.findOne({_id: updateddata.id});
 
 		//If user exists then show error
 		if (!user) {
@@ -66,10 +68,13 @@ router.post("/update", async (req, res) => {
 
 		else {
 
-			user.name = data.name
-			user.email = data.email
-			user.enrollment = data.enrollment
-			user.contact = data.contact
+			user.name = updateddata.name
+			user.email = updateddata.email
+			user.contact = updateddata.contact
+			user.branch = "IT"
+			user.year = "2024"
+			user.gender= "Male"
+			user.dob = "01/01/2000"
 
 			await user.save();
 
