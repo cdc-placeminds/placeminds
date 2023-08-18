@@ -143,6 +143,9 @@ const QRScanner = () => {
             margin-top: 10px;
             color: red;
           }
+          video {
+            transform: scaleX(-1);
+            }
         `}
       </style>
 

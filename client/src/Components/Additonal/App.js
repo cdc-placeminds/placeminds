@@ -13,7 +13,7 @@ import { DriveDataProvider } from "../context/DriveDataContext";
 import { AlertProvider } from "../context/AlertContext";
 import { ScannerProvider } from "../context/ScannerContext";
 import QRScanner from "../Dashboard/AdminPanel/Qrscanner";
-import DrivesScanner from "../Dashboard/AdminPanel/DrivesScanner";
+import ForgetPassword from "../Authorisation/ForgetPassword";
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function App() {
                     <Route path="/adddrive" element={<AdminDash />} />
                     <Route path="/editdrive" element={<EditDriveDash />} />
                     <Route path="/qrscanner" element={<QRScanner />} />
-                    <Route path="/drivescanner" element={<DrivesScanner />} />
+                    <Route path="/res-pass" element={<ForgetPassword/>} />
                   </Routes>
                 </AlertProvider>
               </ScannerProvider>

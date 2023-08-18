@@ -34,6 +34,7 @@ const Dashboard = () => {
       const data = await res.json();
 
       setisLoggedin(true);
+
       if (data.userDatasB.email === "ksingh@gmail.com" || data.userDatasB.email === "nandy2@gmail.com") {
         setisAdmin(true)
       }
