@@ -70,7 +70,7 @@ const StdProfile = () => {
             body: JSON.stringify(verfotpfor)
         })
             .then(response => response.json())
-            .then(data => {
+            .then(async data => {
                 if (data.status === 200) {
                     showalert("Success:", data.message, "success");
                    
@@ -93,7 +93,7 @@ const StdProfile = () => {
                         })
                     }
                     //Calling Fetch API
-                    const res = fetch(url, fetchMethods);
+                    const res = await fetch(url, fetchMethods);
 
                     //If registration is successfull
                     if (res.status === 201) {
