@@ -36,7 +36,7 @@ const AdminDash = () => {
 
         const { name, location, profile, ctc, branch, year } = data;
         //Backend URL
-        const url = "http://localhost:8080/api/createdrive";
+        const url = "http://localhost:8080/api/drive/newdrive";
         //Fetch Api Methods Defining
         const fetchMethods = {
             method: "POST",

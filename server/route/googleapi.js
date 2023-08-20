@@ -30,6 +30,17 @@ router.post("/", async (req, res) => {
         //Getting total rows
         const numRows = sheetData.data.values.length;
 
+        //Checking if company name already exists or not
+        const companyExists = sheetData.data.values.some(row => row[1] === compname);
+
+        if (companyExists) {
+            const currentDate = new Date();
+            const currentMonth = currentDate.getMonth() + 1; // Adding 1 to get the correct month number
+            const currentYear = currentDate.getFullYear();
+
+            compname += `_${currentMonth}/${currentYear}`;
+        }
+
         //Adding Drive Name to Master Sheet
         await googleSheets.spreadsheets.values.append({
             auth,

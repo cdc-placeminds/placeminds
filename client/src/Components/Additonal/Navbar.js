@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import { useAlert } from '../context/AlertContext';
 import { useUserData } from '../context/UserDataContext';
 import { useAdmin } from '../context/AdminContext';
+import Cookies from 'js-cookie';
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(true);
@@ -16,6 +17,7 @@ const Navbar = () => {
     const { userData } = useUserData();
 
     const handleLogout = () => {
+        Cookies.remove('jwtoken')
         setMenuOpen(true)
         setisLoggedin(false)
         showalert("Success: ", "Logout Successful", "warning")
