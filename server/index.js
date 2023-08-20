@@ -34,7 +34,7 @@ app.use(
 //Routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/createdrive", driveRoutes);
+app.use("/api/drive", driveRoutes);
 app.use("/api/dashboard", DashboardAccess)
 app.use("/api/googleapi", GoogleAPI)
 app.use("/api/applyapi", ApplyAPI)

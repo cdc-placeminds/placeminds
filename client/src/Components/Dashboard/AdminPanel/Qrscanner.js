@@ -30,7 +30,7 @@ const QRScanner = () => {
       async function success(decodedText, result) {
 
         // scanned succesfully 
-
+        
         console.log("inside success function");
         console.log(decodedText);
 

@@ -31,7 +31,7 @@ router.post("/", async (req, res) => {
         const numRows = sheetData.data.values.length;
 
         // Adding user details to company sheet that applied for drive
-        await googleSheets.spreadsheets.values.append({
+        googleSheets.spreadsheets.values.append({
             auth,
             spreadsheetId,
             range: compname,
@@ -49,7 +49,7 @@ router.post("/", async (req, res) => {
     }
     catch (error) {
         console.log(error);
-        res.status(500).send({ message: "Internal Server Error" });
+        res.status(500).json({ message: "Internal Server Error" });
     }
 
 })

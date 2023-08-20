@@ -6,7 +6,7 @@ body {
 
 .profile {
     background-color: white;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
@@ -178,7 +178,7 @@ body {
 .updateprfl{
     padding: 2px;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     margin: 10px 2px;
 }
@@ -420,6 +420,16 @@ body {
     padding: 2% 6.5%;
 }
 
+.deadline_btn {
+    background-color: #6c757d;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 400px;
+    color: white;
+    padding: 2% 6.5%;
+}
+
 .applied_btn {
     background-color: #0f7e0b;
     border-radius: 5px;
@@ -535,6 +545,7 @@ body {
     background-color: white;
     border: 1px solid #676767;
     border-radius: 12px;
+    background-image: url("../images/doodle4.jpg");
 }
 
 .lgnhead {
@@ -579,6 +590,7 @@ body {
     padding: 1% 5%;
     margin: 5% 15%;
     height: 450px;
+    background-image: url("../images/doodle_bkg.jpg");
 }
 
 .sgnhead {

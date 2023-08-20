@@ -1,8 +1,36 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Loginfrm from "../Authorisation/Loginfrm";
 import maitlogo from "../images/maitlogo.png"
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+
+  const navigate = useNavigate();
+
+  const callHomePage = async() => {
+    try {
+      const res = await fetch('http://localhost:8080/api/dashboard', {
+        method: "GET",
+        headers: {
+          Accept: "application/json", "Content-Type": "application/json"
+        },
+        credentials: "include"
+      })
+
+      if(res.status === 201){
+        navigate('/dashboard')
+      }
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    callHomePage();
+    // eslint-disable-next-line
+  }, [])
+
   return <div className="container-fluid homebody">
     <div className="row">
       <div className="col-md-10 col-12 mx-auto">

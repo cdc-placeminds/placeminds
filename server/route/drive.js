@@ -13,7 +13,7 @@ const generateCode = (name, year) => {
     return code;
 }
 
-router.post("/", async (req, res) => {
+router.post("/newdrive", async (req, res) => {
 
     try {
         //Getting name and year from request to generate unique code
@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
 
         //Adding body + drivecode to database
         const drive = Drive({ ...req.body, drivecode });
-        await new drive.save(); 
+        await drive.save();
 
         /* Getting all users from database, to update this drive's drivecode to users 
         drives array to check whether user has applied or not to drive */
@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
 
         //Adding drive code to each users drives array, by iterating through every user and save the data
         for (const user of users) {
-            user.drives.push({drivecode})
+            user.drives.push({ drivecode })
             await user.save();
         }
 
@@ -45,5 +45,26 @@ router.post("/", async (req, res) => {
     }
 
 })
+
+router.post("/totalapplied", async (req, res) => {
+
+    try {
+        dcode = req.body.datadrive.drivecode;
+
+        const drive = await Drive.findOne({
+            drivecode: dcode
+        })
+
+        drive.totalapplied += 1
+        drive.save();
+
+        res.status(201).json({ message: "Drive created successfully" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ message: "Internal Server Error" });
+    }
+
+})
+
 
 module.exports = router;

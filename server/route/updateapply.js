@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
         }
 
         //Sending success message of updation Applied = true
-        res.status(201).json({ message: "Update successfull" });
+        res.status(201).json({ message: "Update successfull", userdata: user });
     } catch (error) {
         res.status(500).send({ message: "Internal Server Error" });
         console.log(error);

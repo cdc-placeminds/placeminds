@@ -7,7 +7,10 @@ const driveSchema = new mongoose.Schema({
     ctc: { type: String, required: true },
     branch: { type: String, required: true },
     year: { type: String, required: true },
-    drivecode: { type: String, required: true }
+    deadline: { type: String, required: true},
+    drivecode: { type: String, required: true },
+    totalapplied: {type: Number, default: 0},
+    publishDate: {type: Date, default: Date.now}
 })
 
 const Drive = mongoose.model('drive', driveSchema);
