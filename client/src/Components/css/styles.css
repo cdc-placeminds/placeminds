@@ -603,7 +603,7 @@ body {
     letter-spacing: 0.3px;
 }
 
-.sgnbody {
+/* .sgnbody {
     display: flex;
     justify-content: space-evenly;
 
@@ -614,7 +614,7 @@ body {
     flex-direction: column;
     justify-content: space-around;
     height: 200px;
-}
+} */
 
 .sgnbody p {
     font-family: 'Outfit', sans-serif;
@@ -629,7 +629,7 @@ body {
     justify-content: center;
 }
 
-#inptbox {
+/* .form-floating label{
     border-radius: 5px;
     border: 0.5px solid #676767;
     height: 30px;
@@ -638,7 +638,7 @@ body {
     font-family: 'Outfit', sans-serif;
     font-weight: 400;
     font-size: 16px;
-}
+} */
 
 /* #inptbox :active{
     border: 0.5px solid red;

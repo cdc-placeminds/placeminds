@@ -24,8 +24,8 @@ const Navbar = () => {
     }
 
     return (
-        <nav>
-            <Link to='/' className="title"> <img src={maitbluelogo} alt="" className="navlogo" />CDC Portal</Link>
+        <nav className=' z-[99999]'>
+            <Link to='/' className="title flex"> <img src={maitbluelogo} alt="" className="navlogo" />CDC Portal</Link>
 
             <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
                 <span></span>

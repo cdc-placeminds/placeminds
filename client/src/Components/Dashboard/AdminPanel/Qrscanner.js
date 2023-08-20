@@ -63,7 +63,7 @@ const QRScanner = () => {
           setScanResult("Attendance marked for " + decodedText); // Update the scan result
           
           // then send mail 
-          fetch('http://localhost:8080/api/mailsend', {
+          fetch('http://localhost:8080/api/mailsend/attendance', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
