@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import "./Navbar.css";
 import maitbluelogo from "../images/maitbluelogo.png"
 import { useAuth } from '../context/AuthContext';
@@ -15,12 +15,18 @@ const Navbar = () => {
     const { setisLoggedin } = useAuth();
     const { showalert } = useAlert();
     const { userData } = useUserData();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         Cookies.remove('jwtoken')
         setMenuOpen(true)
         setisLoggedin(false)
-        showalert("Success: ", "Logout Successful", "warning")
+        showalert("", "Logout Successful", "warning")
+    }
+
+    const handleLogin = () => {
+        navigate('/')
+        window.location.reload();
     }
 
     return (
@@ -39,7 +45,7 @@ const Navbar = () => {
                         ?
                         <>
                             <li><NavLink to='/signup'>Signup</NavLink></li>
-                            <li><NavLink to='/'>Login</NavLink></li>
+                            <li><NavLink to='/' onClick={handleLogin}>Login</NavLink></li>
                         </>
                         :
                         <>

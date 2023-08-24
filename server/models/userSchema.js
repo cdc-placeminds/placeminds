@@ -31,8 +31,6 @@ userSchema.methods.generateAuthToken = async function () {
         let token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
             expiresIn: "7d",
         });
-        // this.tokens = this.tokens.concat({ token: token });
-        // await this.save();
         return token;
     }
     catch (error) {

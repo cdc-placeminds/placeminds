@@ -5,7 +5,7 @@ const driveSchema = new mongoose.Schema({
     profile: { type: String, required: true },
     location: { type: String, required: true },
     ctc: { type: String, required: true },
-    branch: { type: String, required: true },
+    branch: { type: Array, required: true },
     year: { type: String, required: true },
     deadline: { type: String, required: true},
     drivecode: { type: String, required: true },

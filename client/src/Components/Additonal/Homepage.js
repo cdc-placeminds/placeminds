@@ -16,7 +16,6 @@ const Home = () => {
         },
         credentials: "include"
       })
-
       if(res.status === 201){
         navigate('/dashboard')
       }

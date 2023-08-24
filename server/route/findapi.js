@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
             scopes: "https://www.googleapis.com/auth/spreadsheets"
         })
 
-        var enrollment = req.body.message.text;
+        var enrollment = req.body.enrollment;
         var compname = req.body.compname;
         var OpentoAll = req.body.OpentoAll;
         

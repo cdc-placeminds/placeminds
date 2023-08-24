@@ -273,7 +273,7 @@ const Signupfrm = () => {
 
     return <div className="container-fluid homebody">
 
-        <div className="w-1/2  mx-auto bg-white h-max py-[1%] px-[5%] mt-[5%] border-[1px] border-headcolor rounded-[12px]  ">
+        <div className="w-1/2 bg-hor-doodle mx-auto bg-white h-max py-[1%] px-[5%] mt-[5%] border-[1px] border-headcolor rounded-[12px]  ">
             <form ref={formRef} className='register_frm' id='register_frm' method="POST" onSubmit={handleSubmit}>
                 <div className="text-center font-head text-headcolor text-[36px] tracking-[0.3px] font-[700] ">Signup to CDC MAIT</div>
                 <div className='h-[20px] text-center'>

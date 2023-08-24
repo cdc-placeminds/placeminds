@@ -17,7 +17,6 @@ const Dashboard = () => {
   const { setuserData } = useUserData();
   const { setdriveData } = useDriveData();
   const { alert } = useAlert();
-  const user_year = "2023";
 
   const navigate = useNavigate();
 
@@ -68,7 +67,7 @@ const Dashboard = () => {
             <Alert alert={alert} />
             <div className="row">
               <Profile />
-              <Drivesec user_year={user_year} />
+              <Drivesec />
             </div>
           </div>
         </div>

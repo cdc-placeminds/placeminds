@@ -24,8 +24,45 @@ const transporter = nodemailer.createTransport({
   });
 
 
+// --------------------------------for emailsender---------------------------------------
+router.post("/",async(req,res) =>{
+  try{
+    console.log("emailSender")
+    console.log(req.body);
+    const user = await User.findOne({email: req.body.email});
+    var mailOptions = {
+      from: process.env.SMTP_MAIL,
+      to: user.email,
+      subject: req.body.subject,
+     html: `<div>${req.body.message}</div>`
+    ,
+    };
+  
+    transporter.sendMail(mailOptions, function (error, info) {
+    i++;
+      if (error) {
+        res.json({ EmailSent:false });
+        console.log(error);
+      } else {
+        res.json({ EmailSent: true });
+        console.log("Email sent successfully for the "+i+" time !");
+      }
+    });
+  
 
-router.post("/",async(req,res)=>{
+  console.log("inside mailsender router");
+
+  console.log(req.body);
+  }
+  catch(error){
+    console.log(error);
+  }
+})
+
+
+
+// if attendance is marked 
+router.post("/attendance",async(req,res)=>{
 
   try{
 
@@ -49,10 +86,12 @@ router.post("/",async(req,res)=>{
       i++;
 
         if (error) {
+          res.json({ EmailSent: false });
           console.log(error);
         } else {
             
           console.log("Email sent successfully for the "+i+" time !");
+          res.json({ EmailSent: true });
         }
       });
     
@@ -152,7 +191,7 @@ router.post('/verifyotp', async (req, res) => {
     
 
     if (!cachedOtpData) {
-      return res.status(400).json({ message: 'OTP not found or expired' });
+      return res.status(400).json({ message: 'OTP Expired' });
     }
     // fetching otp and creation time 
     const { otp, creationTime } = cachedOtpData;
@@ -164,18 +203,18 @@ router.post('/verifyotp', async (req, res) => {
 
     if (timeElapsedInSeconds > OTP_EXPIRATION_SECONDS) {
       otpCache.del(email); // Remove expired OTP from the cache
-      return res.json({status: 400, message: 'OTP has expired' });
+      return res.json({status: 400, message: 'OTP Expired' });
     }
 
     if (enteredOtp === otp) {
       otpCache.del(email); // Remove verified OTP from the cache
-      return res.json({status: 200, message: 'OTP verified successfully' });
+      return res.json({status: 200, message: 'OTP Verified ' });
     } else {
       return res.json({status: 400, message: 'Invalid OTP' });
     }
   } catch (error) {
     console.log(error);
-    res.json({ status: 500,message: 'Internal server error' });
+    res.json({ status: 500,message: 'Server error' });
   }
 });
 

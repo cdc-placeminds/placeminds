@@ -71,10 +71,10 @@ router.post("/update", async (req, res) => {
 			user.name = updateddata.name
 			user.email = updateddata.email
 			user.contact = updateddata.contact
-			user.branch = "IT"
-			user.year = "2024"
-			user.gender= "Male"
-			user.dob = "01/01/2000"
+			user.branch = updateddata.branch
+			user.year = updateddata.year
+			user.gender= updateddata.gender
+			user.dob = updateddata.dob
 
 			await user.save();
 

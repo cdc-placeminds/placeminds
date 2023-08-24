@@ -10,6 +10,7 @@ const DriveCard = ({ datadrive }) => {
     // const { driveData } = useDriveData();
     const { showalert } = useAlert();
 
+
     //Here we are checking if user is applied to this drive initially or not, below expression return True or False
     const isDriveAppliedInitially = userData.drives.some(drive => drive.drivecode === datadrive.drivecode && drive.applied);
     const [isDriveApplied, setisDriveApplied] = useState(isDriveAppliedInitially);
@@ -17,11 +18,23 @@ const DriveCard = ({ datadrive }) => {
     const [daysAgoPublished, setDaysAgoPublished] = useState(0); // State to store the number of days ago drive was published
 
     // Check if the deadline has passed
-    const deadlineParts = datadrive.deadline.split('/');
-    const deadlineIST = new Date(
-        `${deadlineParts[2]}-${deadlineParts[1]}-${deadlineParts[0]}T00:00:00+05:30`
-    );
-    const isDeadlineExpired = deadlineIST < new Date();
+    const deadlineIST = new Date(datadrive.deadline);
+    const currentDateIST = new Date(); // Current date and time in IST
+    const isDeadlineExpired = deadlineIST < currentDateIST;
+
+    //-------------Formating Deadline to Show on DriveCard-------------
+
+    const formatDeadline = (datadrive) => {
+        if (datadrive.name === 'Paytm') {
+            const deadline = datadrive.deadline; // Assuming it's in the format "2023-08-25T14:00"  
+            const [datePart, timePart] = deadline.split('T');
+            const [year, month, day] = datePart.split('-');
+            const [hour, minute] = timePart.split(':');
+
+            return `${month}-${day}-${year} | ${hour}:${minute}`
+        }
+    }
+
     //-----------------------------------------
 
     const handleSubmit = async (e) => {
@@ -109,7 +122,7 @@ const DriveCard = ({ datadrive }) => {
         const daysAgo = calculateDaysAgoPublished();
         setDaysAgoPublished(daysAgo);
 
-    // eslint-disable-next-line
+        // eslint-disable-next-line
     }, []);
 
     return (
@@ -136,8 +149,8 @@ const DriveCard = ({ datadrive }) => {
             <div className="horline"></div>
             <div className="compdisc">
                 <div className="jobtype compdiscdiv">
-                    <p className="head">Job Type</p>
-                    <p className="subhead">{datadrive.year}</p>
+                    <p className="head">Deadline</p>
+                    <p className="subhead">{formatDeadline(datadrive)}</p>
                 </div>
                 <div className="ctc compdiscdiv">
                     <p className="head">CTC</p>
@@ -145,7 +158,10 @@ const DriveCard = ({ datadrive }) => {
                 </div>
                 <div className="brelig compdiscdiv">
                     <p className="head">Branch Eligible</p>
-                    <p className="subhead">{datadrive.branch}</p>
+                    <p className="subhead">{datadrive.branch.length <= 2
+                        ? datadrive.branch.join(" | ")
+                        : `${datadrive.branch.slice(0, 2).join(" | ")} +${datadrive.branch.length - 2}`}
+                    </p>
                 </div>
                 <div className="locat compdiscdiv">
                     <p className="head">Location</p>

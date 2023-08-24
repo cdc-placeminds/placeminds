@@ -25,12 +25,12 @@ router.post("/",async(req,res)=>{
   const hashPassword = await bcrypt.hash(newPassword, 10);
         user.password=hashPassword;
         await user.save();
-        return res.json({status:200,message:'Password updated successfully'})
+        return res.json({status:200,message:'Password updated'})
 
     }
      catch(error){
         console.log(error);
-        res.json({status:500,message:'Internal server error'});
+        res.json({status:500,message:' server error'});
 
     }
 

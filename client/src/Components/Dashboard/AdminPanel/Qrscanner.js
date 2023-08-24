@@ -3,19 +3,24 @@ import { Html5QrcodeScanner } from 'html5-qrcode';
 import beepSoundSrc from '../../static/audio/beep.mp3';
 import errorbeepSoundSrc from '../../static/audio/error-beep.mp3';
 import { useScannerData } from '../../context/ScannerContext';
+// for loader 
+import HashLoader from 'react-spinners/HashLoader';
+
+
 
 const beepSound = new Audio(beepSoundSrc);
 const errorbeepSound = new Audio(errorbeepSoundSrc);
 
+
 const QRScanner = () => {
-  const {selectedDrive, isOpenForAll} = useScannerData();
-  const [scanResult, setScanResult] = useState("Show QR to Mark Attendance || " + selectedDrive);
+  const [scanResult, setScanResult] = useState("Show QR to Mark Attendance");
+  const { selectedDrive, isOpenForAll } = useScannerData();
+  const [loading, setLoading] = useState(false);
   let scanner;
+  
 
   useEffect(() => {
-
     if (!scanner?.getState()) {
-      // eslint-disable-next-line
       scanner = new Html5QrcodeScanner('qrreader', {
         qrbox: {
           width: 250,
@@ -27,22 +32,9 @@ const QRScanner = () => {
 
       scanner.render(success, error);
 
-      async function success(decodedText, result) {
+      //-----------------------Add to Sheet Function Start-----------------------------
 
-        // scanned succesfully 
-        
-        console.log("inside success function");
-        console.log(decodedText);
-
-
-        // api req to send mail 
-        const message = {
-          subject: 'Attendace Marked',
-          text: decodedText,
-        };
-
-        // ---------------------------------Fetch API to Mark Attendance in sheet------------------------------------
-
+      const markattendance = async (decodedText) => {
         const url = "http://localhost:8080/api/findapi"
         const fetchMethod = {
           method: "POST",
@@ -50,65 +42,116 @@ const QRScanner = () => {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            message,
+            enrollment: decodedText,
             compname: selectedDrive,
             OpentoAll: isOpenForAll
           })
         }
         const addtosheet = await fetch(url, fetchMethod);
+        return addtosheet;
+      }
 
-        //Marking attendance successfully
-        if (addtosheet.status === 201) {
+      //------------------------------END---------------------------------------------
+      //----------------------Function for sending Mail-------------------------------
 
-          setScanResult("Attendance marked for " + decodedText); // Update the scan result
-          
-          // then send mail 
-          fetch('http://localhost:8080/api/mailsend/attendance', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(message),
+      const sendmail = (message) => {
+        // -----------------mail send started-------------------------------------
+
+        fetch('http://localhost:8080/api/mailsend/attendance', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(message),
+        })
+          .then(response => response.json())
+          .then(data => {
+            // now if mail is sent 
+            setLoading(false)
+            setScanResult("Attendance Marked");
+            beepSound.play();
+            setTimeout(function () {
+              setScanResult("Show QR to Mark Attendance"); // Reset the scan result
+              scanner.resume();
+            }, 2000);
+            console.log('Email sent:', data.EmailSent);
           })
-            .then(response => response.json())
-            .then(data => {
-              console.log('Email sent:', data);
-            })
-            .catch(error => {
-              console.error('Error sending email:', error);
-            });
+          .catch(error => {
+            setLoading(false)
+            console.error('Error sending email:', error);
+          });
+
+        // -----------------mail send ended -------------------------------------
+
+      }
 
 
-          beepSound.play();
+      //---------------------------------END------------------------------------------
+      //-------------------------Success function started ---------------------------
+
+      async function success(decodedText, result) {
+
+        // --------------------paused scanner and beep sound ----------------------------------
+        scanner.pause();
+        setLoading(true);
+        // beepSound.play();
+
+        // --------------------paused scanner ---------------------------------------------------
+
+
+        // setScanResult("Attendance marked for " + decodedText); // Update the scan result
+
+        // Decoded Message, with enrollment in text
+        const message = {
+          subject: 'Attendace Marked',
+          text: decodedText,
+        };
+
+        //-------------------- api req to add to sheet start ---------------------
+
+        const addtosheet = await markattendance(decodedText);
+        if (addtosheet.status === 201) {
+          sendmail(message)
+          console.log("Attendance Marked")
         }
-
-        //If user is already present
         else if (addtosheet.status === 423) {
-          console.log("Already Present")
-          setScanResult("Already Present");
+          console.log("Already Present");
+          setLoading(false)
           errorbeepSound.play();
-        }
+          setScanResult("Already Present");
+          setTimeout(function () {
+            setScanResult("Show QR to Mark Attendance"); // Reset the scan result
+            scanner.resume();
+          }, 2000);
 
-        //If User has not applied for drive
+        }
         else if (addtosheet.status === 422) {
           console.log("Not Applied for Drive")
-          setScanResult("Not Applied for Drive ");
+          setLoading(false)
           errorbeepSound.play();
+          setScanResult("Not Applied for Drive");
+          setTimeout(function () {
+            setScanResult("Show QR to Mark Attendance"); // Reset the scan result
+            scanner.resume();
+          }, 2000);
         }
-
         else {
+          // setLoading(false)
+          setScanResult("Open Scanner Again")
           console.log("Server Error")
         }
 
-        // ----------------------------------------------------------------------------------------------------------
+        //-------------------- api req to add to sheet end ---------------------
+
+        //-------------------- api req to send mail ---------------------
 
 
-        // scanner.pause();
-          setTimeout(function () {
-            setScanResult("Show QR to Mark Attendance || " + selectedDrive); // Reset the scan result
-            // scanner.resume();
-          }, 2000);
 
+
+        // setTimeout(function () {
+        //   setScanResult("Show QR to Mark Attendance"); // Reset the scan result
+        //   scanner.resume();
+        // }, 2000);
       }
 
       function error(err) {
@@ -148,14 +191,21 @@ const QRScanner = () => {
             }
         `}
       </style>
-
       <main>
+      {loading?<div className='text-center absolute z-[99999]' ><HashLoader
+
+color={'#09a91d'}
+loading={loading}
+size={75}
+aria-label="Loading Spinner"
+data-testid="loader"
+/></div>:''}
         <div className="scanres">{scanResult}</div>
         <div id="qrreader"></div>
+
       </main>
     </div>
   );
-
 };
 
 export default QRScanner;

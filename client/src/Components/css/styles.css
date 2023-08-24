@@ -410,6 +410,18 @@ body {
     padding: 2% 3%;
 }
 
+.viewdtl:hover{
+    background-color: #1f3b66;
+    border: 2px solid #1f3b66;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 400px;
+    color: white;
+    margin-right: 7px;
+    padding: 2% 3%;
+}
+
 .apnow_btn {
     background-color: #1f3b66;
     border-radius: 5px;

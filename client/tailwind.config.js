@@ -16,6 +16,11 @@ module.exports = {
     extend: {
       fontFamily:{
         'head':['Outfit', 'sans-serif']
+      },
+      backgroundImage: {
+        'form-doodle': "url('./Components/images/doodle4.jpg')",
+        'hor-doodle': "url('./Components/images/doodle_bkg.jpg')",
+        
       }
     },
   },

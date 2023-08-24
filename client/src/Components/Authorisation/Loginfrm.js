@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useAlert } from '../context/AlertContext';
 import Alert from '../Additonal/Alert';
+
 // for loader 
 // import ClipLoader from "react-spinners/ClipLoader";
 import HashLoader from 'react-spinners/HashLoader';
@@ -27,7 +28,8 @@ const Loginfrm = () => {
   const [numvalid, setNumvalid] = useState({ msg: "", value: false });
   const [plenvalid, setPlenvalid] = useState({ msg: "", value: false });
   // functions for forget passwrod --------------------------------------
-
+  // for counter 
+  const [counter, setCounter] = useState(179);
 
   //   useeffect for checking Femail being entered exitst in our db or not 
 
@@ -44,11 +46,11 @@ const Loginfrm = () => {
         .then(data => {
           setFemailExists(data.exists)
           if (data.exists) {
-            showalert("Success:", "User found", "success")
+            showalert("", "User found", "success")
 
           }
           else {
-            showalert("Error:", "Invalid Details", "warning")
+            showalert("", "Invalid Details", "danger")
 
           }
         })
@@ -80,13 +82,12 @@ const Loginfrm = () => {
         //   otp is sent 
         setOtpSent(data.otpSent);
         if (data.otpSent) {
-          // setLoading(false);
-          showalert("Success:", "OTP Sent", "success")
+          showalert("", "OTP Sent", "success")
 
         }
         else {
           console.log("checking if otp is sent " + data.otpSent);
-          showalert("Error:", "Invalid Details", "warning")
+          showalert("", "Invalid Details", "danger")
 
         }
       })
@@ -113,11 +114,11 @@ const Loginfrm = () => {
         setLoading(false);
         if (data.status === 200) {
 
-          showalert("Success:", data.message, "success");
+          showalert("", data.message, "success");
           setOtpVerified(true);
           // Set your state variable (otpVerified) to true if needed
         } else {
-          showalert("Error:", data.message, "warning");
+          showalert("", data.message, "danger");
         }
 
       })
@@ -188,7 +189,7 @@ const Loginfrm = () => {
 
   const handleResetPassword = (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
-   
+
     // logic to reset the password.
 
     if (newPassword !== confirmPassword) {
@@ -196,35 +197,41 @@ const Loginfrm = () => {
     }
     else {
       setLoading(true);
-      const updateCred = { email: Femail, newPassword: newPassword };
+      if (otpVerified) {
+        const updateCred = { email: Femail, newPassword: newPassword };
 
-      fetch("http://localhost:8080/api/resetpassword", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updateCred)
-
-      })
-        .then(response => response.json())
-        .then(data => {
-          setLoading(false);
-          if (data.status === 200) {
-            showalert("Success:", data.message, "success");
-            setPasswordReset(true);
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000);
-            console.log("password reset successfull");
-          }
-          else {
-            showalert("Success:", data.message, "success");
-          }
+        fetch("http://localhost:8080/api/resetpassword", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(updateCred)
 
         })
-        .catch(error => {
-          console.log(error);
-        })
+          .then(response => response.json())
+          .then(data => {
+            setLoading(false);
+            if (data.status === 200) {
+              showalert("", data.message, "success");
+              setPasswordReset(true);
+              setTimeout(() => {
+                window.location.reload();
+              }, 2000);
+              console.log("password reset successfull");
+            }
+            else {
+              showalert("", data.message, "success");
+            }
+
+          })
+          .catch(error => {
+            console.log(error);
+          })
+
+      }
+      else {
+        window.location.reload();
+      }
 
     }
 
@@ -274,13 +281,13 @@ const Loginfrm = () => {
 
     //Checking for any error or credentials dont match
     if (res.status === 400 || !userData) {
-      showalert("Error:", "Invalid Details", "warning")
+      showalert("", "Invalid Details", "danger")
       console.log("Invalid Credentials")
     }
     //Login Successful
     else {
 
-      showalert("Success:", "Log In Successful", "success")
+      showalert("", "Log In Successful", "success")
 
       console.log("Login Successful")
       //Redirecting to Dashboard
@@ -296,15 +303,24 @@ const Loginfrm = () => {
   }
 
 
+  // for counter 
+
+  useEffect(() => {
+    const timer =
+      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+    return () => clearInterval(timer);
+  }, [counter]);
+
+
   return (
     <div className="col-md-6 loginsec flex justify-center items-center">
-      <div className='  w-fit flex flex-col  h-[75%] px-[7%] py-[3%] bg-white border-2px border-headcolor rounded-[16px] '>
-        <h1 className=' text-center mt-[5%] font-head text-headcolor font-[700] text-[2.0rem] tracking-[0.3px]'>{Fpass ? "Reset Password" : 'Student Login'}</h1>
+      <div className='bg-form-doodle  w-[55%] flex flex-col   px-[7%] py-[3%] bg-white border-2px border-headcolor rounded-[16px] '>
+        <h1 className=' text-center mt-[5%] font-head text-headcolor font-[700] text-[1.4rem] md:text-[2.0rem] tracking-[0.3px]'>{Fpass ? "Reset Password" : 'Student Login'}</h1>
 
 
         <form className={`signin_frm ${loading ? 'flex justify-center h-[100%]' : ''}`} id='signin_frm' method="POST" onSubmit={handleSubmit}>
 
-          {loading ? <div className='text-center mt-[30%]' ><HashLoader
+          {loading ? <div className='text-center my-[16%]' ><HashLoader
 
             color={'#0b5ed7'}
             loading={loading}
@@ -312,12 +328,12 @@ const Loginfrm = () => {
             aria-label="Loading Spinner"
             data-testid="loader"
           /></div> : <>
-            <div className={`h-[25px] w-[207px] ${Fpass ? 'mt-[7px] mb-[10px]' : 'mt-[5px]'}`}>  <Alert alert={alert} /> </div>
+            <div className={`h-[25px]  flex justify-center w-[100%] ${Fpass ? 'mt-[7px] mb-[10px]' : 'mt-[5px]'}`}>  <Alert alert={alert} /> </div>
 
             {/* ================= this area is for login if fpass false ---------------- */}
-            {!Fpass && (<>  <div className='relative'>
+            {!Fpass && (<div className='flex flex-col items-center'>  <div className=''>
               <div className="form-floating mb-[3%] mt-[5%]">
-                <input type='email' id='floatingemail' name='email' className='form-control' placeholder='EMAIL ADDRESS' required value={data.email} onChange={handleInputs} ></input>
+                <input type='email' id='floatingemail' name='email' className='form-control border-[2px]' placeholder='EMAIL ADDRESS' required value={data.email} onChange={handleInputs} ></input>
                 <label className='w-full  text-headcolor' htmlFor="floatingemail">Email Address</label>
               </div>
             </div>
@@ -327,12 +343,12 @@ const Loginfrm = () => {
                   <label className='w-full text-headcolor ' htmlFor="floatingpassword">Password</label>
                 </div>
               </div>
-              <div className='lgnbtns flex flex-col items-center mt-[7%]' >
-                <button type="submit" className='btn btn-primary mb-[5%]' onClick={handleSubmit}>Login</button>
+              <div className='lgnbtns flex flex-col items-center mt-[10%]' >
+                <button type="submit" className='btn btn-primary mb-[10%]' onClick={handleSubmit}>Login</button>
                 <p className='text-[25px] cursor cursor-pointer hover:underline hover:text-lblue' onClick={() => setFpass(true)}>Forgot Password ? </p>
 
 
-              </div> </>)}
+              </div> </div>)}
 
 
             {/* =================== if Fpass is clicked ------------------------------ */}
@@ -365,11 +381,19 @@ const Loginfrm = () => {
 
                     )}
 
-                    {/* if otp is sent then an input for sending otp and verify otp button  */}
+                    {/* if otp is sent then an input for otp and verify otp button  */}
 
                     {otpSent && (
                       <div className='flex flex-col items-center'>
-
+                        {/* timer is here  */}
+                        <p className="counter text-headcolor">
+                          {counter !== 0 ? (<span>
+                            Expires in <span className='text-warn'>{counter}</span>s</span>
+                          ) : (
+                            <span className='text-warn'>OTP Expired</span>
+                          )}
+                        </p>
+                        {/* timer ended  */}
                         <div className="form-floating mb-[3%] mt-[1%]">
                           <input type='text' id='floatingotp' name='otp' className='form-control' required value={otp}
                             onChange={(e) => setOtp(e.target.value)}
@@ -401,14 +425,14 @@ const Loginfrm = () => {
                       />
                       <label className='w-full  text-headcolor' htmlFor="floatingcnfpassword">Reset Password</label>
                     </div>
-                      
+
                     {/* password validation */}
                     <label className=' text-[90%] ' htmlFor="password"><span>{plenvalid.msg}</span> </label>
 
-                    <label className=' text-[75%] ' htmlFor="password"><span className='mr-[7px]'>{Uppercasevalid.msg}</span> <span className='mr-[7px]'>{Lowercasevalid.msg}</span><br/> <span className='mr-[7px]'>{specialcasevalid.msg}</span> <span>{numvalid.msg}</span> </label>
+                    <label className=' text-[75%] ' htmlFor="password"><span className='mr-[7px]'>{Uppercasevalid.msg}</span> <span className='mr-[7px]'>{Lowercasevalid.msg}</span><br /> <span className='mr-[7px]'>{specialcasevalid.msg}</span> <span>{numvalid.msg}</span> </label>
 
 
-                    <button disabled={!(Uppercasevalid.value && Lowercasevalid.value && numvalid.value && specialcasevalid.value && plenvalid.value)}  className='mt-[5%] btn btn-primary ' onClick={handleResetPassword}>Reset Password</button>
+                    <button disabled={!(Uppercasevalid.value && Lowercasevalid.value && numvalid.value && specialcasevalid.value && plenvalid.value)} className='mt-[5%] btn btn-primary ' onClick={handleResetPassword}>Reset Password</button>
 
                   </div>
                 )}
@@ -416,7 +440,7 @@ const Loginfrm = () => {
                 {/* if password is resetted then this  */}
 
                 {passwordReset && (
-                  <p>Password reset successfully!</p>
+                  <> </>
                 )}
               </div>
 
