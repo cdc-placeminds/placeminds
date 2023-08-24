@@ -9,7 +9,7 @@ const Home = () => {
 
   const callHomePage = async() => {
     try {
-      const res = await fetch('http://localhost:8080/api/dashboard', {
+      const res = await fetch(`${process.env.REACT_APP_BASE_URL}/api/dashboard`, {
         method: "GET",
         headers: {
           Accept: "application/json", "Content-Type": "application/json"

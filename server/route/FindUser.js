@@ -24,5 +24,29 @@ router.post("/", async(req,res)=>{
 })
 
 
+// router to find many user and its details 
+
+router.post("/findusers", async(req,res)=>{
+  console.log("inside findusers");
+  try{
+        const query = {};
+        query[req.body.searchBy] = req.body.searchInp;
+        const users = await User.find(query);
+
+        if (users) {
+          res.json(users);
+          console.log(users);
+        } else {
+          res.json({ message: 'Unable to find ' });
+        }
+      } 
+       catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+      }
+})
+
+
+
 
 module.exports=router;

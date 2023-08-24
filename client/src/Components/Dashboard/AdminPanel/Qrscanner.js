@@ -17,7 +17,7 @@ const QRScanner = () => {
   const { selectedDrive, isOpenForAll } = useScannerData();
   const [loading, setLoading] = useState(false);
   let scanner;
-  
+
 
   useEffect(() => {
     if (!scanner?.getState()) {
@@ -35,7 +35,7 @@ const QRScanner = () => {
       //-----------------------Add to Sheet Function Start-----------------------------
 
       const markattendance = async (decodedText) => {
-        const url = "http://localhost:8080/api/findapi"
+        const url = `${process.env.REACT_APP_BASE_URL}/api/findapi`
         const fetchMethod = {
           method: "POST",
           headers: {
@@ -57,7 +57,7 @@ const QRScanner = () => {
       const sendmail = (message) => {
         // -----------------mail send started-------------------------------------
 
-        fetch('http://localhost:8080/api/mailsend/attendance', {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/mailsend/attendance`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -192,14 +192,14 @@ const QRScanner = () => {
         `}
       </style>
       <main>
-      {loading?<div className='text-center absolute z-[99999]' ><HashLoader
+        {loading ? <div className='text-center absolute z-[99999]' ><HashLoader
 
-color={'#09a91d'}
-loading={loading}
-size={75}
-aria-label="Loading Spinner"
-data-testid="loader"
-/></div>:''}
+          color={'#09a91d'}
+          loading={loading}
+          size={75}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        /></div> : ''}
         <div className="scanres">{scanResult}</div>
         <div id="qrreader"></div>
 

@@ -43,13 +43,16 @@ const ProfileAccordian = () => {
     const editdrivepanel = () => {
         navigate('/editdrive')
     }
+    const controlpanel=()=>{
+        navigate('/controlpanel');
+    }
     // const qrScanner = () => {
     //     navigate('/qrscanner')
     // }
 
     const handlesubmit = async () => {
 
-        const url = "http://localhost:8080/api/sheetnames"
+        const url = `${process.env.REACT_APP_BASE_URL}/api/sheetnames`
         const fetchMethods = {
             method: "POST",
             headers: {
@@ -106,9 +109,10 @@ const ProfileAccordian = () => {
                     <p>Admin Panel</p>
                 </>
             } content={
-                <div>
+                <div className='grid grid-cols-1 grid-flow-row md:grid-cols-2'>
                     <button onClick={adddrivepanel} className='btn btn-primary btn-sm my-1 mx-1'>Add Drive</button>
                     <button onClick={editdrivepanel} className='btn btn-primary btn-sm my-1 mx-1'>Edit Drive</button>
+                    <button onClick={controlpanel} className='btn btn-primary btn-sm my-1 mx-1'>Control Panel</button>
                     <button onClick={() => { setisOpen(true); handlesubmit() }} className='btn btn-primary btn-sm my-1 mx-1'>Scan QR</button>
                 </div>
             } />)}

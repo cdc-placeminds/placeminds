@@ -6,7 +6,7 @@ function CheckUserExistence(varName, varValue) {
     useEffect(() => {
         if (varValue) {
             const userCheck = { varname: varName, varval: varValue };
-            fetch("http://localhost:8080/api/check-user", {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/check-user`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userCheck)

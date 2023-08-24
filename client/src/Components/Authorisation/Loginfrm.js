@@ -37,7 +37,7 @@ const Loginfrm = () => {
 
     if (Femail) {
       var usercheck = { varname: 'email', varval: Femail }
-      fetch("http://localhost:8080/api/check-user", {
+      fetch(`${process.env.REACT_APP_BASE_URL}/api/check-user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(usercheck)
@@ -68,7 +68,7 @@ const Loginfrm = () => {
     e.preventDefault(); // Prevent the default form submission behavior
     // Here, you can implement the logic to send the OTP to the user's Femail.
     const message = { email: Femail }
-    fetch('http://localhost:8080/api/mailsend/sendotp', {
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/mailsend/sendotp`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ const Loginfrm = () => {
     e.preventDefault(); // Prevent the default form submission behavior
     setLoading(true);
     const verfotpfor = { email: Femail, enteredOtp: otp }
-    fetch("http://localhost:8080/api/mailsend/verifyotp", {
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/mailsend/verifyotp`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -200,7 +200,7 @@ const Loginfrm = () => {
       if (otpVerified) {
         const updateCred = { email: Femail, newPassword: newPassword };
 
-        fetch("http://localhost:8080/api/resetpassword", {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/resetpassword`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -262,7 +262,7 @@ const Loginfrm = () => {
 
     const { email, password } = data;
     //Backend URL
-    const url = "http://localhost:8080/api/auth";
+    const url = `${process.env.REACT_APP_BASE_URL}/api/auth`;
     //Fetch Api Methods Defining
     const fetchMethods = {
       method: "POST",

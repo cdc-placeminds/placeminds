@@ -27,7 +27,7 @@ const StdProfile = () => {
     useEffect(() => {
         if (updateddata.email !== userData.email) {
             var usercheck = { varname: 'email', varval: updateddata.email }
-            fetch("http://localhost:8080/api/check-user", {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/check-user`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(usercheck)
@@ -66,7 +66,7 @@ const StdProfile = () => {
             email: updateddata.email
         }
 
-        fetch('http://localhost:8080/api/mailsend/sendotp', {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/mailsend/sendotp`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ const StdProfile = () => {
     // --------------------------------------Verifying OTP Backend Fetch API-------------------------------------
     const handleVerifyOTP = () => {
         const verfotpfor = { email: updateddata.email, enteredOtp: otp }
-        fetch("http://localhost:8080/api/mailsend/verifyotp", {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/mailsend/verifyotp`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -120,7 +120,7 @@ const StdProfile = () => {
 
 
                     //Backend URL
-                    const url = "http://localhost:8080/api/users/update";
+                    const url = `${process.env.REACT_APP_BASE_URL}/api/users/update`;
                     //Fetch Api Methods Defining
                     const fetchMethods = {
                         method: "POST",

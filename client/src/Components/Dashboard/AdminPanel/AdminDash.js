@@ -39,7 +39,7 @@ const AdminDash = () => {
 
         const { name, location, profile, ctc, branch, year, deadline } = data;
         //Backend URL
-        const url = "http://localhost:8080/api/drive/newdrive";
+        const url = `${process.env.REACT_APP_BASE_URL}/api/drive/newdrive`;
         //Fetch Api Methods Defining
         const fetchMethods = {
             method: "POST",
@@ -56,7 +56,7 @@ const AdminDash = () => {
 
         // -----------------------------------------------------------------------------------
 
-        const sheeturl = "http://localhost:8080/api/googleapi"
+        const sheeturl = `${process.env.REACT_APP_BASE_URL}/api/googleapi`
         const fetchMethod = {
             method: "POST",
             headers: {

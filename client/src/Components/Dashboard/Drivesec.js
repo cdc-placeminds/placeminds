@@ -7,9 +7,9 @@ import { useUserData } from '../context/UserDataContext'
 
 const Drivesec = () => {
   const { driveData } = useDriveData();
-  const {userData} = useUserData();
+  const { userData } = useUserData();
   const drivesArray = Object.keys(driveData).map(key => driveData[key])
-    
+
 
   return (
     <div className="col-md-8 dash">
@@ -17,48 +17,16 @@ const Drivesec = () => {
         <span className="material-symbols-outlined">
           business_center
         </span>
-        <h1> PLACEMENT DRIVES</h1>
+        <h1 className='flex items-center text-[30px] font-[600] ml-[8px]'> PLACEMENT DRIVES</h1>
       </div>
 
       {/* Statusbar   */}
-      <Statusbar/>
+      <Statusbar />
 
       {/* DriveCard  */}
       {drivesArray.filter(drive => drive.year === userData.year).reverse().map((datadrive, index) => (
         <DriveCard key={index} datadrive={datadrive} />
       ))}
-      
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     </div>
   )

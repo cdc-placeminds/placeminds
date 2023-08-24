@@ -89,7 +89,7 @@ const Signupfrm = () => {
 
         if (data.email) {
             var usercheck = { varname: 'email', varval: data.email }
-            fetch("http://localhost:8080/api/check-user", {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/check-user`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(usercheck)
@@ -118,7 +118,7 @@ const Signupfrm = () => {
 
         if (data.enrollment) {
             var usercheck = { varname: 'enrollment', varval: data.enrollment }
-            fetch("http://localhost:8080/api/check-user", {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/check-user`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(usercheck)
@@ -223,7 +223,7 @@ const Signupfrm = () => {
 
 
         //Backend URL
-        const url = "http://localhost:8080/api/users/signup";
+        const url = `${process.env.REACT_APP_BASE_URL}/api/users/signup`;
         //Fetch Api Methods Defining
         const fetchMethods = {
             method: "POST",

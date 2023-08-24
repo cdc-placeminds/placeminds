@@ -13,6 +13,7 @@ import { DriveDataProvider } from "../context/DriveDataContext";
 import { AlertProvider } from "../context/AlertContext";
 import { ScannerProvider } from "../context/ScannerContext";
 import QRScanner from "../Dashboard/AdminPanel/Qrscanner";
+import ControlPanel from "../Dashboard/AdminPanel/ControlPanel";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                     <Route path="/adddrive" element={<AdminDash />} />
                     <Route path="/editdrive" element={<EditDriveDash />} />
                     <Route path="/qrscanner" element={<QRScanner />} />
+                    <Route path="/controlpanel" element={<ControlPanel />} />
                   </Routes>
                 </AlertProvider>
               </ScannerProvider>

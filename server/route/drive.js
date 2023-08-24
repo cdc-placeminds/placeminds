@@ -5,7 +5,7 @@ const { User } = require("../models/userSchema");
 /* Function to generate unique drivecode for each drive, which is of format
     First four letters of Company name + Last two digits of Year for which drive is, Alphabet NK, 4 digit random no */
 const generateCode = (name, year) => {
-    const firstFourLetters = name.slice(0, 4).toUpperCase();
+    const firstFourLetters = name.replace(/\s/g, '').slice(0, 4).toUpperCase();
     const lastTwoDigitsOfYear = year.toString().slice(-2);
     const randomFourDigitNumber = Math.floor(Math.random() * 9000) + 1000;
 

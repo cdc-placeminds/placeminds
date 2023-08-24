@@ -4,7 +4,7 @@ function Emailsender({ email, message,subject }) {
 
     const messageBody = { email: email, message: message ,subject:subject};
     console.log(messageBody);
-    fetch('http://localhost:8080/api/mailsend', {
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/mailsend`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

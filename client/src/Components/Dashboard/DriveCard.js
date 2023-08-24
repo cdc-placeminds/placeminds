@@ -26,16 +26,18 @@ const DriveCard = ({ datadrive }) => {
 
     const formatDeadline = (datadrive) => {
         if (datadrive.name === 'Paytm') {
-            const deadline = datadrive.deadline; // Assuming it's in the format "2023-08-25T14:00"  
-            const [datePart, timePart] = deadline.split('T');
-            const [year, month, day] = datePart.split('-');
-            const [hour, minute] = timePart.split(':');
-
-            return `${month}-${day}-${year} | ${hour}:${minute}`
+            const deadline = new Date(datadrive.deadline); // Assuming it's in the format "2023-08-25T14:00"
+            const options = { day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric', hour12: true };
+            return deadline.toLocaleString('en-US', options);
         }
+        return ''; // Return an empty string if the name is not 'Paytm'
     }
 
     //-----------------------------------------
+    //TO check wheter user is eligible for drive or not
+    const isEligible = datadrive.branch.some((branch) => userData.branch === branch);
+
+
 
     const handleSubmit = async (e) => {
 
@@ -43,7 +45,7 @@ const DriveCard = ({ datadrive }) => {
 
             // ---------------------------Fetch API for Adding User Details to Google Sheet----------------------------------
 
-            const sheeturl = "http://localhost:8080/api/applyapi"
+            const sheeturl = `${process.env.REACT_APP_BASE_URL}/api/applyapi`
             const fetchMethod = {
                 method: "POST",
                 headers: {
@@ -57,7 +59,7 @@ const DriveCard = ({ datadrive }) => {
 
             // ---------------------------Fetch API for Updating Applied = True in Database----------------------------------
 
-            const url = "http://localhost:8080/api/updateapply"
+            const url = `${process.env.REACT_APP_BASE_URL}/api/updateapply`
             const fetchMethods = {
                 method: "POST",
                 headers: {
@@ -74,7 +76,7 @@ const DriveCard = ({ datadrive }) => {
             // ---------------------------Fetch API for Updating Total Applied Count in Database----------------------------------
 
 
-            const uri = "http://localhost:8080/api/drive/totalapplied"
+            const uri = `${process.env.REACT_APP_BASE_URL}/api/drive/totalapplied`
             const Methods = {
                 method: "POST",
                 headers: {
@@ -176,15 +178,18 @@ const DriveCard = ({ datadrive }) => {
                 </div>
                 <div className="drvbtns">
                     <button className="viewdtl">View Details</button>
-                    {isDriveApplied //To toggle Apply now and applied button
-                        ? (<button className="applied_btn" disabled>Applied</button>)
-                        : (
+                    {isDriveApplied ? (
+                        <button className="applied_btn" disabled>Applied</button>
+                    ) : (
+                        isEligible ? (
                             isDeadlineExpired ? (
                                 <button className="deadline_btn" disabled>Closed</button>
                             ) : (
                                 <button className="apnow_btn" onClick={handleSubmit}>Apply Now</button>
-                            )
-                        )}
+                            )) : (
+                            <button className="deadline_btn" disabled>Not Eligible</button>
+                        )
+                    )}
 
                 </div>
             </div>
