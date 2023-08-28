@@ -24,20 +24,40 @@ router.post("/", async(req,res)=>{
 })
 
 
-// router to find many user and its details 
+// router to find many user and its details in control panel
 
 router.post("/findusers", async(req,res)=>{
   console.log("inside findusers");
   try{
         const query = {};
-        query[req.body.searchBy] = req.body.searchInp;
+        query[req.body.searchBy] = {
+          $regex: req.body.searchInp,
+          $options: "i" // Case-insensitive match
+      };
         const users = await User.find(query);
 
         if (users) {
-          res.json(users);
-          console.log(users);
+
+          const UserData = users.map(user=>{
+            return{
+              name: user.name,
+              email: user.email,
+              enrollment: user.enrollment,
+              contact: user.contact,
+              branch: user.branch,
+              year: user.year,
+              gender: user.gender,
+              dob: user.dob,
+              id: user._id,
+              isAdmin: user.isAdmin,
+              
+            }
+          })
+
+          res.json(UserData);
+          console.log(UserData);
         } else {
-          res.json({ message: 'Unable to find ' });
+          res.status(423).json({ message: 'Unable to find ' });
         }
       } 
        catch (error) {
@@ -49,4 +69,4 @@ router.post("/findusers", async(req,res)=>{
 
 
 
-module.exports=router;
+module.exports=router; 

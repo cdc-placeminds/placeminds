@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
-// import complogo from './images/complogo.png';
 import { useUserData } from '../context/UserDataContext';
-// import { useDriveData } from '../context/DriveDataContext';
 import { useAlert } from '../context/AlertContext';
+import HashLoader from 'react-spinners/HashLoader';
 
 const DriveCard = ({ datadrive }) => {
 
     const { setuserData, userData } = useUserData();
-    // const { driveData } = useDriveData();
     const { showalert } = useAlert();
+    const [loading, setLoading] = useState(false);
 
 
     //Here we are checking if user is applied to this drive initially or not, below expression return True or False
@@ -25,12 +24,9 @@ const DriveCard = ({ datadrive }) => {
     //-------------Formating Deadline to Show on DriveCard-------------
 
     const formatDeadline = (datadrive) => {
-        if (datadrive.name === 'Paytm') {
-            const deadline = new Date(datadrive.deadline); // Assuming it's in the format "2023-08-25T14:00"
-            const options = { day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric', hour12: true };
-            return deadline.toLocaleString('en-US', options);
-        }
-        return ''; // Return an empty string if the name is not 'Paytm'
+        const deadline = new Date(datadrive.deadline); // Assuming it's in the format "2023-08-25T14:00"
+        const options = { day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric', hour12: true };
+        return deadline.toLocaleString('en-US', options);
     }
 
     //-----------------------------------------
@@ -40,7 +36,7 @@ const DriveCard = ({ datadrive }) => {
 
 
     const handleSubmit = async (e) => {
-
+        setLoading(true)
         try {
 
             // ---------------------------Fetch API for Adding User Details to Google Sheet----------------------------------
@@ -90,7 +86,7 @@ const DriveCard = ({ datadrive }) => {
 
 
             // --------------------------------------------------------------------------------------------------------------
-
+            setLoading(false);
             if (addtosheet.status === 201) {
                 if (updateApplied.status === 201) {
                     if (updatetotalapplied.status === 201) {
@@ -138,6 +134,14 @@ const DriveCard = ({ datadrive }) => {
                         </span>
 
                     </div>
+                    {loading && <div className='text-center absolute z-[999] top-[50%] left-[50%]' ><HashLoader
+
+                        color={'#0b5ed7'}
+                        loading={loading}
+                        size={60}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    /></div>}
                     <div>
                         <p className='comprole'>{datadrive.profile}</p>
                         <p className="compname">{datadrive.name}</p>
@@ -160,10 +164,23 @@ const DriveCard = ({ datadrive }) => {
                 </div>
                 <div className="brelig compdiscdiv">
                     <p className="head">Branch Eligible</p>
-                    <p className="subhead">{datadrive.branch.length <= 2
-                        ? datadrive.branch.join(" | ")
-                        : `${datadrive.branch.slice(0, 2).join(" | ")} +${datadrive.branch.length - 2}`}
-                    </p>
+                    <label className="subhead group relative">
+                        {datadrive.branch.length <= 2
+                            ? datadrive.branch.join(" | ")
+                            : (
+                                <>
+                                    {datadrive.branch.slice(0, 2).join(" | ")}
+                                    <span className="tooltip-popup absolute hidden group-hover:flex group-hover:flex-row group-hover:items-center group-hover:justify-center group-hover:top-[100%] group-hover:left-1/2 transform -translate-x-1/2 bg-bkg py-1 px-2 rounded shadow-lg border border-headcolor">
+                                        {datadrive.branch.map((branch, index) => (
+                                            <span key={index} className="mx-1">{branch}{index !== datadrive.branch.length - 1 ? ',' : ''}</span>
+                                        ))}
+                                    </span>
+                                    +{datadrive.branch.length - 2}
+                                </>
+                            )}
+                    </label>
+
+
                 </div>
                 <div className="locat compdiscdiv">
                     <p className="head">Location</p>

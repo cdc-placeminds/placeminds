@@ -13,7 +13,8 @@ const AdminDash = () => {
     const [loading, setLoading] = useState(false);
 
     const checkisAdmin = () => {
-
+        console.log("Checking Admin")
+        console.log(isAdmin)
         if (!isAdmin) {
             navigate('/')
         }
@@ -21,6 +22,7 @@ const AdminDash = () => {
 
     useEffect(() => {
         checkisAdmin();
+
         // eslint-disable-next-line
     }, [])
 
@@ -54,36 +56,33 @@ const AdminDash = () => {
         //Calling Fetch API
         const res = await fetch(url, fetchMethods);
 
-        // -----------------------------------------------------------------------------------
-
-        const sheeturl = `${process.env.REACT_APP_BASE_URL}/api/googleapi`
-        const fetchMethod = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name, location, profile, ctc, branch, year, deadline
-            })
-        }
-        const addtosheet = await fetch(sheeturl, fetchMethod);
-
-        if (addtosheet.status === 201) {
-            console.log("Add to sheet successful")
-        } else {
-            console.log("Error")
-        }
-
-
-
-
-        // -----------------------------------------------------------------------------------
-
-        setLoading(false)
         //Checking If any error occured 
         if (res.status === 201) {
-            showalert("Success: ", "Drive Added Successfully", "success")
-            console.log("Drive Created Successfully")
+            // -----------------------------------------------------------------------------------
+
+            const sheeturl = `${process.env.REACT_APP_BASE_URL}/api/googleapi`
+            const fetchMethod = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name, location, profile, ctc, branch, year, deadline
+                })
+            }
+            const addtosheet = await fetch(sheeturl, fetchMethod);
+
+            setLoading(false)
+
+            if (addtosheet.status === 201) {
+                console.log("Add to sheet successful")
+                console.log("Drive Created Successfully")
+                showalert("Success: ", "Drive Added Successfully", "success")
+            } else {
+                console.log("Error")
+            }
+            // -----------------------------------------------------------------------------------
+
         }
         //If registration is successfull
         else {
@@ -142,7 +141,7 @@ const AdminDash = () => {
                 <Alert alert={alert} />
                 <div className="sgnhead">Create New Drive</div>
                 <form className='register_frm' id='register_frm' method="POST" >
-                    {loading && <div className='text-center absolute z-[999]' ><HashLoader
+                    {loading && <div className='text-center absolute z-[999] top-[50%] left-[50%]' ><HashLoader
 
                         color={'#0b5ed7'}
                         loading={loading}

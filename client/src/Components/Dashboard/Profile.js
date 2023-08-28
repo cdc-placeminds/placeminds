@@ -11,7 +11,6 @@ const Profile = () => {
   const [isOpen, setisOpen] = useState(false)
 
   const handleinput = (e) => {
-    console.log(e)
     setimageurl(e.target.files[0])
   }
 
@@ -39,7 +38,7 @@ const Profile = () => {
     data.append("upload_preset", "user_profileimg_prm")
     data.append("cloud_name", "daw345b5a")
 
-    fetch("https://api.cloudinary.com/v1_1/daw345b5a/image/upload", {
+    fetch(process.env.REACT_APP_EDIT_IMG, {
       method: "POST",
       body: data
     })
@@ -77,11 +76,11 @@ const Profile = () => {
             <div className="popup">
               <div className="popup-content">
                 <div className='comphead'>
-                  <h2>Edit Profile</h2>
+                  <h2 className='font-head m-[2%] text-[20px] font-[400]' >Edit Profile</h2>
                 </div>
 
                 <div className="horline"></div>
-                <div>
+                <div className='my-[3%]'>
                   <input type='file' onChange={handleinput} />
                 </div>
                 <div className="horline"></div>

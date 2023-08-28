@@ -122,7 +122,7 @@ const ProfileAccordian = () => {
                     <div className="popup-content">
                         {/* Content of the popup */}
                         <div className='comphead'>
-                            <h2>QR Scanner</h2>
+                            <h2 className='font-head m-[2%] text-[20px] font-[400]' >QR Scanner</h2>
                         </div>
 
                         <div className="horline"></div>
@@ -141,7 +141,7 @@ const ProfileAccordian = () => {
                                         ))}
                                     </select>
                                 </div>
-                                <div>
+                                <div className='my-[3%]'>
                                     <label>Is this drive open for all: </label>
                                     <label>Yes</label>
                                     <input type='radio' value='true' checked={isOpenForAll === true} onChange={() => setIsOpenForAll(true)} name='isOpenforall' />

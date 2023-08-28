@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useUserData } from '../context/UserDataContext'
 import { useAlert } from '../context/AlertContext'
+import HashLoader from 'react-spinners/HashLoader';
 
 const StdProfile = () => {
     const [isOpen, setisOpen] = useState(false)
@@ -8,6 +9,8 @@ const StdProfile = () => {
     const [otp, setOtp] = useState('');
     const [otpVerified, setOtpVerified] = useState(false);
     const [emailExists, setEmailExists] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [counter, setCounter] = useState(179);
     const [FixedWarning, setFixedWarning] = useState({ msg: "", type: "" });
     const { userData } = useUserData();
     const { showalert } = useAlert();
@@ -58,6 +61,7 @@ const StdProfile = () => {
     }
 
     const handleSubmit = async (e) => {
+        setLoading(true)
         e.preventDefault();
 
         // --------------------------------------EMAIL VERIFICATION USING OTP-------------------------------------------
@@ -75,6 +79,7 @@ const StdProfile = () => {
         })
             .then(response => response.json())
             .then(data => {
+                setLoading(false)
                 console.log('Email sent:', data);
                 //   otp is sent 
                 setOtpSent(data.otpSent);
@@ -100,6 +105,7 @@ const StdProfile = () => {
 
     // --------------------------------------Verifying OTP Backend Fetch API-------------------------------------
     const handleVerifyOTP = () => {
+        setLoading(true)
         const verfotpfor = { email: updateddata.email, enteredOtp: otp }
         fetch(`${process.env.REACT_APP_BASE_URL}/api/mailsend/verifyotp`, {
             method: 'POST',
@@ -112,9 +118,11 @@ const StdProfile = () => {
             .then(async data => {
                 if (data.status === 200) {
                     showalert("Success:", data.message, "success");
+                    setTimeout(() => {
+                        setOtpVerified(true);
+                        console.log("otp verified " + otpVerified);
+                    }, 2000);
 
-                    setOtpVerified(true);
-                    console.log("otp verified " + otpVerified);
 
                     // -----------------------------------UPDATE DETAILS IN BACKEND FETCH API----------------------------------------------
 
@@ -133,13 +141,15 @@ const StdProfile = () => {
                     }
                     //Calling Fetch API
                     const res = await fetch(url, fetchMethods);
-
+                    setLoading(false)
                     //If registration is successfull
                     if (res.status === 201) {
                         setisOpen(false)
                         showalert("Success:", "Update Successful", "success")
-                        console.log("Update Successful")
-                        window.location.reload();
+                        setTimeout(() => {
+                            console.log("Update Successful")
+                            window.location.reload();
+                        }, 3000);
                     }
 
                     // //Checking If any error occured 
@@ -195,7 +205,12 @@ const StdProfile = () => {
     };
 
     // ---------------------------------------------------------------------------------
-
+    //---------------------Timer to Verify OTP------------------------------------------
+    useEffect(() => {
+        const timer =
+            counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+        return () => clearInterval(timer);
+    }, [counter]);
 
 
     return (
@@ -231,8 +246,15 @@ const StdProfile = () => {
                 <div className="popup">
                     <div className="popup-content">
                         {/* Content of the popup */}
+                        {loading && <div className='text-center absolute z-[999] top-[50%] left-[50%]' ><HashLoader
+                            color={'#0b5ed7'}
+                            loading={loading}
+                            size={50}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                        /></div>}
                         <div className='comphead'>
-                            <h2>Edit Profile</h2>
+                            <h2 className='font-head m-[2%] text-[20px] font-[400]'>Edit Profile</h2>
                         </div>
 
                         <div className="horline"></div>
@@ -307,7 +329,7 @@ const StdProfile = () => {
                                 </div>
                                 {/* gender */}
                                 <fieldset className='md:col-span-2 '>
-                                    <legend>Gender:</legend>
+                                    <legend className='text-[20px] '>Gender:</legend>
                                     <div className="gendiv ">
                                         <input
                                             className='mr-[1%]'
@@ -351,10 +373,10 @@ const StdProfile = () => {
                             <div className="horline"></div>
 
                             <div className="compbtn">
-                                <button className='btn btn-secondary mx-2 my-2' onClick={() => { setisOpen(false); window.location.reload() }}>Close</button>
-                                {emailExists 
-                                    ? <button type='submit' disabled className='btn btn-primary mx-2 my-2' onClick={handleSubmit}>Save</button>
-                                    : <button type='submit' className='btn btn-primary mx-2 my-2' onClick={handleSubmit}>Save</button>
+                                <button className='mt-[3%] mx-[2%] btn btn-primary' onClick={() => { setisOpen(false); window.location.reload() }}>Close</button>
+                                {emailExists
+                                    ? <button type='submit' disabled className='mt-[3%] mx-[2%] btn btn-primary' onClick={handleSubmit}>Save</button>
+                                    : <button type='submit' className='mt-[3%] mx-[2%] btn btn-primary' onClick={handleSubmit}>Save</button>
                                 }
                             </div>
                         </form>
@@ -369,21 +391,48 @@ const StdProfile = () => {
                 isOpen && OtpSent && !otpVerified && (
                     <div className="popup">
                         <div className="popup-content">
+                            {loading && <div className='text-center absolute z-[999] top-[50%] left-[50%]' ><HashLoader
+                                color={'#0b5ed7'}
+                                loading={loading}
+                                size={50}
+                                aria-label="Loading Spinner"
+                                data-testid="loader"
+                            /></div>}
                             <div className='comphead'>
-                                <h2>Edit Profile</h2>
+                                <h2 className='font-head m-[2%] text-[20px] font-[400]' >Verify OTP</h2>
                             </div>
-
                             <div className="horline"></div>
                             <div>
-                                <input
-                                    type="text"
-                                    placeholder="Enter OTP"
-                                    value={otp}
-                                    onChange={(e) => setOtp(e.target.value)}
-                                />
-                                <button onClick={handleVerifyOTP}>Verify OTP</button>
+                                <div className='flex flex-col items-center'>
+                                    <div className='emailinp my-[4%]' >
+                                        <div className="form-floating mb-[1%] mt-[1%]">
+                                            <input type='email' id='floatingemail' name='email' className='form-control' placeholder='EMAIL ADDRESS' required value={updateddata.email} disabled={OtpSent} ></input>
+                                            <label className='w-full  text-headcolor' htmlFor="floatingemail">Email Address</label>
+                                        </div>
+                                    </div>
+                                    {/* timer is here  */}
+                                    <p className="counter text-headcolor">
+                                        {counter !== 0 ? (<span>
+                                            Expires in <span className='text-warn'>{counter}</span>s</span>
+                                        ) : (
+                                            <span className='text-warn'>OTP Expired</span>
+                                        )}
+                                    </p>
+                                    {/* timer ended  */}
+                                    <div className="form-floating mb-[3%] mt-[1%]">
+                                        <input type='text' id='floatingotp' name='otp' className='form-control' required value={otp}
+                                            onChange={(e) => setOtp(e.target.value)}
+                                        />
+                                        <label className='w-full  text-headcolor' htmlFor="floatingotp">Enter OTP</label>
+                                    </div>
+
+                                </div>
                             </div>
                             <div className="horline"></div>
+                            <div>
+                                <button className='mt-[3%] mx-[2%] btn btn-primary' onClick={() => { setisOpen(false) }}>Close</button>
+                                <button className='mt-[3%] mx-[2%] btn btn-primary' onClick={handleVerifyOTP}>Verify OTP</button>
+                            </div>
                         </div>
                     </div>
 

@@ -51,7 +51,7 @@ const Navbar = () => {
                         <>
                             <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
                             {isAdmin && <li><NavLink to='/adddrive'>Add Drive</NavLink></li>}
-                            {isAdmin && <li><NavLink to='/editdrive'>Edit Drive</NavLink></li>}
+                            {isAdmin && <li><NavLink to='/controlpanel'>Control Panel</NavLink></li>}
                             <li><NavLink to='/' onClick={handleLogout}>Logout</NavLink></li>
                             <li>
                                 <span className="material-symbols-outlined">

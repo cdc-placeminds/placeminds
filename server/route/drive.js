@@ -44,6 +44,41 @@ router.post("/newdrive", async (req, res) => {
         res.status(500).send({ message: "Internal Server Error" });
     }
 
+
+})
+router.post("/updatedrive", async (req, res) => {
+
+    try {
+
+        const {updatedDriveData} = req.body 
+        
+        const drive = await Drive.findOne({_id: updatedDriveData.id})
+
+        if(!drive){
+            return res.status(422).json({ error: "Drive Not Found" });
+        }
+
+        else {
+
+			drive.name = updatedDriveData.name
+			drive.profile = updatedDriveData.profile
+			drive.ctc = updatedDriveData.ctc
+			drive.branch = updatedDriveData.branch
+			drive.year = updatedDriveData.year
+			drive.location = updatedDriveData.location
+			drive.deadline = updatedDriveData.deadline
+
+			await drive.save();
+
+			// Sending respose of Drive updated successfully
+			res.status(201).json({ message: "Drive Details Updated successfully" });
+		}
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ message: "Internal Server Error" });
+    }
+
 })
 
 router.post("/totalapplied", async (req, res) => {
@@ -66,5 +101,42 @@ router.post("/totalapplied", async (req, res) => {
 
 })
 
+router.post("/finddrive", async (req, res) => {
+
+    try {
+        const query = {};
+        query[req.body.searchBy] = {
+            $regex: req.body.searchInp,
+            $options: "i" // Case-insensitive match
+        };
+        const drives = await Drive.find(query);
+
+        if (drives) {
+
+            const DriveData = drives.map(drive => {
+                return {
+                    name: drive.name,
+                    profile: drive.profile,
+                    location: drive.location,
+                    ctc: drive.ctc,
+                    deadline: drive.deadline,
+                    branch: drive.branch,
+                    year: drive.year,
+                    id: drive._id,
+                }
+            })
+
+            res.json(DriveData);
+            console.log(drives);
+        } else {
+            res.status(423).json({ message: 'Unable to find ' });
+        }
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+
+})
 
 module.exports = router;

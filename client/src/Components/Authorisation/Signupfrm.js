@@ -33,7 +33,7 @@ const Signupfrm = () => {
 
     // selection options for year and branches 
     const renderBranchOptions = () => {
-        const branches = ['CSE', 'CST', 'MAE', 'ME']; // Add more branches if needed
+        const branches = ['CSE', 'CST', 'IT', 'ITE', 'AIDS', 'AIML', 'ECE', 'EEE', 'MAE', 'ME']; // Add more branches if needed
         return branches.map((branch, index) => (
             <option key={index} value={branch}>
                 {branch}

@@ -23,28 +23,28 @@ router.post("/signup", async (req, res) => {
 		// }
 
 		// else {
-			// Password Hashing
-			const hashPassword = await bcrypt.hash(req.body.password, 10);
+		// Password Hashing
+		const hashPassword = await bcrypt.hash(req.body.password, 10);
 
-			// Getting all drive details in drives
-			const drives = await Drive.find();
+		// Getting all drive details in drives
+		const drives = await Drive.find();
 
-			//Creating blank array to store all drivecodes and applied = false
-			const drivecodes = [];
-			for (const drive of drives) {
-				drivecodes.push({ drivecode: drive.drivecode, applied: false })
-			}
-
-			/*Here we are saving drivecodes, as drivecode gets updated to all users when drive is published, 
-			but old drivecodes can be show to that user, so to show that we find all drives from Database 
-			and save its drivecode to user drives array with applied = false.*/
-
-			// Updating Hashed Password , All drivecodes and Saving in Database
-			await new User({ ...req.body, password: hashPassword, drives: drivecodes }).save();
-
-			// Sending respose of user created successfully
-			res.status(201).json({ message: "User created successfully" });
+		//Creating blank array to store all drivecodes and applied = false
+		const drivecodes = [];
+		for (const drive of drives) {
+			drivecodes.push({ drivecode: drive.drivecode, applied: false })
 		}
+
+		/*Here we are saving drivecodes, as drivecode gets updated to all users when drive is published, 
+		but old drivecodes can be show to that user, so to show that we find all drives from Database 
+		and save its drivecode to user drives array with applied = false.*/
+
+		// Updating Hashed Password , All drivecodes and Saving in Database
+		await new User({ ...req.body, password: hashPassword, drives: drivecodes }).save();
+
+		// Sending respose of user created successfully
+		res.status(201).json({ message: "User created successfully" });
+	}
 	catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
 		console.log(error)
@@ -53,13 +53,9 @@ router.post("/signup", async (req, res) => {
 
 router.post("/update", async (req, res) => {
 	try {
-		console.log("Inside Check")
-		console.log(req.body)
-		const {updateddata} = req.body
-		console.log(updateddata)
-
+		const { updateddata } = req.body
 		//Checking if email already exist
-		const user = await User.findOne({_id: updateddata.id});
+		const user = await User.findOne({ _id: updateddata.id });
 
 		//If user exists then show error
 		if (!user) {
@@ -73,7 +69,7 @@ router.post("/update", async (req, res) => {
 			user.contact = updateddata.contact
 			user.branch = updateddata.branch
 			user.year = updateddata.year
-			user.gender= updateddata.gender
+			user.gender = updateddata.gender
 			user.dob = updateddata.dob
 
 			await user.save();
@@ -87,5 +83,36 @@ router.post("/update", async (req, res) => {
 	}
 });
 
+router.post("/admin", async (req, res) => {
+	try {
+
+
+		//Checking if email already exist
+		const user = await User.findOne({ email: req.body.email });
+
+		//If user exists then show error
+		if (!user) {
+			return res.status(422).json({ error: "User Not Found" });
+		}
+
+		else {
+
+			if (req.body.makeadmin) {
+				user.isAdmin = true
+			}
+			else {
+				user.isAdmin = false
+			}
+
+			await user.save();
+
+			// Sending respose of user created successfully
+			res.status(201).json({ message: "User Details Updated successfully" });
+		}
+	} catch (error) {
+		res.status(500).send({ message: "Internal Server Error" });
+		console.log(error)
+	}
+});
 
 module.exports = router;

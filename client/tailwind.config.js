@@ -11,7 +11,8 @@ module.exports = {
      warnborder:'#fc7a7ab5',
      succ:'#d0ffd0',
      white:'#ffffff',
-     lblue:'#0b5ed7'
+     lblue:'#0b5ed7',
+     bkg: '#EAF1FF'
     },
     extend: {
       fontFamily:{

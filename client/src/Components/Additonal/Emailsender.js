@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Emailsender({ email, message,subject }) {
 
     const messageBody = { email: email, message: message ,subject:subject};
