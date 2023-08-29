@@ -12,7 +12,8 @@ module.exports = {
      succ:'#d0ffd0',
      white:'#ffffff',
      lblue:'#0b5ed7',
-     bkg: '#EAF1FF'
+     bkg: '#EAF1FF',
+     cardborder: '#60606041'
     },
     extend: {
       fontFamily:{

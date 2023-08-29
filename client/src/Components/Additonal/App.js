@@ -16,7 +16,7 @@ import ControlPanel from "../Dashboard/AdminPanel/ControlPanel";
 
 function App() {
   return (
-    <div className="appbody">
+    <div className="appbody bg-gradient-to-b to-[#dff1ff] from-[#cdb3fe40]">
       <AuthProvider>
         <UserDataProvider>
           <DriveDataProvider>

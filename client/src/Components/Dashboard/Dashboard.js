@@ -35,7 +35,7 @@ const Dashboard = () => {
 
       setisLoggedin(true);
 
-      if (data.userDatasB.email === "ksingh@gmail.com" || data.userDatasB.email === "nandy2@gmail.com") {
+      if (data.userDatasB.email === "ksingh@gmail.com" || data.userDatasB.email === "7narendradeo@gmail.com") {
         setisAdmin(true)
       }
       setuserData(data.userDatasB);

@@ -9,7 +9,7 @@ import { useAdmin } from '../context/AdminContext';
 import Cookies from 'js-cookie';
 
 const Navbar = () => {
-    const [menuOpen, setMenuOpen] = useState(true);
+    const [menuOpen, setMenuOpen] = useState(false);
     const { isLoggedin } = useAuth();
     const { isAdmin } = useAdmin();
     const { setisLoggedin } = useAuth();
@@ -45,16 +45,16 @@ const Navbar = () => {
                         ?
                         <>
                             <li><NavLink to='/signup'>Signup</NavLink></li>
-                            <li><NavLink to='/' onClick={handleLogin}>Login</NavLink></li>
+                            <li ><NavLink to='/' onClick={handleLogin}>Login</NavLink></li>
                         </>
                         :
                         <>
-                            <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+                            <li ><NavLink to='/dashboard'>Dashboard</NavLink></li>
                             {isAdmin && <li><NavLink to='/adddrive'>Add Drive</NavLink></li>}
                             {isAdmin && <li><NavLink to='/controlpanel'>Control Panel</NavLink></li>}
                             <li><NavLink to='/' onClick={handleLogout}>Logout</NavLink></li>
                             <li>
-                                <span className="material-symbols-outlined">
+                                <span className="material-symbols-outlined user_icon">
                                     account_circle
                                 </span>
                                 <p>{userData.name}</p>

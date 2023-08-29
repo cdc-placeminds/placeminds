@@ -26,7 +26,7 @@ function QRCodeGenerator() {
   }, [enrollmentNo]);
 
   return (
-    <div>
+    <div className='flex justify-center'>
       <canvas id="qrcode" />
     </div>
   );
