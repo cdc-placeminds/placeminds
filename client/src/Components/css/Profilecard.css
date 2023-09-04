@@ -1,0 +1,42 @@
+.prfanim{
+    animation: reveal 1s ease-in-out;
+}
+.prfcls{
+animation: close 200ms forwards ease-in;
+}
+
+@keyframes reveal {
+
+    0%{
+     transform: translateY(-101%);
+     opacity: 0.2;
+    
+    }
+    
+    
+    100%{
+        transform: translateY(0%); 
+        opacity: 1.0; 
+    }
+    
+}
+
+@keyframes close {
+
+
+    0%{
+        transform: translateY(0%); 
+        opacity: 1.0; 
+    }
+
+    100%{
+     transform: translateY(-101%);
+     opacity: 0.2;
+     display: none;
+    
+    }
+    
+    
+    
+    
+}

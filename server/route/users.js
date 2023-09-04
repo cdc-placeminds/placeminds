@@ -53,9 +53,10 @@ router.post("/signup", async (req, res) => {
 
 router.post("/update", async (req, res) => {
 	try {
-		const { updateddata } = req.body
+		const { updatedStudentData } = req.body
+		console.log(updatedStudentData)
 		//Checking if email already exist
-		const user = await User.findOne({ _id: updateddata.id });
+		const user = await User.findOne({ _id: updatedStudentData.id });
 
 		//If user exists then show error
 		if (!user) {
@@ -64,13 +65,37 @@ router.post("/update", async (req, res) => {
 
 		else {
 
-			user.name = updateddata.name
-			user.email = updateddata.email
-			user.contact = updateddata.contact
-			user.branch = updateddata.branch
-			user.year = updateddata.year
-			user.gender = updateddata.gender
-			user.dob = updateddata.dob
+			user.name = updatedStudentData.name
+			user.email = updatedStudentData.email
+			user.contact = updatedStudentData.contact
+			user.branch = updatedStudentData.branch
+			user.year = updatedStudentData.year
+			user.gender = updatedStudentData.gender
+			user.dob = updatedStudentData.dob
+
+			await user.save();
+
+			// Sending respose of user created successfully
+			res.status(201).json({ message: "User Details Updated successfully" });
+		}
+	} catch (error) {
+		res.status(500).send({ message: "Internal Server Error" });
+		console.log(error)
+	}
+});
+
+router.post("/update_userimg", async (req, res) => {
+	try {
+		const user = await User.findOne({ _id: req.body.id });
+
+		//If user exists then show error
+		if (!user) {
+			return res.status(422).json({ error: "User Not Found" });
+		}
+
+		else {
+
+			user.userimgurl = req.body.newurl
 
 			await user.save();
 

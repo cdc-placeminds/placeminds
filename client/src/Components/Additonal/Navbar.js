@@ -31,7 +31,7 @@ const Navbar = () => {
 
     return (
         <nav className=' z-[99999]'>
-            <Link to='/' className="title flex"> <img src={maitbluelogo} alt="" className="navlogo" />CDC Portal</Link>
+            <Link to='/' className="title flex"> <img src={maitbluelogo} alt="" className="navlogo" />CDC PLACEMINDS</Link>
 
             <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
                 <span></span>

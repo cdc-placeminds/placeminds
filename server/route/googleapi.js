@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
         const googleSheets = google.sheets({ version: "v4", auth: client });
 
         // ID of spreadsheet on which edit is to be made
-        const spreadsheetId = "14B4o0Fdj4_PSy3i8dRZ26Wc7d_2aBnqPvF8x2e8bOpE"
+        const spreadsheetId = process.env.spreadsheet_id
 
 
         //Getting Values of Master Sheet to get total no of rows, and set serial no

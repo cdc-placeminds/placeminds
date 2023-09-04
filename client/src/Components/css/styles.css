@@ -174,14 +174,14 @@ body {
 }
 
 /* Update Profile  */
- 
+/*  
 .updateprfl{
     padding: 2px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin: 10px 2px;
-}
+} */
 
 .updateprfl p{
     margin-bottom: 0 !important;
@@ -542,7 +542,7 @@ body {
 .cdchrline {
     border-bottom: 1.5px solid white;
     margin-right: 70px;
-    margin-top: -10px;
+    margin-top: 5px;
 }
 
 /* login form */

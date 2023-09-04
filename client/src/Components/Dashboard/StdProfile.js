@@ -15,7 +15,7 @@ const StdProfile = () => {
     const { userData } = useUserData();
     const { showalert } = useAlert();
 
-    const [updateddata, setData] = useState({
+    const [updatedStudentData, setData] = useState({
         name: userData.name,
         email: userData.email,
         enrollment: userData.enrollment,
@@ -28,8 +28,24 @@ const StdProfile = () => {
     })
 
     useEffect(() => {
-        if (updateddata.email !== userData.email) {
-            var usercheck = { varname: 'email', varval: updateddata.email }
+        // Update updatedStudentData when userData changes
+        setData({
+            name: userData.name,
+            email: userData.email,
+            enrollment: userData.enrollment,
+            contact: userData.contact,
+            branch: userData.branch,
+            year: userData.year,
+            gender: userData.gender,
+            dob: userData.dob,
+            id: userData._id,
+        });
+    }, [userData]);
+    
+
+    useEffect(() => {
+        if (updatedStudentData.email !== userData.email) {
+            var usercheck = { varname: 'email', varval: updatedStudentData.email }
             fetch(`${process.env.REACT_APP_BASE_URL}/api/check-user`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -53,11 +69,11 @@ const StdProfile = () => {
                 })
         }
         // eslint-disable-next-line
-    }, [updateddata.email])
+    }, [updatedStudentData.email])
 
 
     const handleInputs = ({ currentTarget: input }) => {
-        setData({ ...updateddata, [input.name]: input.value })
+        setData({ ...updatedStudentData, [input.name]: input.value })
     }
 
     const handleSubmit = async (e) => {
@@ -67,7 +83,7 @@ const StdProfile = () => {
         // --------------------------------------EMAIL VERIFICATION USING OTP-------------------------------------------
 
         const message = {
-            email: updateddata.email
+            email: updatedStudentData.email
         }
 
         fetch(`${process.env.REACT_APP_BASE_URL}/api/mailsend/sendotp`, {
@@ -106,7 +122,7 @@ const StdProfile = () => {
     // --------------------------------------Verifying OTP Backend Fetch API-------------------------------------
     const handleVerifyOTP = () => {
         setLoading(true)
-        const verfotpfor = { email: updateddata.email, enteredOtp: otp }
+        const verfotpfor = { email: updatedStudentData.email, enteredOtp: otp }
         fetch(`${process.env.REACT_APP_BASE_URL}/api/mailsend/verifyotp`, {
             method: 'POST',
             headers: {
@@ -136,7 +152,7 @@ const StdProfile = () => {
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify({
-                            updateddata
+                            updatedStudentData
                         })
                     }
                     //Calling Fetch API
@@ -215,9 +231,9 @@ const StdProfile = () => {
 
     return (
         <div>
-            <div className="updateprfl">
-                <p>Edit Profile</p>
-                <span className="material-symbols-outlined" onClick={() => { setisOpen(true) }}>
+            <div className="updateprfl flex justify-around items-center p-[3%]">
+                <h1 className='text-[22px] font-head font-[600]'>Edit Profile</h1>
+                <span className="material-symbols-outlined flex justify-end" onClick={() => { setisOpen(true) }}>
                     edit
                 </span>
             </div>
@@ -227,16 +243,22 @@ const StdProfile = () => {
                 <div className="stdprfl_head">
                     <p>Full Name        :</p>
                     <p>Contact No       :</p>
+                    <p>Enrollment No    :</p>
                     <p>Email Id         :</p>
                     <p>Gender           :</p>
                     <p>DOB              :</p>
+                    <p>Branch           :</p>
+                    <p>Year             :</p>
                 </div>
                 <div className="stdprfl_body">
                     <p>{userData.name}</p>
                     <p>{userData.contact}</p>
+                    <p>{userData.enrollment}</p>
                     <p>{userData.email}</p>
                     <p>{userData.gender}</p>
                     <p>{userData.dob}</p>
+                    <p>{userData.branch}</p>
+                    <p>{userData.year}</p>
                 </div>
 
             </div>
@@ -263,26 +285,25 @@ const StdProfile = () => {
                         </div>
 
                         <form>
-
                             <div className='mt-[20px]  grid grid-cols-1 md:grid-cols-2 grid-flow-row gap-x-2 gap-y-3'>
 
                                 <div className="form-floating">
-                                    <input type="text" name="name" className="form-control" id="floatingInput" placeholder="First Name" value={updateddata.name} onChange={handleInputs} autoFocus required />
+                                    <input type="text" name="name" className="form-control" id="floatingInput" placeholder="First Name" value={updatedStudentData.name} onChange={handleInputs} autoFocus required />
                                     <label className='w-full text-headcolor ' htmlFor="floatingInput">Full Name</label>
                                 </div>
 
                                 <div className="form-floating">
-                                    <input type='email' id='floatingemail' name='email' className={`form-control ${emailExists ? 'border-2 shadow-lg border-warnborder shadow-warn' : ''}`} placeholder='EMAIL ADDRESS' required value={updateddata.email} onChange={handleInputs} ></input>
+                                    <input type='email' id='floatingemail' name='email' className={`form-control ${emailExists ? 'border-2 shadow-lg border-warnborder shadow-warn' : ''}`} placeholder='EMAIL ADDRESS' required value={updatedStudentData.email} onChange={handleInputs} ></input>
                                     <label className='w-full  text-headcolor' htmlFor="floatingemail">Email Address</label>
                                 </div>
 
 
                                 <div className="form-floating">
-                                    <input id='floatingenrollment' name='enrollment' className="form-control" placeholder='' required value={updateddata.enrollment} readOnly type='text' inputMode='numeric'></input>
+                                    <input id='floatingenrollment' name='enrollment' className="form-control" placeholder='' required value={updatedStudentData.enrollment} readOnly type='text' inputMode='numeric'></input>
                                     <label className='w-full text-headcolor ' htmlFor="floatingenrollment">Enrollment No.</label>
                                 </div>
                                 <div className="form-floating">
-                                    <input id='flaotingcontact' name='contact' className="form-control" placeholder='' required value={updateddata.contact} onChange={handleInputs} type='text' inputMode='numeric'></input>
+                                    <input id='flaotingcontact' name='contact' className="form-control" placeholder='' required value={updatedStudentData.contact} onChange={handleInputs} type='text' inputMode='numeric'></input>
                                     <label className='w-full text-headcolor ' htmlFor="flaotingcontact">Contact No.</label>
                                 </div>
                                 <div className="form-floating">
@@ -290,7 +311,7 @@ const StdProfile = () => {
                                         className="form-select text-center"
                                         id="floatingYear"
                                         name="year"
-                                        value={updateddata.year}
+                                        value={updatedStudentData.year}
                                         onChange={handleInputs}
                                         required
                                     >
@@ -306,7 +327,7 @@ const StdProfile = () => {
                                         className="form-control  text-center"
                                         placeholder="(DD/MM/YYYY)"
                                         required
-                                        value={updateddata.dob}
+                                        value={updatedStudentData.dob}
                                         onChange={handleInputs}
                                         type='date'
                                     />
@@ -318,7 +339,7 @@ const StdProfile = () => {
                                         className="form-select text-center"
                                         id="floatingBranch"
                                         name="branch"
-                                        value={updateddata.branch}
+                                        value={updatedStudentData.branch}
                                         onChange={handleInputs}
                                         required
                                     >
@@ -337,7 +358,7 @@ const StdProfile = () => {
                                             id="genderChoice1"
                                             name="gender"
                                             value="male"
-                                            checked={updateddata.gender === "male"}
+                                            checked={updatedStudentData.gender === "male"}
                                             onChange={handleInputs}
                                             required
 
@@ -350,7 +371,7 @@ const StdProfile = () => {
                                             id="genderChoice2"
                                             name="gender"
                                             value="female"
-                                            checked={updateddata.gender === "female"}
+                                            checked={updatedStudentData.gender === "female"}
                                             onChange={handleInputs}
                                             required
                                         />
@@ -362,7 +383,7 @@ const StdProfile = () => {
                                             id="genderChoice3"
                                             name="gender"
                                             value="prefer not to say"
-                                            checked={updateddata.gender === "prefer not to say"}
+                                            checked={updatedStudentData.gender === "prefer not to say"}
                                             onChange={handleInputs}
                                             required
                                         />
@@ -373,7 +394,7 @@ const StdProfile = () => {
                             <div className="horline"></div>
 
                             <div className="compbtn">
-                                <button className='mt-[3%] mx-[2%] btn btn-primary' onClick={() => { setisOpen(false); window.location.reload() }}>Close</button>
+                                <button className='mt-[3%] mx-[2%] btn btn-primary' onClick={() => { setisOpen(false); }}>Close</button>
                                 {emailExists
                                     ? <button type='submit' disabled className='mt-[3%] mx-[2%] btn btn-primary' onClick={handleSubmit}>Save</button>
                                     : <button type='submit' className='mt-[3%] mx-[2%] btn btn-primary' onClick={handleSubmit}>Save</button>
@@ -406,7 +427,7 @@ const StdProfile = () => {
                                 <div className='flex flex-col items-center'>
                                     <div className='emailinp my-[4%]' >
                                         <div className="form-floating mb-[1%] mt-[1%]">
-                                            <input type='email' id='floatingemail' name='email' className='form-control' placeholder='EMAIL ADDRESS' required value={updateddata.email} disabled={OtpSent} ></input>
+                                            <input type='email' id='floatingemail' name='email' className='form-control' placeholder='EMAIL ADDRESS' required value={updatedStudentData.email} disabled={OtpSent} ></input>
                                             <label className='w-full  text-headcolor' htmlFor="floatingemail">Email Address</label>
                                         </div>
                                     </div>

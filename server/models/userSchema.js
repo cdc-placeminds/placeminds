@@ -15,8 +15,9 @@ const userSchema = new mongoose.Schema({
     branch: { type: String, required: true },
     year: { type: String, required: true },
     gender: { type: String, required: true },
-    dob: {type: String, required: true},
-    isAdmin: {type: Boolean, default: false},
+    dob: { type: String, required: true },
+    userimgurl: { type: String },
+    isAdmin: { type: Boolean, default: false },
     drives: [
         {
             drivecode: { type: String, required: true },

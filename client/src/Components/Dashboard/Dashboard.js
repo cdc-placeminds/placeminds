@@ -35,7 +35,7 @@ const Dashboard = () => {
 
       setisLoggedin(true);
 
-      if (data.userDatasB.email === "ksingh@gmail.com" || data.userDatasB.email === "7narendradeo@gmail.com") {
+      if (data.userDatasB.isAdmin === true) {
         setisAdmin(true)
       }
       setuserData(data.userDatasB);
@@ -61,7 +61,7 @@ const Dashboard = () => {
 
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid dash bg-gradient-to-b to-[#dff1ff] from-[#eadeff40]">
       <div className="row">
         <div className="col-md-10 col-12 mx-auto">
           <div className="container-fluid dashboard">

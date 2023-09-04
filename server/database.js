@@ -9,7 +9,7 @@ module.exports = () => {
         useUnifiedTopology: true
     };
 
-    const uri = 'mongodb+srv://'+ process.env.MONGO_USER+':'+process.env.MONGO_PASS+'@cluster0.7gseivw.mongodb.net/firstdatabase?retryWrites=true&w=majority'
+    const uri = 'mongodb+srv://'+ process.env.MONGO_USER+':'+process.env.MONGO_PASS+'@cluster0.ojf9xps.mongodb.net/cdcplaceminds?retryWrites=true&w=majority'
     
     try {
         mongoose.connect(uri, connectionParams);

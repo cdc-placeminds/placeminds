@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import {useAlert} from '../../context/AlertContext'
+import { useAlert } from '../../context/AlertContext'
+import HashLoader from 'react-spinners/HashLoader';
 
 const SearchRes = ({ data, searchFor }) => {
-    console.log(searchFor)
-    console.log(data)
     const [isOpen, setisOpen] = useState(false);
     const [isReadOnly, setisReadOnly] = useState(true);
-    const {showalert} = useAlert()
+    const [loading, setLoading] = useState(false);
+    const { showalert } = useAlert()
     // Student state
     const [updatedStudentData, setStudentData] = useState({
         name: data.name,
@@ -76,8 +76,8 @@ const SearchRes = ({ data, searchFor }) => {
 
 
     const handleAdmin = () => {
+        setLoading(true)
         const makeadmin = data.isAdmin ? false : true
-
         fetch(`${process.env.REACT_APP_BASE_URL}/api/users/admin`, {
             method: 'POST',
             headers: {
@@ -86,10 +86,13 @@ const SearchRes = ({ data, searchFor }) => {
             body: JSON.stringify({ makeadmin, email: data.email })
         }).then(response => response.json())
             .then(data => {
+                setLoading(false)
+                showalert('Success', '', 'success')
                 console.log("Successful");
 
             })
             .catch(error => {
+                showalert('Error', '', 'danger')
                 console.log(error);
             });
 
@@ -246,6 +249,14 @@ const SearchRes = ({ data, searchFor }) => {
 
     return (
         <div>
+            {loading && <div className='text-center absolute z-[999] top-[50%] left-[50%]' ><HashLoader
+
+                color={'#0b5ed7'}
+                loading={loading}
+                size={60}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+            /></div>}
             <div className='displayres flex m-[3%] p-[3%] pl-[5%] bg-bkg shadow-md hover:shadow-xl hover:scale-[102%] justify-between'>
                 <div onClick={showUserDtl} className='w-[74%]'>
                     <div className="reshead flex flex-col">
