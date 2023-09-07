@@ -3,6 +3,10 @@ import '../css/landingpage.css'
 import { useNavigate } from 'react-router-dom';
 import maitbluelogo from "../images/maitbluelogo.png"
 import onesymbol from "../images/one.png"
+import Working from './Working';
+import Contactus from './Contactus';
+import Testimonial from './Testimonial';
+import Footer from './Footer';
 
 
 
@@ -57,7 +61,7 @@ function Landingpage() {
                     <div className='flex px-[3%] py-[3%]'>
                         <div>
                             {/* <h1 className="intrhead text-[#3d3d3d] text-[5.5rem] md:text-[15rem] font-tagline font-light">1</h1> */}
-                            <img src={onesymbol} alt="" className="w-[60px] h-[70px] md:w-[30px] md:h-[175px]"/>
+                            <img src={onesymbol} alt="" className="w-[60px] h-[70px] md:w-[30px] md:h-[175px]" />
                         </div>
                         <div className='flex flex-col justify-center ml-[5%]'>
                             <h1 className="intrhead text-[#3d3d3d] text-[0.85rem] md:text-[2.2rem] font-tagline font-bold">STOP</h1>
@@ -76,6 +80,15 @@ function Landingpage() {
                     </div>
                 </div>
             </div>
+
+
+
+            <Working/>
+            <Testimonial />
+            <Contactus />
+            <Footer />
+
+
         </div>
     )
 }

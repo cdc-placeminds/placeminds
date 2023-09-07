@@ -1,0 +1,464 @@
+/* contact section  */
+
+.contactsec {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(circle, rgba(255,255,255,1) 24%, rgba(40,21,114,1) 56%);
+    position: relative;
+    z-index: 0;
+ 
+ }
+ 
+ .contactsec::before {
+    content: '';
+    position: absolute;
+    top: 0%;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,1) 24%, rgba(8,225,186,1) 69%);
+    z-index: 0;
+ }
+ 
+ /* contact container  */
+ 
+ .container-contact {
+    position: relative;
+    min-width: 1100px;
+    min-height: 550px;
+    display: flex;
+    z-index: 1000;
+    /* background:white; */
+ }
+ 
+ .container-contact .contactInfo {
+ 
+    position: absolute;
+    top: 40px;
+    width: 350px;
+    height: calc(100% - 80px);
+    background: #131a58;
+    z-index: 99;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+    color: white;
+ }
+ 
+ .contacttitle {
+    position: relative;
+    left: 6%;
+ }
+ 
+ .contactaddress {
+    font-size: 24px;
+ }
+ 
+ .container-contact .contactInfo li {
+    list-style: none;
+    font-size: 1.5rem;
+    display: flex;
+    margin: 20px 0;
+    cursor: pointer;
+    align-items: flex-start;
+ }
+ 
+ li a {
+    color: var(--main-bg);
+    text-decoration: none;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+ 
+ }
+ 
+ 
+ 
+ .container-contact .contactForm {
+ 
+    position: absolute;
+    padding: 7px 50px;
+    padding-left: 250px;
+    margin-left: 150px;
+    width: calc(100% - 150px);
+    background: white;
+    box-shadow: 0 50px 50px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+ }
+ 
+ /* icons for contact page  */
+ 
+ .cicon {
+    width: 17%;
+ }
+ 
+ .cicon .fa {
+    font-size: 31px;
+ }
+ 
+ .cinfo {
+    margin-left: 7px;
+    font-size: 76% !important;
+    font-family: raleway, sans-serif !important;
+ }
+ 
+ .address {
+    font-weight: 600 !important;
+ }
+ 
+ 
+ /* animate on scroll  */
+ 
+ .hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-30%);
+    transition: all 1s;
+ }
+ 
+ .show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+    transition-delay: 100ms;
+ }
+ 
+ .hidden1 {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(30%);
+    transition: all 1s;
+ }
+ 
+ .show1 {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+    transition-delay: 100ms;
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ /* styling of the contact form  */
+ 
+ .formtitle {
+    position: relative;
+    top: -10%;
+    font-size: 3.4rem;
+ }
+ 
+ .contact-form {
+    padding: 0px 14% 1% 0;
+    position: relative;
+    top: -8%;
+ 
+ }
+ 
+ /* putting asterick * after required label  */
+ 
+ .required {
+    font-weight: bold;
+ }
+ 
+ .required:after {
+    content: " *";
+    color: red;
+ }
+ 
+ .form-label {
+    font-size: 13px;
+    font-family: raleway, sans-serif;
+    font-weight: 900;
+ }
+ 
+ .form-group {
+    margin-top: 5.2px;
+ }
+ 
+ /* removing up down arrow from number  */
+ 
+ /* Chrome, Safari, Edge, Opera */
+ input::-webkit-outer-spin-button,
+ input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+ }
+ 
+ /* Firefox */
+ input[type=number] {
+    -moz-appearance: textfield;
+ }
+ 
+ /* submit button for form  */
+ 
+ .enqbtn {
+    background-color: rgb(13 91 86) !important;
+    border-color: #08e1ba !important;
+    font-size: 16px !important;
+    height: 42px !important;
+    padding: 4px !important;
+    width: 98px !important;
+    margin: 1% 0;
+    border-radius: 15px !important;
+    position: relative;
+    left: 106%;
+ }
+ 
+ .enqbtn:hover {
+    background-color: var(--main-color) !important;
+ }
+ 
+ .form-control {
+    border-radius: 10px 0 10px 0 !important;
+    box-shadow: inset 0em 0em 0.2em #282727;
+    font-size: medium;
+    font-weight: 500;
+ 
+ }
+ 
+ 
+ /* now making contact part responsive  */
+ 
+ @media(max-width:1200px) {
+    .container-contact.container-contact {
+       width: 90% !important;
+       min-width: auto;
+       margin: 20px;
+       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+       transition: 0.5ms;
+       transition-timing-function: ease-in;
+    }
+ 
+    .contactInfo.contactInfo {
+       top: 0;
+       height: 550px;
+       position: relative;
+       box-shadow: none;
+       transition: 0.5ms;
+       transition-timing-function: ease-in;
+    }
+ 
+    .contactForm.contactForm {
+       position: relative;
+       width: calc(100% - 350px);
+       padding-left: 0;
+       margin-left: 0;
+       padding: 40px;
+       height: 550px;
+       transition: 0.5ms;
+       transition-timing-function: ease-in;
+ 
+ 
+    }
+ 
+    .enqbtn.enqbtn {
+       left: 100%;
+       transition: 0.5ms;
+       transition-timing-function: ease-in;
+ 
+ 
+    }
+ 
+    .formtitle.formtitle {
+       top: -1%;
+    }
+ 
+    .contact-form.contact-form {
+       top: 0%;
+    }
+ 
+ 
+ }
+ 
+ @media(max-width:991px) {
+    .contactsec.contactsec {
+       background: #08e1ba;
+ 
+    }
+ 
+    .contactsec::before {
+       display: none;
+    }
+ 
+    .container-contact.container-contact {
+       display: flex;
+       /* column reverse for putting info down  */
+       flex-direction: column-reverse;
+    }
+ 
+    .contactForm.contactForm {
+       width: 100%;
+    }
+ 
+    .contactInfo.contactInfo {
+       width: 100%;
+    }
+ 
+    .formtitle.formtitle {
+       top: -6%;
+    }
+ 
+    .contact-form.contact-form {
+       top: -5%;
+    }
+ 
+    .enqbtn.enqbtn {
+       left: 96%;
+       width: 70px !important;
+       height: 35px !important;
+    }
+ }
+ 
+ /* creating glass glance effect now  */
+ 
+ 
+
+ /* social media icon part  */
+
+/* creating background color  */
+
+.socialsec {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(40,21,114,0.9921218487394958) 50%, rgba(255,255,255,1) 100%);
+ }
+ 
+ section .color {
+    position: absolute;
+    filter: blur(150px);
+ }
+ 
+ 
+ /* creating 3 color boxes for gradient  */
+ section .color:nth-child(1) {
+    top: 0%;
+    left: 0;
+    background: #30db331f;
+    width: 50%;
+    height: 50%;
+ }
+ 
+ section .color:nth-child(2) {
+    bottom: 0%;
+    background: #fffd87;
+    width: 50%;
+    height: 50%;
+    right: 0%;
+ }
+ 
+ section .color:nth-child(3) {
+    bottom: 0%;
+    right: 0%;
+    background: #00d2ff;
+    width: 30%;
+    height: 30%;
+ 
+ }
+ 
+ 
+ /* now creating half box for icons draw over  */
+ 
+ .socialsec::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    bottom: 0%;
+    z-index: 10;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+ }
+ 
+ /* styling icons  */
+ 
+ .socialsec ul {
+    position: relative;
+    display: flex;
+ }
+ 
+ .socialsec ul li {
+    position: relative;
+    list-style: none;
+    margin: 10px;
+ }
+ 
+ .socialsec ul li a {
+    position: relative;
+    top: 0;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 2em;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    /* icon will be behind drawer  */
+    z-index: 1;
+    box-shadow: 0 5px 45px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    /* hiding glance  
+ */
+    overflow: hidden;
+ 
+    /* adding transitions and delay  */
+    transition: top 0.5s, z-index 0.5s, transform 0.5s;
+    transition-delay: 0.5s, 0s, 0s;
+ 
+ }
+ 
+ /* putting icon on top on hover  */
+ 
+ .socialsec li a:hover {
+    transition-delay: 0s, 0.5s, 0.5s;
+    top: -50px;
+    /* basically we are moving it on top and then transforming after 0.5s  */
+    transform: translateY(50px);
+    z-index: 11;
+ 
+ }
+ 
+ 
+ 
+ /* creating glass glance effect now  */
+ 
+ .socialsec li a:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+ 
+    /* now we will rotate this for 45 deg to create slanted glance */
+    transform: skewX(45deg) translateX(150px);
+    /* now this glance will be shifted  */
+    transition: 0.5s;
+ 
+ }
+ 
+ /* now making glance effect on hover  */
+ 
+ .socialsec li a:hover::before {
+    transform: skewX(45deg)translateX(-150px);
+ }
