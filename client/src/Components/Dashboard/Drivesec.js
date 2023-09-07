@@ -14,10 +14,10 @@ const Drivesec = () => {
   return (
     <div className="col-md-8 dash">
       <div className="drivesecheading">
-        <span className="material-symbols-outlined">
+        <span className="material-symbols-outlined text-[2rem] md:text-[2.5rem] md:ml-[20px]">
           business_center
         </span>
-        <h1 className='flex items-center text-[30px] font-[600] ml-[8px]'> PLACEMENT DRIVES</h1>
+        <h1 className='flex items-center text-[1.3rem] font-[600] md:text-[1.5rem] md:ml-[8px]'> PLACEMENT DRIVES</h1>
       </div>
 
       {/* Statusbar   */}

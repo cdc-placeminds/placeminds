@@ -1,0 +1,8 @@
+
+.bglhm{
+
+    background-image: url("../images/maitbkg.jpg");
+    /* filter: blur(1px); */
+    background-size: cover;
+    background-position-x: 60%;
+}

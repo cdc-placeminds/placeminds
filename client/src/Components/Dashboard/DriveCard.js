@@ -127,9 +127,9 @@ const DriveCard = ({ datadrive }) => {
         <div className="drivecard">
             <div className="compdet">
                 <div className="comphead">
-                    <div className="imgborder">
+                    <div className="imgborder md:h-[2.7rem] md:w-[2.7rem]">
                         {/* <img className='complogo' src={complogo} alt="Company Logo" /> */}
-                        <span className="material-symbols-outlined">
+                        <span className="material-symbols-outlined md:text-[1.8rem] md:h-[2.5rem] md:w-[2.5rem]">
                             business_center
                         </span>
 
@@ -143,11 +143,11 @@ const DriveCard = ({ datadrive }) => {
                         data-testid="loader"
                     /></div>}
                     <div>
-                        <p className='comprole'>{datadrive.profile}</p>
-                        <p className="compname">{datadrive.name}</p>
+                        <p className='comprole md:text-[1.3rem]'>{datadrive.profile}</p>
+                        <p className="compname md:text-[1.1rem]">{datadrive.name}</p>
                     </div>
                 </div>
-                <div className="comptime">
+                <div className="comptime md:text-[0.8rem]">
                     <p>Published {daysAgoPublished} days ago</p>
 
                 </div>
@@ -164,7 +164,7 @@ const DriveCard = ({ datadrive }) => {
                 </div>
                 <div className="brelig compdiscdiv">
                     <p className="head">Branch Eligible</p>
-                    <label className="subhead group relative">
+                    <p className="subhead group relative">
                         {datadrive.branch.length <= 2
                             ? datadrive.branch.join(" | ")
                             : (
@@ -178,7 +178,7 @@ const DriveCard = ({ datadrive }) => {
                                     +{datadrive.branch.length - 2}
                                 </>
                             )}
-                    </label>
+                    </p>
 
 
                 </div>
@@ -190,8 +190,8 @@ const DriveCard = ({ datadrive }) => {
             <div className="horline"></div>
             <div className="compbtn">
                 <div className="stdapl">
-                    <span className="material-symbols-outlined groupicon">group</span>
-                    <p>{appliedstd} Applied</p>
+                    <span className="material-symbols-outlined groupicon flex items-end h-[30px] md:h-[41px] text-[1.5rem] md:text-[1.8rem]">group</span>
+                    <p className='text-[0.6rem] md:text-[0.8rem]'>{appliedstd} Applied</p>
                 </div>
                 <div className="drvbtns">
                     <button className="viewdtl">View Details</button>

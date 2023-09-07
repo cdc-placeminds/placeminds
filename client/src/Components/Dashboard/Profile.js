@@ -72,7 +72,7 @@ const Profile = () => {
           })
         }
         //Calling Fetch API
-        const res = await fetch(url, fetchMethods);
+        await fetch(url, fetchMethods);
 
       }).catch((err) => {
         console.log(err)
@@ -114,7 +114,7 @@ const Profile = () => {
     <div className="col-md-4 mt-[2%]">
 
       {/* profile div  */}
-      <div className='relative z-[100] grid grid-flow-row grid-cols-2 bg-white h-[42vh] p-[2%] mt-[1%] border-1 border-solid border-cardborder rounded-xl'>
+      <div className='relative z-[100] grid grid-flow-row grid-cols-2 bg-white h-[37vh] md:h-[42vh] p-[2%] mt-[1%] border-1 border-solid border-cardborder rounded-xl'>
 
 
         <div className="profimgdiv flex flex-col items-center justify-center ">
@@ -165,7 +165,7 @@ const Profile = () => {
         <div className="stddetails ">
           <div className="accordion flex flex-col items-center justify-center h-full ">
 
-            <button className='btn btn-primary w-[70%] tracking-wider font-head text-[0.8rem] flex flex-row items-center my-[1.5%]' onClick={() => {
+            <button className='btn btn-primary w-[70%] tracking-wider font-head text-[0.6rem] md:text-[0.8rem] flex flex-row items-center my-[1.5%]' onClick={() => {
               if (viewdtl.type === 'View QR') {
                 setCardbtnclkd(!cardbtnclkd);
               } else {
@@ -176,13 +176,13 @@ const Profile = () => {
                 }, 300);
               }
             }}>
-              <span className="material-symbols-outlined text-white ml-0 text-[1.4rem]  h-[25px]">
+              <span className="material-symbols-outlined text-white ml-0 text-[1.4rem] h-[20px] md:h-[25px]">
                 qr_code_scanner
               </span>
               View QR
             </button>
 
-            <button className='btn btn-primary w-[70%] tracking-wider font-head text-[0.8rem] flex flex-row items-center my-[1.5%]' onClick={() => {
+            <button className='btn btn-primary w-[70%] tracking-wider font-head text-[0.6rem] md:text-[0.8rem] flex flex-row items-center my-[1.5%]' onClick={() => {
               if (viewdtl.type === 'Student Profile') {
                 setCardbtnclkd(!cardbtnclkd);
               } else {
@@ -193,13 +193,13 @@ const Profile = () => {
                 }, 300);
               }
             }}>
-              <span className="material-symbols-outlined text-white ml-0 text-[1.4rem]  h-[25px]">
+              <span className="material-symbols-outlined text-white ml-0 text-[1.4rem] h-[20px] md:h-[25px]">
                 badge
               </span>
               Profile
             </button>
 
-            <button className='btn btn-primary w-[70%] tracking-wider font-head text-[0.8rem] flex flex-row items-center my-[1.5%]' onClick={() => {
+            <button className='btn btn-primary w-[70%] tracking-wider font-head text-[0.6rem] md:text-[0.8rem] flex flex-row items-center my-[1.5%]' onClick={() => {
               if (viewdtl.type === 'Placement Detail') {
                 setCardbtnclkd(!cardbtnclkd);
               } else {
@@ -210,7 +210,7 @@ const Profile = () => {
                 }, 300);
               }
             }}>
-              <span className="material-symbols-outlined text-white ml-0 text-[1.4rem]  h-[25px]">
+              <span className="material-symbols-outlined text-white ml-0 text-[1.4rem] h-[20px] md:h-[25px]">
                 business_center
               </span>
               Extras
@@ -220,7 +220,7 @@ const Profile = () => {
             {/* For Admin  */}
             {isAdmin && (
 
-              <button className='btn btn-primary w-[70%] tracking-wider font-head text-[0.8rem] flex flex-row items-center my-[1.5%]' onClick={() => {
+              <button className='btn btn-primary w-[70%] tracking-wider font-head text-[0.6rem] md:text-[0.8rem] flex flex-row items-center my-[1.5%]' onClick={() => {
                 if (viewdtl.type === 'Admin Panel') {
                   setCardbtnclkd(!cardbtnclkd);
                 } else {
@@ -231,7 +231,7 @@ const Profile = () => {
                   }, 300);
                 }
               }}>
-                <span className="material-symbols-outlined text-white ml-0 text-[1.4rem]  h-[25px]">
+                <span className="material-symbols-outlined text-white ml-0 text-[1.4rem] h-[20px] md:h-[25px]">
                   admin_panel_settings
                 </span>
                 Controls
@@ -245,7 +245,7 @@ const Profile = () => {
         </div>
 
         <div className="stdname col-span-2">
-          <h1 className="prname ml-[5%] tracking-wide text-[35px] text-[#2e2e2e] font-head font-[600]"> {userData.name}</h1>
+          <h1 className="prname ml-[5%] tracking-wide text-[1.7rem] md:text-[2rem] text-[#2e2e2e] font-head font-[600]"> {userData.name}</h1>
         </div>
 
 
@@ -253,7 +253,7 @@ const Profile = () => {
       {/* --------------profile ends here ---------- */}
 
 
-      <div className={` relative z-[10] grid grid-flow-row bg-white h-[42vh] p-[5%] mt-[1%] border-1 border-solid border-cardborder rounded-xl ${cardbtnclkd ? 'prfanim' : 'prfcls'}`}>
+      <div className={` relative z-[10] grid grid-flow-row bg-white p-[5%] mt-[1%] border-1 border-solid border-cardborder rounded-xl ${cardbtnclkd ? 'prfanim' : 'prfcls'}`}>
 
         {viewdtl.type === 'View QR' &&
           <>
@@ -271,9 +271,9 @@ const Profile = () => {
 
         {viewdtl.type === "Admin Panel" &&
           <div className='flex flex-col md:flex-col gap-[2px]'>
-            <button onClick={adddrivepanel} className='btn btn-primary btn-sm my-1 mx-1 h-[15%] w-[40%]'>Add Drive</button>
-            <button onClick={controlpanel} className='btn btn-primary btn-sm my-1 mx-1 h-[15%] w-[40%]'>Control Panel</button>
-            <button onClick={() => { setisScannerOpen(true); handlesubmitsheetname() }} className='btn btn-primary btn-sm my-1 mx-1 h-[15%] w-[40%]'>Scan QR</button>
+            <button onClick={adddrivepanel} className='btn btn-primary btn-sm my-1 mx-1 h-[30%] w-[40%]'>Add Drive</button>
+            <button onClick={controlpanel} className='btn btn-primary btn-sm my-1 mx-1 h-[30%] w-[40%]'>Control Panel</button>
+            <button onClick={() => { setisScannerOpen(true); handlesubmitsheetname() }} className='btn btn-primary btn-sm my-1 mx-1 h-[30%] w-[40%]'>Scan QR</button>
           </div>
         }
 

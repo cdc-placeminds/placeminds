@@ -13,6 +13,7 @@ import { AlertProvider } from "../context/AlertContext";
 import { ScannerProvider } from "../context/ScannerContext";
 import QRScanner from "../Dashboard/AdminPanel/Qrscanner";
 import ControlPanel from "../Dashboard/AdminPanel/ControlPanel";
+import Landingpage from "./Landingpage";
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
                 <AlertProvider>
                   <Navbar />
                   <Routes>
-                    <Route path='/' element={<Home />} />
+                    <Route path='/login' element={<Home />} />
+                    <Route path='/' element={<Landingpage />} />
                     <Route path='/signup' element={<Signupfrm />} />
                     <Route path='/dashboard' element={<Dashboard />} />
                     <Route path="/adddrive" element={<AdminDash />} />

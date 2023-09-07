@@ -25,7 +25,7 @@ const Navbar = () => {
     }
 
     const handleLogin = () => {
-        navigate('/')
+        navigate('/login')
         window.location.reload();
     }
 
@@ -45,7 +45,7 @@ const Navbar = () => {
                         ?
                         <>
                             <li><NavLink to='/signup'>Signup</NavLink></li>
-                            <li ><NavLink to='/' onClick={handleLogin}>Login</NavLink></li>
+                            <li ><NavLink to='/login' onClick={handleLogin}>Login</NavLink></li>
                         </>
                         :
                         <>

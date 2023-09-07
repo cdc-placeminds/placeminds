@@ -28,18 +28,18 @@ const Statusbar = () => {
       <div className="statusbar">
         <div className="opprcount  countdiv">
           <p className="subheading">OPPORTUNITY</p>
-          <p className="subcount">{total_drive}</p>
+          <p className="subcount md:text-[1.7rem]">{total_drive}</p>
         </div>
         <div className="verline"></div>
         <div className="appcount countdiv">
           <p className="subheading">APPLIED</p>
-          <p className="subcount">{appliedDrivesCount}</p>
+          <p className="subcount md:text-[1.7rem]">{appliedDrivesCount}</p>
         </div>
 
         <div className="verline"></div>
         <div className="disccount countdiv">
           <p className="subheading">DISCIPLINE</p>
-          <p className="subcount">GREEN</p>
+          <p className="subcount md:text-[1.7rem]">GREEN</p>
         </div>
 
 

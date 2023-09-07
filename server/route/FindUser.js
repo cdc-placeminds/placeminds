@@ -27,7 +27,6 @@ router.post("/", async(req,res)=>{
 // router to find many user and its details in control panel
 
 router.post("/findusers", async(req,res)=>{
-  console.log("inside findusers");
   try{
         const query = {};
         query[req.body.searchBy] = {
@@ -55,7 +54,6 @@ router.post("/findusers", async(req,res)=>{
           })
 
           res.json(UserData);
-          console.log(UserData);
         } else {
           res.status(423).json({ message: 'Unable to find ' });
         }

@@ -6,6 +6,7 @@ module.exports = {
   theme: {
     // custom colors 
     colors:{
+      sechead:'#102970',
      headcolor:'#676767',
      warn:'#ff0000',
      warnborder:'#fc7a7ab5',
@@ -17,7 +18,9 @@ module.exports = {
     },
     extend: {
       fontFamily:{
-        'head':['Outfit', 'sans-serif']
+        'head':['Outfit', 'sans-serif'],
+        'subt':['Kaushan Script', 'cursive'],
+        'tagline': ['Playfair Display', 'serif']
       },
       backgroundImage: {
         'form-doodle': "url('./Components/images/doodle4.jpg')",
