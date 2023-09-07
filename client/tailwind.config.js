@@ -20,7 +20,8 @@ module.exports = {
       fontFamily:{
         'head':['Outfit', 'sans-serif'],
         'subt':['Kaushan Script', 'cursive'],
-        'tagline': ['Playfair Display', 'serif']
+        'tagline': ['Playfair Display', 'serif'],
+        'numb':['digital-7','sans-serif']
       },
       backgroundImage: {
         'form-doodle': "url('./Components/images/doodle4.jpg')",

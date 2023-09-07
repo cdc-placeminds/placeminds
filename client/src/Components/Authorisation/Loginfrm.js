@@ -313,8 +313,8 @@ const Loginfrm = () => {
 
 
   return (
-    <div className="col-md-6 loginsec flex justify-center items-center">
-      <div className='bg-form-doodle  w-[55%] flex flex-col   px-[7%] py-[3%] bg-white border-2px border-headcolor rounded-[16px] '>
+    <div className="loginsec flex justify-center items-center">
+      <div className='bg-form-doodle w-[65%] md:w-[40%] flex flex-col px-[7%] py-[3%] bg-white border-2px border-headcolor rounded-[16px] '>
         <h1 className=' text-center mt-[5%] font-head text-headcolor font-[700] text-[1.4rem] md:text-[2.0rem] tracking-[0.3px]'>{Fpass ? "Reset Password" : 'Student Login'}</h1>
 
 

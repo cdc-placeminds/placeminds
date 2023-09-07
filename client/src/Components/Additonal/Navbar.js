@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import "./Navbar.css";
-import maitbluelogo from "../images/maitbluelogo.png"
+import maitbluelogo from "../images/PlaceMinds-logo.png"
 import { useAuth } from '../context/AuthContext';
 import { useAlert } from '../context/AlertContext';
 import { useUserData } from '../context/UserDataContext';
@@ -31,7 +31,7 @@ const Navbar = () => {
 
     return (
         <nav className=' z-[99999]'>
-            <Link to='/' className="title flex"> <img src={maitbluelogo} alt="" className="navlogo" />CDC PLACEMINDS</Link>
+            <Link to='/' className="title flex"> <img src={maitbluelogo} alt="" className="navlogo" /></Link>
 
             <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
                 <span></span>
