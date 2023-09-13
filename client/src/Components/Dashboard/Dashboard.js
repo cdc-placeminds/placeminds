@@ -61,7 +61,7 @@ const Dashboard = () => {
 
 
   return (
-    <div className="container-fluid dash bg-gradient-to-b to-[#dff1ff] from-[#eadeff40]">
+    <div className="container-fluid dash bg-gradient-to-b to-[#dff1ff] from-[#eadeff40] min-h-[100vh]">
       <div className="row">
         <div className="col-md-10 col-12 mx-auto">
           <div className="container-fluid dashboard">

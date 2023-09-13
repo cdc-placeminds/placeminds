@@ -155,11 +155,11 @@ const DriveCard = ({ datadrive }) => {
             <div className="horline"></div>
             <div className="compdisc">
                 <div className="jobtype compdiscdiv">
-                    <p className="head">Deadline</p>
+                    <p className="head">Date</p>
                     <p className="subhead">{formatDeadline(datadrive)}</p>
                 </div>
                 <div className="ctc compdiscdiv">
-                    <p className="head">CTC</p>
+                    <p className="head">Registration Fees</p>
                     <p className="subhead">{datadrive.ctc}</p>
                 </div>
                 <div className="brelig compdiscdiv">
