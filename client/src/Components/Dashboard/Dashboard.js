@@ -35,7 +35,7 @@ const Dashboard = () => {
 
       setisLoggedin(true);
 
-      console.log(res.status)
+      // console.log(res.status)
       console.log(data)
       if (data.userDatasB.isAdmin === true) {
         setisAdmin(true)
