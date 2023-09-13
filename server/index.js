@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-      origin: "http://localhost:3000",
+      origin: "https://vercel.com/cdc-placeminds/placeminds-frontend/A278W3Pg8RpfbgQVvWMyWocjxJYT",
       credentials: true,
     })
   );
