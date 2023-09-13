@@ -14,9 +14,9 @@ const UpdateApply = require("./route/updateapply");
 const FindAPI = require("./route/findapi")
 const SheetNames = require("./route/sheetnames")
 const cookieParser = require("cookie-parser");
-const Mailsender=require("./route/Mailsender")
-const FindUser=require("./route/FindUser");
-const ResetPassword =require("./route/ResetPassword");
+const Mailsender = require("./route/Mailsender")
+const FindUser = require("./route/FindUser");
+const ResetPassword = require("./route/ResetPassword");
 
 // database connection 
 connection();
@@ -24,12 +24,13 @@ connection();
 //Middlewares
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-    cors({
-      origin: "https://vercel.com/cdc-placeminds/placeminds-frontend/A278W3Pg8RpfbgQVvWMyWocjxJYT",
-      credentials: true,
-    })
-  );
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://placeminds-frontend.vercel.app');
+  // Add other necessary headers as needed
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 
 //Routes
 app.use("/api/users", userRoutes);
@@ -42,15 +43,15 @@ app.use("/api/updateapply", UpdateApply)
 app.use("/api/findapi", FindAPI)
 app.use("/api/sheetnames", SheetNames)
 // api for sending mail 
-app.use("/api/mailsend",Mailsender);
+app.use("/api/mailsend", Mailsender);
 // for checking if user exist 
-app.use("/api/check-user",FindUser);
+app.use("/api/check-user", FindUser);
 // for reset password 
-app.use("/api/resetpassword",ResetPassword);
+app.use("/api/resetpassword", ResetPassword);
 
 
 //Listen to port
 const port = 8080;
 app.listen(port, () => {
-    console.log(`Listening to the Port ${port}`)
+  console.log(`Listening to the Port ${port}`)
 })
