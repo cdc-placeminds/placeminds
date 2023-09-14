@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import profileImage from '../images/userpic.png'; // Make sure the path to your image is correct
 import '../css/styles.css'
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,7 @@ import '../css/Profilecard.css';
 
 const Profile = () => {
   const [cardbtnclkd, setCardbtnclkd] = useState(false);
+  const [zIndex, setZIndex] = useState(100);
   const { userData } = useUserData();
   const [imageurl, setimageurl] = useState();
   const [imgurl, setimgurl] = useState();
@@ -110,6 +111,16 @@ const Profile = () => {
     navigate('/controlpanel');
   }
 
+  useEffect(() => {
+    if (cardbtnclkd) {
+      setTimeout(() => {
+        setZIndex(10);
+      }, 1000); // Set a 1-second timeout
+    } else {
+      setZIndex(100);
+    }
+  }, [cardbtnclkd]);
+
   return (
     <>
       {/* --------------------Popup Starts-------------------- */}
@@ -169,7 +180,7 @@ const Profile = () => {
       <div className="col-md-4 mt-[2%]">
 
         {/* profile div  */}
-        <div className= {`relative ${cardbtnclkd ? 'z-[10]' : 'z-[100]'} grid grid-flow-row grid-cols-2 bg-white h-[37vh] md:h-[42vh] p-[2%] mt-[1%] border-1 border-solid border-cardborder rounded-xl`}>
+        <div className= {`relative z-${zIndex} grid grid-flow-row grid-cols-2 bg-white h-[37vh] md:h-[42vh] p-[2%] mt-[1%] border-1 border-solid border-cardborder rounded-xl`}>
 
 
           <div className="profimgdiv flex flex-col items-center justify-center ">
