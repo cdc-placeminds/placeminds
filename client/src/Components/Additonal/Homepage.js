@@ -11,7 +11,7 @@ const Home = () => {
     try {
       let token = Cookies.get('jwtoken');
       if(!token){
-        navigate("/");
+        navigate("/login");
       }
       const res = await fetch(`${process.env.REACT_APP_BASE_URL}/api/dashboard`, {
         method: "GET",
