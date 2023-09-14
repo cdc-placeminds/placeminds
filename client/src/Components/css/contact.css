@@ -1,4 +1,4 @@
-/* contact section  */
+contact section 
 
 .contactsec {
 
@@ -218,9 +218,9 @@
  }
  
  .form-control {
-    border-radius: 10px 0 10px 0 !important;
-    box-shadow: inset 0em 0em 0.2em #282727;
-    font-size: medium;
+    /* border-radius: 10px 0 10px 0 !important; */
+    /* box-shadow: inset 0em 0em 0.2em #282727; */
+    /* font-size: medium; */
     font-weight: 500;
  
  }
