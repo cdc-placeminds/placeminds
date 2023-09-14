@@ -296,7 +296,7 @@ const Loginfrm = () => {
       setisLoggedin(true);
 
 
-      Cookies.set("jwtoken", userData.data, { expires: 7 });
+      Cookies.set("jwtoken", userData.data, { expires: 7, secure: true, sameSite: 'none' });
       navigate('/dashboard')
 
     }
