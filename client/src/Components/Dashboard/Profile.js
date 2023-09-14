@@ -115,7 +115,7 @@ const Profile = () => {
     if (cardbtnclkd) {
       setTimeout(() => {
         setZIndex(10);
-      }, 1000); // Set a 1-second timeout
+      }, 2000); // Set a 1-second timeout
     } else {
       setZIndex(100);
     }
