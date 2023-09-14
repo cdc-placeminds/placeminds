@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Cookies from "js-cookie"
 import Loginfrm from "../Authorisation/Loginfrm";
 import { useNavigate } from "react-router-dom";
 
@@ -8,10 +9,15 @@ const Home = () => {
 
   const callHomePage = async () => {
     try {
+      let token = Cookies.get('jwtoken');
+      if(!token){
+        navigate("/");
+      }
       const res = await fetch(`${process.env.REACT_APP_BASE_URL}/api/dashboard`, {
         method: "GET",
         headers: {
-          Accept: "application/json", "Content-Type": "application/json"
+          Accept: "application/json", "Content-Type": "application/json", 
+          Authorization: "Bearer "+ token        
         },
         credentials: "include"
       })
