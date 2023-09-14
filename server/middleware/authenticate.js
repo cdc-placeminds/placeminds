@@ -8,14 +8,16 @@ const authenticate = async (req, res, next) => {
     try {
         //Verifying user cookie token with private key
         const token = req.cookies.jwtoken;
+        console.log("JW Token is: " + token)
         if (!token) {
             return next();
         }
 
         const verifyToken = jwt.verify(token, process.env.JWTPRIVATEKEY);
-
+        console.log("Verify Token is:" + verifyToken)
         //finding detail of user using id of user that we get from verifytoken
         const rootUser = await User.findOne({ _id: verifyToken._id });
+        console.log("rootUser is: " + rootUser)
         const drive = await Drive.find({});
 
 
