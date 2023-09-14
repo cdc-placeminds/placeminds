@@ -180,7 +180,7 @@ const Profile = () => {
       <div className="col-md-4 mt-[2%]">
 
         {/* profile div  */}
-        <div className= {`relative z-${zIndex} grid grid-flow-row grid-cols-2 bg-white h-[37vh] md:h-[42vh] p-[2%] mt-[1%] border-1 border-solid border-cardborder rounded-xl`}>
+        <div className= {`relative z-[${zIndex}] grid grid-flow-row grid-cols-2 bg-white h-[37vh] md:h-[42vh] p-[2%] mt-[1%] border-1 border-solid border-cardborder rounded-xl`}>
 
 
           <div className="profimgdiv flex flex-col items-center justify-center ">
