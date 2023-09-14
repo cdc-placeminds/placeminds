@@ -7,7 +7,7 @@ const authenticate = async (req, res, next) => {
 
     try {
         //Verifying user cookie token with private key
-        const token = req.cookies.jwtoken;
+        const token = req.headers.authorization.split(' ')[1];
         console.log("JW Token is: " + token)
         if (!token) {
             return next();
