@@ -48,8 +48,8 @@ const Profile = () => {
   const handlesubmit = () => {
     const data = new FormData();
     data.append("file", imageurl)
-    data.append("upload_preset", "user_profileimg_prm")
-    data.append("cloud_name", "dl1ctpk4y")
+    data.append("upload_preset", process.env.REACT_APP_IMG_PRESET)
+    data.append("cloud_name", process.env.REACT_APP_IMG_CLDNAME)
 
     fetch(process.env.REACT_APP_EDIT_IMG, {
       method: "POST",
