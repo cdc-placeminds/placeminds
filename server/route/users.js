@@ -54,7 +54,6 @@ router.post("/signup", async (req, res) => {
 router.post("/update", async (req, res) => {
 	try {
 		const { updatedStudentData } = req.body
-		console.log(updatedStudentData)
 		//Checking if email already exist
 		const user = await User.findOne({ _id: updatedStudentData.id });
 

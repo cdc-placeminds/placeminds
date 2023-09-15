@@ -127,7 +127,6 @@ router.post("/finddrive", async (req, res) => {
             })
 
             res.json(DriveData);
-            console.log(drives);
         } else {
             res.status(423).json({ message: 'Unable to find ' });
         }

@@ -37,7 +37,6 @@ router.post("/", async (req, res) => {
 
         if (RowIndex !== -1) {
             if (values[RowIndex][attendanceColumnIndex] === 'Present') {
-                console.log("Already Present")
                 res.status(423).send({ message: "Attendance Marked Successfully" })
             } else {
                 values[RowIndex][attendanceColumnIndex] = 'Present'
@@ -54,7 +53,6 @@ router.post("/", async (req, res) => {
                     valueInputOption: 'RAW',
                     resource: updateValuesRequest,
                 })
-                console.log("Successful");
                 res.status(201).send({ message: "Attendance Marked Successfully" })
             }
         }
@@ -77,11 +75,9 @@ router.post("/", async (req, res) => {
 
                 })
 
-                console.log("Successfuly Added");
                 res.status(201).send({ message: "User Added and Attendance Marked Successfully" })
             }
             else {
-                console.log("Not Allowed");
                 res.status(422).send({ message: "Not Applied for Drive" })
             }
         }
