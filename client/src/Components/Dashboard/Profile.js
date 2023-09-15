@@ -12,8 +12,8 @@ import { useScannerData } from '../context/ScannerContext';
 import '../css/Profilecard.css';
 
 const Profile = () => {
+  const [zprofcard,setZprofcard]=useState('z-[100]');
   const [cardbtnclkd, setCardbtnclkd] = useState(false);
-  const [zIndex, setZIndex] = useState(100);
   const { userData } = useUserData();
   const [imageurl, setimageurl] = useState();
   const [imgurl, setimgurl] = useState();
@@ -165,12 +165,10 @@ const Profile = () => {
         {/* --------------------Popup Ends-------------------- */}
 
       </div>
-
-
       <div className="col-md-4 mt-[2%]">
 
         {/* profile div  */}
-        <div className={`relative z-[${zIndex}] grid grid-flow-row grid-cols-2 bg-white h-[37vh] md:h-[42vh] p-[2%] mt-[1%] border-1 border-solid border-cardborder rounded-xl`}>
+        <div className={`relative ${zprofcard} grid grid-flow-row grid-cols-2 bg-white h-[37vh] md:h-[42vh] p-[2%] mt-[1%] border-1 border-solid border-cardborder rounded-xl`}>
 
 
           <div className="profimgdiv flex flex-col items-center justify-center ">
@@ -224,16 +222,15 @@ const Profile = () => {
               <button className='btn btn-primary w-[70%] tracking-wider font-head text-[0.6rem] md:text-[0.8rem] flex flex-row items-center my-[1.5%]' onClick={() => {
                 if (viewdtl.type === 'View QR') {
                   setCardbtnclkd(!cardbtnclkd);
-                  setZIndex(100)
+                  setZprofcard('z-[100]');
+
                 } else {
+                  setZprofcard('z-[100]');
                   setCardbtnclkd(false);
                   setTimeout(() => {
                     setCardbtnclkd(true);
                     setviewdtl({ type: "View QR" });
                   }, 300);
-                  setTimeout(() => {
-                    setZIndex(10)
-                  }, 1000);
                 }
               }}>
                 <span className="material-symbols-outlined text-white ml-0 text-[1.4rem] h-[20px] md:h-[25px]">
@@ -245,10 +242,12 @@ const Profile = () => {
               <button className='btn btn-primary w-[70%] tracking-wider font-head text-[0.6rem] md:text-[0.8rem] flex flex-row items-center my-[1.5%]' onClick={() => {
                 if (viewdtl.type === 'Student Profile') {
                   setCardbtnclkd(!cardbtnclkd);
+                  setZprofcard('z-[100]');
                 } else {
                   setCardbtnclkd(false);
                   setTimeout(() => {
                     setCardbtnclkd(true);
+                    setTimeout(()=>{setZprofcard('z-[0]')},300)
                     setviewdtl({ type: 'Student Profile' });
                   }, 300);
                 }
@@ -262,7 +261,10 @@ const Profile = () => {
               <button className='btn btn-primary w-[70%] tracking-wider font-head text-[0.6rem] md:text-[0.8rem] flex flex-row items-center my-[1.5%]' onClick={() => {
                 if (viewdtl.type === 'Placement Detail') {
                   setCardbtnclkd(!cardbtnclkd);
+                  setZprofcard('z-[100]');
+
                 } else {
+                  setZprofcard('z-[100]');
                   setCardbtnclkd(false);
                   setTimeout(() => {
                     setCardbtnclkd(true);
@@ -283,7 +285,10 @@ const Profile = () => {
                 <button className='btn btn-primary w-[70%] tracking-wider font-head text-[0.6rem] md:text-[0.8rem] flex flex-row items-center my-[1.5%]' onClick={() => {
                   if (viewdtl.type === 'Admin Panel') {
                     setCardbtnclkd(!cardbtnclkd);
+                    setZprofcard('z-[100]');
+
                   } else {
+                    setZprofcard('z-[100]');
                     setCardbtnclkd(false);
                     setTimeout(() => {
                       setCardbtnclkd(true);
@@ -337,11 +342,13 @@ const Profile = () => {
             </div>
           }
 
+
+
           {/* --------------------------inside this you have to keep sir --------------------- */}
         </div>
       </div>
-    </>
 
+    </>
 
   )
 }
