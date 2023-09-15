@@ -25,7 +25,7 @@ function QRCodeGenerator() {
   }, [enrollmentNo]);
 
   return (
-    <div className='flex justify-center flex-col items center'>
+    <div className='flex justify-center flex-col items-center'>
       <div className="justify-around items-center p-[3%]">
         <h1 className='text-[10px] md:text-[20px] font-head font-[600]'>Scan QR to Mark Attendance</h1>
 
