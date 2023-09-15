@@ -51,6 +51,7 @@ const Profile = () => {
     data.append("upload_preset", process.env.REACT_APP_IMG_PRESET)
     data.append("cloud_name", process.env.REACT_APP_IMG_CLDNAME)
 
+    console.log(process.env.REACT_APP_EDIT_IMG)
     fetch(process.env.REACT_APP_EDIT_IMG, {
       method: "POST",
       body: data
