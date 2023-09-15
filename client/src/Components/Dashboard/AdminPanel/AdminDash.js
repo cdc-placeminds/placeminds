@@ -60,20 +60,7 @@ const AdminDash = () => {
         if (res.status === 201) {
             // -----------------------------------------------------------------------------------
 
-            // const sheeturl = `${process.env.REACT_APP_BASE_URL}/api/googleapi`
-            // const fetchMethod = {
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type": "application/json"
-            //     },
-            //     body: JSON.stringify({
-            //         name, location, profile, ctc, branch, year, deadline
-            //     })
-            // }
-            // const addtosheet = await fetch(sheeturl, fetchMethod);
-
-
-            const sheeturl = 'https://script.google.com/macros/s/AKfycbyHH8TqfY5PTRPVyMGmDM61jpGcEY9h8EqT1lmCrxrE_po24Geu_EsskPTZfXUJSps/exec'
+            const sheeturl = `${process.env.REACT_APP_BASE_URL}/api/googleapi`
             const fetchMethod = {
                 method: "POST",
                 headers: {
