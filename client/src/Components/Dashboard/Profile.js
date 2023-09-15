@@ -25,8 +25,15 @@ const Profile = () => {
   const { isAdmin } = useAdmin();
   const { selectedDrive, setSelectedDrive, isOpenForAll, setIsOpenForAll } = useScannerData()
   const handleinput = (e) => {
-    setimageurl(e.target.files[0])  
+    setimageurl(e.target.files[0])
   }
+
+  const modifyCloudinaryUrl = (originalUrl) => {
+    // Split the original URL into parts
+    const modifiedUrl = originalUrl.replace("http://", "https://");
+
+    return modifiedUrl;
+  };
 
   const handlesubmit = () => {
     const data = new FormData();
@@ -34,15 +41,14 @@ const Profile = () => {
     data.append("upload_preset", process.env.REACT_APP_IMG_PRESET)
     data.append("cloud_name", process.env.REACT_APP_IMG_CLDNAME)
 
-    console.log(process.env.REACT_APP_EDIT_IMG)
     fetch(process.env.REACT_APP_EDIT_IMG, {
       method: "POST",
       body: data
     })
       .then((res) => res.json())
       .then(async (data) => {
-        const newurl = data.url
-        setimgurl(data.url)
+        const newurl = modifyCloudinaryUrl(data.url)
+        setimgurl(newurl)
 
         //Backend URL
         const url = `${process.env.REACT_APP_BASE_URL}/api/users/update_userimg`;
