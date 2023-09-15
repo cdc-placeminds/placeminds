@@ -25,25 +25,8 @@ const Profile = () => {
   const { isAdmin } = useAdmin();
   const { selectedDrive, setSelectedDrive, isOpenForAll, setIsOpenForAll } = useScannerData()
   const handleinput = (e) => {
-    setimageurl(e.target.files[0])
+    setimageurl(e.target.files[0])  
   }
-
-  const modifyCloudinaryUrl = (originalUrl) => {
-    // Split the original URL into parts
-    const parts = originalUrl.split('/');
-
-    // Find the index of "upload" in the URL
-    const uploadIndex = parts.findIndex(part => part === 'upload');
-
-    if (uploadIndex !== -1) {
-      // Insert the desired transformation parameters after "upload"
-      parts.splice(uploadIndex + 1, 0, 'c_thumb,g_faces,h_300,w_300');
-    }
-
-    // Join the parts back together to create the modified URL
-    const modifiedUrl = parts.join('/');
-    return modifiedUrl;
-  };
 
   const handlesubmit = () => {
     const data = new FormData();
@@ -58,8 +41,8 @@ const Profile = () => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        const newurl = modifyCloudinaryUrl(data.url)
-        setimgurl(newurl)
+        const newurl = data.url
+        setimgurl(data.url)
 
         //Backend URL
         const url = `${process.env.REACT_APP_BASE_URL}/api/users/update_userimg`;
