@@ -74,7 +74,6 @@ const QRScanner = () => {
               setScanResult("Show QR to Mark Attendance"); // Reset the scan result
               scanner.resume();
             }, 2000);
-            console.log('Email sent:', data.EmailSent);
           })
           .catch(error => {
             setLoading(false)
@@ -112,10 +111,8 @@ const QRScanner = () => {
         const addtosheet = await markattendance(decodedText);
         if (addtosheet.status === 201) {
           sendmail(message)
-          console.log("Attendance Marked")
         }
         else if (addtosheet.status === 423) {
-          console.log("Already Present");
           setLoading(false)
           errorbeepSound.play();
           setScanResult("Already Present");
@@ -126,7 +123,6 @@ const QRScanner = () => {
 
         }
         else if (addtosheet.status === 422) {
-          console.log("Not Applied for Drive")
           setLoading(false)
           errorbeepSound.play();
           setScanResult("Not Applied for Drive");

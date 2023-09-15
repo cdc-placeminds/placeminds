@@ -96,7 +96,6 @@ const StdProfile = () => {
             .then(response => response.json())
             .then(data => {
                 setLoading(false)
-                console.log('Email sent:', data);
                 //   otp is sent 
                 setOtpSent(data.otpSent);
                 if (data.otpSent) {
@@ -104,7 +103,6 @@ const StdProfile = () => {
 
                 }
                 else {
-                    console.log("checking if otp is sent " + data.otpSent);
                     showalert("Error:", "Invalid Details", "warning")
 
                 }
@@ -136,7 +134,6 @@ const StdProfile = () => {
                     showalert("Success:", data.message, "success");
                     setTimeout(() => {
                         setOtpVerified(true);
-                        console.log("otp verified " + otpVerified);
                     }, 2000);
 
 
@@ -163,7 +160,6 @@ const StdProfile = () => {
                         setisOpen(false)
                         showalert("Success:", "Update Successful", "success")
                         setTimeout(() => {
-                            console.log("Update Successful")
                             window.location.reload();
                         }, 3000);
                     }
@@ -172,13 +168,11 @@ const StdProfile = () => {
                     else if (res.status === 422) {
                         setisOpen(false)
                         showalert("Error:", "User Not Found", "warning")
-                        console.log("Update Unsuccessful")
                     }
 
                     else {
                         setisOpen(false)
                         showalert("Error:", "Server Error", "warning")
-                        console.log("Update Unsuccessful")
                     }
                 }
                 // Set your state variable (otpVerified) to true if needed

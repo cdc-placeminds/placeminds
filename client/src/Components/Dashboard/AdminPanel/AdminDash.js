@@ -13,8 +13,6 @@ const AdminDash = () => {
     const [loading, setLoading] = useState(false);
 
     const checkisAdmin = () => {
-        console.log("Checking Admin")
-        console.log(isAdmin)
         if (!isAdmin) {
             navigate('/')
         }
@@ -75,8 +73,6 @@ const AdminDash = () => {
             setLoading(false)
 
             if (addtosheet.status === 201) {
-                console.log("Add to sheet successful")
-                console.log("Drive Created Successfully")
                 showalert("Success: ", "Drive Added Successfully", "success")
             } else {
                 console.log("Error")
@@ -87,7 +83,6 @@ const AdminDash = () => {
         //If registration is successfull
         else {
             showalert("Error: ", "Fill Details Correctly", "warning")
-            console.log("Unsuccessful")
         }
 
     }

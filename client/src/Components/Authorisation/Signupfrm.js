@@ -209,7 +209,6 @@ const Signupfrm = () => {
     }
 
     const handleSubmit = async (e) => {
-        console.log("inside handle submit ");
         e.preventDefault();
 
         const { name, email, contact, enrollment, password, cpassword, branch, year, gender, dob } = data;
@@ -255,7 +254,6 @@ const Signupfrm = () => {
             subject: 'Registration Successful'
         })
         if(EmailSent)
-        console.log("Email Sent Succefully");
             scrollToTopOfForm();
             setTimeout(() => {
 

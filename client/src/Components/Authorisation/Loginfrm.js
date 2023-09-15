@@ -78,7 +78,6 @@ const Loginfrm = () => {
       .then(response => response.json())
       .then(data => {
         setLoading(false);
-        console.log('email sent:', data);
         //   otp is sent 
         setOtpSent(data.otpSent);
         if (data.otpSent) {
@@ -86,7 +85,6 @@ const Loginfrm = () => {
 
         }
         else {
-          console.log("checking if otp is sent " + data.otpSent);
           showalert("", "Invalid Details", "danger")
 
         }
@@ -110,7 +108,6 @@ const Loginfrm = () => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log("verification backend data back")
         setLoading(false);
         if (data.status === 200) {
 
@@ -217,7 +214,6 @@ const Loginfrm = () => {
               setTimeout(() => {
                 window.location.reload();
               }, 2000);
-              console.log("password reset successfull");
             }
             else {
               showalert("", data.message, "success");
@@ -282,14 +278,12 @@ const Loginfrm = () => {
     //Checking for any error or credentials dont match
     if (res.status === 400 || !userData) {
       showalert("", "Invalid Details", "danger")
-      console.log("Invalid Credentials")
     }
     //Login Successful
     else {
 
       showalert("", "Log In Successful", "success")
 
-      console.log("Login Successful")
       //Redirecting to Dashboard
 
 

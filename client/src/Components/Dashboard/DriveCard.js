@@ -93,7 +93,6 @@ const DriveCard = ({ datadrive }) => {
                         setisDriveApplied(true); // To change button from Apply now to Applied
                         setappliedstd(datadrive.totalapplied + 1)
                         showalert("Success: ", "Applied to Drive Successfully", "success") // Showing Alert of Successful Applied
-                        console.log("Add to sheet successful")
                     }
                 }
             }
@@ -127,7 +126,7 @@ const DriveCard = ({ datadrive }) => {
         <div className="drivecard">
             <div className="compdet">
                 <div className="comphead">
-                    <div className="imgborder md:h-[2.7rem] md:w-[2.7rem]">
+                    <div className="imgborder items-center md:h-[2.7rem] md:w-[2.7rem]">
                         {/* <img className='complogo' src={complogo} alt="Company Logo" /> */}
                         <span className="material-symbols-outlined md:text-[1.8rem] md:h-[2.5rem] md:w-[2.5rem]">
                             business_center

@@ -88,7 +88,6 @@ const SearchRes = ({ data, searchFor }) => {
             .then(data => {
                 setLoading(false)
                 showalert('Success', '', 'success')
-                console.log("Successful");
 
             })
             .catch(error => {
@@ -108,7 +107,6 @@ const SearchRes = ({ data, searchFor }) => {
         // setisReadOnly(true)
 
         e.preventDefault()
-        console.log("Inside Submit")
 
         if (searchFor === 'Student') {
             //Backend URL
@@ -130,20 +128,17 @@ const SearchRes = ({ data, searchFor }) => {
             if (res.status === 201) {
                 setisOpen(false)
                 showalert("Success:", "User Update Successful", "success")
-                console.log("User Update Successful")
             }
 
             // //Checking If any error occured 
             else if (res.status === 422) {
                 setisOpen(false)
                 showalert("Error:", "User Not Found", "warning")
-                console.log("User Update Unsuccessful")
             }
 
             else {
                 setisOpen(false)
                 showalert("Error:", "Server Error", "warning")
-                console.log("User Update Unsuccessful")
             }
         }
         //Fetch Request for Drive Updation
@@ -168,27 +163,23 @@ const SearchRes = ({ data, searchFor }) => {
             if (res.status === 201) {
                 setisOpen(false)
                 showalert("Success:", "Drive Update Successful", "success")
-                console.log("Drive Update Successful")
             }
 
             // //Checking If any error occured 
             else if (res.status === 422) {
                 setisOpen(false)
                 showalert("Error:", "Drive Not Found", "warning")
-                console.log("Drive Update Unsuccessful")
             }
 
             else {
                 setisOpen(false)
                 showalert("Error:", "Server Error", "warning")
-                console.log("Drive Update Unsuccessful")
             }
         }
     }
 
 
     const showUserDtl = () => {
-        console.log(updatedStudentData)
         setisOpen(true)
     }
 

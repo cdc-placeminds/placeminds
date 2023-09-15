@@ -1,5 +1,5 @@
 .prfanim{
-    animation: reveal 1s ease-in-out;
+    animation: reveal 700ms ease-in-out;
 }
 .prfcls{
 animation: close 200ms forwards ease-in;

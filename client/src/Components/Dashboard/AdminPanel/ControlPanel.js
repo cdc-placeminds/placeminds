@@ -92,9 +92,6 @@ const ControlPanel = () => {
 
     //    --------------------------- search for fn ------------------
     const handleSearchFor = () => {
-
-        console.log("inside search for ");
-
         // setSFor(true);
 
 
@@ -107,7 +104,6 @@ const ControlPanel = () => {
     const handleSearchBy = (e) => {
         e.preventDefault(); // Prevent the default form submission behavior
 
-        console.log("inside search by ");
         const searchelem = { searchBy: data.searchBy, searchInp: data.searchinp }
 
         //Fetch API to Serach for Students
@@ -121,7 +117,6 @@ const ControlPanel = () => {
             }).then(response => response.json())
                 .then(data => {
                     setsearchData(data)
-                    console.log("inside res of searchby");
                 })
                 .catch(error => {
                     console.log(error);
@@ -139,7 +134,6 @@ const ControlPanel = () => {
             }).then(response => response.json())
                 .then(data => {
                     setsearchData(data)
-                    console.log("inside res of searchby");
                 })
                 .catch(error => {
                     console.log(error);
@@ -191,7 +185,6 @@ const ControlPanel = () => {
                         {/* Search for Students*/}
                         {data.searchFor === 'Student' && (
                             <>
-                                {console.log("Searching for Students")}
                                 <div className="form-floating ">
                                     <select
                                         className="form-select text-center"
@@ -222,7 +215,6 @@ const ControlPanel = () => {
                         {
                             data.searchFor === 'Drive' && (
                                 <>
-                                    {console.log("Searching For Drives")}
                                     <div className="form-floating ">
                                         <select
                                             className="form-select text-center"
