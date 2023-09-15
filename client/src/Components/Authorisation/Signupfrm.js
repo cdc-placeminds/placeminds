@@ -257,7 +257,7 @@ const Signupfrm = () => {
             scrollToTopOfForm();
             setTimeout(() => {
 
-                navigate("/");
+                navigate("/login");
             }, 2500);
 
 
