@@ -8,9 +8,11 @@ import Alert from '../Additonal/Alert';
 // for loader 
 // import ClipLoader from "react-spinners/ClipLoader";
 import HashLoader from 'react-spinners/HashLoader';
+import { useLoader } from '../context/LoaderContext';
 
 const Loginfrm = () => {
   const [loading, setLoading] = useState(false);
+  const {setLoadingcont} = useLoader()
   // states for forgotpass 
   const [Fpass, setFpass] = useState(false);
   const [Femail, setFemail] = useState('');
@@ -254,6 +256,7 @@ const Loginfrm = () => {
 
   //When user Submits form
   const handleSubmit = async (e) => {
+    setLoadingcont(true)
     e.preventDefault();
 
     const { email, password } = data;
@@ -274,7 +277,7 @@ const Loginfrm = () => {
     //Converting String Data to JSON
     const userData = await res.json();
 
-
+    setLoadingcont(false)
     //Checking for any error or credentials dont match
     if (res.status === 400 || !userData) {
       showalert("", "Invalid Details", "danger")

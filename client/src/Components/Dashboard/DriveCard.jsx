@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useUserData } from '../context/UserDataContext';
 import { useAlert } from '../context/AlertContext';
-import HashLoader from 'react-spinners/HashLoader';
+import { useLoader } from '../context/LoaderContext';
 
 const DriveCard = ({ datadrive }) => {
 
     const { setuserData, userData } = useUserData();
     const { showalert } = useAlert();
-    const [loading, setLoading] = useState(false);
+    const {setLoadingcont} = useLoader();
 
 
     //Here we are checking if user is applied to this drive initially or not, below expression return True or False
@@ -36,7 +36,7 @@ const DriveCard = ({ datadrive }) => {
 
 
     const handleSubmit = async (e) => {
-        setLoading(true)
+        setLoadingcont(true)
         try {
 
             // ---------------------------Fetch API for Adding User Details to Google Sheet----------------------------------
@@ -86,7 +86,7 @@ const DriveCard = ({ datadrive }) => {
 
 
             // --------------------------------------------------------------------------------------------------------------
-            setLoading(false);
+            setLoadingcont(false);
             if (addtosheet.status === 201) {
                 if (updateApplied.status === 201) {
                     if (updatetotalapplied.status === 201) {
@@ -133,14 +133,6 @@ const DriveCard = ({ datadrive }) => {
                         </span>
 
                     </div>
-                    {loading && <div className='text-center absolute z-[999] top-[50%] left-[50%]' ><HashLoader
-
-                        color={'#0b5ed7'}
-                        loading={loading}
-                        size={60}
-                        aria-label="Loading Spinner"
-                        data-testid="loader"
-                    /></div>}
                     <div>
                         <p className='comprole md:text-[1.3rem]'>{datadrive.profile}</p>
                         <p className="compname md:text-[1.1rem]">{datadrive.name}</p>

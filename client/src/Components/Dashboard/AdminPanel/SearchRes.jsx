@@ -453,11 +453,11 @@ const SearchRes = ({ data, searchFor }) => {
 
 
                                 <div className="form-floating">
-                                    <input id='floatingctc' name='ctc' className="form-control" placeholder='' required value={updatedDriveData.ctc} disabled={isReadOnly ? true : false} onChange={handleInputs} type='text' inputMode='numeric'></input>
+                                    <input id='floatingctc' name='ctc' className="form-control" placeholder='' required value={updatedDriveData.ctc} disabled={isReadOnly ? true : false} onChange={handleInputs} type='text'></input>
                                     <label className='w-full text-headcolor ' htmlFor="floatingctc">CTC</label>
                                 </div>
                                 <div className="form-floating">
-                                    <input id='flaotinglocation' name='location' className="form-control" placeholder='' required value={updatedDriveData.location} disabled={isReadOnly ? true : false} onChange={handleInputs} type='text' inputMode='numeric'></input>
+                                    <input id='flaotinglocation' name='location' className="form-control" placeholder='' required value={updatedDriveData.location} disabled={isReadOnly ? true : false} onChange={handleInputs} type='text'></input>
                                     <label className='w-full text-headcolor ' htmlFor="flaotinglocation">location</label>
                                 </div>
                                 <div className="form-floating">

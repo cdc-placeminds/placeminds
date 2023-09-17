@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Homepage';
 import Signupfrm from "../Authorisation/Signupfrm";
 import AdminDash from "../Dashboard/AdminPanel/AdminDash";
+import Loader from './Loader';
 import { AuthProvider } from "../context/AuthContext";
 import { AdminProvider } from "../context/AdminContext";
 import { UserDataProvider } from "../context/UserDataContext";
@@ -14,6 +15,7 @@ import { ScannerProvider } from "../context/ScannerContext";
 import QRScanner from "../Dashboard/AdminPanel/Qrscanner";
 import ControlPanel from "../Dashboard/AdminPanel/ControlPanel";
 import Landingpage from "./Landingpage";
+import { LoaderProvider } from "../context/LoaderContext";
 
 function App() {
   return (
@@ -24,16 +26,19 @@ function App() {
             <AdminProvider>
               <ScannerProvider>
                 <AlertProvider>
-                  <Navbar />
-                  <Routes>
-                    <Route path='/login' element={<Home />} />
-                    <Route path='/' element={<Landingpage />} />
-                    <Route path='/signup' element={<Signupfrm />} />
-                    <Route path='/dashboard' element={<Dashboard />} />
-                    <Route path="/adddrive" element={<AdminDash />} />
-                    <Route path="/qrscanner" element={<QRScanner />} />
-                    <Route path="/controlpanel" element={<ControlPanel />} />
-                  </Routes>
+                  <LoaderProvider>
+                    <Navbar />
+                    <Loader />
+                    <Routes>
+                      <Route path='/login' element={<Home />} />
+                      <Route path='/' element={<Landingpage />} />
+                      <Route path='/signup' element={<Signupfrm />} />
+                      <Route path='/dashboard' element={<Dashboard />} />
+                      <Route path="/adddrive" element={<AdminDash />} />
+                      <Route path="/qrscanner" element={<QRScanner />} />
+                      <Route path="/controlpanel" element={<ControlPanel />} />
+                    </Routes>
+                  </LoaderProvider>
                 </AlertProvider>
               </ScannerProvider>
             </AdminProvider>

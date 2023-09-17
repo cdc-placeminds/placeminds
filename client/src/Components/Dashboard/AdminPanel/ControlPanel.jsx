@@ -200,7 +200,7 @@ const ControlPanel = () => {
                                     <label className='w-full text-headcolor ' htmlFor="floatingSearchBy">Search By</label>
                                 </div>
                                 <div className="form-floating">
-                                    <input id='floatingenrollment' name='searchinp' className={`form-control `} placeholder='' required value={data.searchinp} onChange={handleInputs} type='text' inputMode='numeric'></input>
+                                    <input id='floatingenrollment' name='searchinp' className={`form-control `} placeholder='' required value={data.searchinp} onChange={handleInputs} type='text' ></input>
                                     <label className='w-full text-headcolor ' htmlFor="floatingenrollment">Enter {data.searchBy}</label>
                                 </div>
 
@@ -230,7 +230,7 @@ const ControlPanel = () => {
                                         <label className='w-full text-headcolor ' htmlFor="floatingSearchBy">Search By</label>
                                     </div>
                                     <div className="form-floating">
-                                        <input id='floatingenrollment' name='searchinp' className={`form-control `} placeholder='' required value={data.searchinp} onChange={handleInputs} type='text' inputMode='numeric'></input>
+                                        <input id='floatingenrollment' name='searchinp' className={`form-control `} placeholder='' required value={data.searchinp} onChange={handleInputs} type='text'></input>
                                         <label className='w-full text-headcolor ' htmlFor="floatingenrollment">Enter {data.searchBy}</label>
                                     </div>
 

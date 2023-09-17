@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate } from "react-router-dom";
 import Emailsender from '../Additonal/Emailsender';
+import { useLoader } from '../context/LoaderContext';
 
 // const dotenv = require("dotenv")
 
 const Signupfrm = () => {
-
+    const {setLoadingcont} = useLoader()
     const [p1Filled, setP1Filled] = useState(false);
     const [emailExists, setEmailExists] = useState(false);
     const [enrollExists, setEnrollExists] = useState(false);
@@ -209,6 +210,7 @@ const Signupfrm = () => {
     }
 
     const handleSubmit = async (e) => {
+        setLoadingcont(true)
         e.preventDefault();
 
         const { name, email, contact, enrollment, password, cpassword, branch, year, gender, dob } = data;
@@ -238,6 +240,7 @@ const Signupfrm = () => {
         //Converting Data in JSON 
         const userData = await res.json();
 
+        setLoadingcont(false)
         //Checking If any error occured 
         if (res.status === 422 || !userData) {
             setFixedWarning({ msg: 'Invalid Details', type: 'warning' });
