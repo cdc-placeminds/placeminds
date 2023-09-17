@@ -27,19 +27,19 @@ function Landingpage() {
     return (
         <div>
             {/* main body of home page  */}
-            <div className=" homepg flex w-full flex-col md:grid md:grid-cols-2 lg:grid-cols-[60%_40%]">
+            <div className=" homepg flex w-full flex-col supports-[min-height:91dvh]:min-h-[91dvh] md:grid md:grid-cols-2 lg:grid-cols-[60%_40%]">
                 <div className="lhmintro flex flex-col bglhm">
                     <div className='w-full h-full grid grid-cols-2 grid-flow-row'>
-                        <div className="introtxt col-span-2 py-[10px] md:py-[5%] flex flex-col justify-evenly">
-                            <div className='w-[100%] px-[6%] py-[10px] mb-[20px] md:mb-[0]'>
+                        <div className="introtxt col-span-2 h-[70vh] py-[15%] md:py-[5%] flex flex-col justify-evenly">
+                            <div className='w-[100%] px-[6%] py-[5%] mb-[10%] md:mb-[0]'>
                                 <img src={maitbluelogo} alt="" className="homelogo w-[45px] md:w-[70px]" />
                             </div>
-                            <div className='bg-[#0000005c] w-[100%] px-[6%] py-[10px] '>
-                                <div className="cdchead mt-[2px] mb-[10px]">
+                            <div className='bg-[#0000005c] w-[100%] px-[6%] py-[5%] '>
+                                <div className="cdchead mt-[1%] mb-[5%]">
                                     <div className="cdcline"></div>
                                     <div className="text-[1.5rem] md:text-[2.5rem] font-[800] font-head text-white ml-[0.5rem] md:ml-[1rem] leading-8 md:leading-10">CAREER <span className='font-head font-[200] text-[1.5rem] md:text-[2.5rem]'>AND</span><br /> DEVELOPMENT CELL</div>
                                 </div>
-                                <div className='mt-[10px] mb-[2px]'>
+                                <div className='mt-[5%] mb-[1%]'>
                                     <div className="text-[1rem] md:text-[2rem] font-[700] font-head text-white leading-[1]">Maharaja Agrasen <br /><span className='font-head font-[200] text-[0.8rem] md:text-[1.8rem]'>Institute of Technology, Delhi</span></div>
                                     <div className="cdchrline"></div>
                                 </div>
