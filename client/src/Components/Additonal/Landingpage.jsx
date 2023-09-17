@@ -30,7 +30,7 @@ function Landingpage() {
             <div className=" homepg flex w-full flex-col supports-[min-height:91dvh]:min-h-[91dvh] md:grid md:grid-cols-2 lg:grid-cols-[60%_40%]">
                 <div className="lhmintro flex flex-col bglhm">
                     <div className='w-full h-full grid grid-cols-2 grid-flow-row'>
-                        <div className="introtxt col-span-2 h-[70vh] py-[15%] md:py-[5%] flex flex-col justify-evenly">
+                        <div className="introtxt col-span-2 h-[64vh] md:h-[91vh] py-[15%] md:py-[5%] flex flex-col justify-evenly">
                             <div className='w-[100%] px-[6%] py-[5%] mb-[10%] md:mb-[0]'>
                                 <img src={maitbluelogo} alt="" className="homelogo w-[45px] md:w-[70px]" />
                             </div>
