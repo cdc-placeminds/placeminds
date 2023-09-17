@@ -25,21 +25,27 @@ connection();
 app.use(express.json());
 app.use(cookieParser());
 
-// app.use(
-//   cors({
-//     origin: "http://localhost:3000",
-//     credentials: true,
-//   })
-// );
+// Define the CORS configurations
+const corsOptionsDevelopment = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+};
 
-const corsOptions = {
+const corsOptionsProduction = {
   origin: ['https://placeminds-frontend.vercel.app'],
   methods: 'GET, POST, PUT, DELETE',
   allowedHeaders: 'Content-Type, Authorization',
   credentials: true,
 };
 
-app.use(cors(corsOptions));
+
+// Use CORS middleware based on the environment
+if (process.env.NODE_ENV === 'development') {
+  app.use(cors(corsOptionsDevelopment));
+} else {
+  app.use(cors(corsOptionsProduction));
+}
+
 
 
 
