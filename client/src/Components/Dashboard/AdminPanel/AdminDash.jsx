@@ -25,7 +25,7 @@ const AdminDash = () => {
     }, [])
 
     const [data, setData] = useState({
-        name: "", location: "", profile: "", ctc: "", branch: [], year: "", deadline: ""
+        name: "", location: "", profile: "", ctc: "", branch: [], year: "", deadline: "", isExtLink: "", ExtLink: "", isOnCampus: ""
     })
 
     const handleInputs = ({ currentTarget: input }) => {
@@ -37,7 +37,7 @@ const AdminDash = () => {
         setLoading(true)
         e.preventDefault();
 
-        const { name, location, profile, ctc, branch, year, deadline } = data;
+        const { name, location, profile, ctc, branch, year, deadline, isExtLink, ExtLink, isOnCampus } = data;
         //Backend URL
         const url = `${process.env.REACT_APP_BASE_URL}/api/drive/newdrive`;
         //Fetch Api Methods Defining
@@ -47,7 +47,7 @@ const AdminDash = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                name, location, profile, ctc, branch, year, deadline
+                name, location, profile, ctc, branch, year, deadline, isExtLink, ExtLink, isOnCampus
             })
         }
 
@@ -106,16 +106,17 @@ const AdminDash = () => {
     const renderBranchOptions = () => {
         const branches = ['CSE', 'CST', 'IT', 'ITE', 'AIDS', 'AIML', 'ECE', 'EEE', 'MAE', 'ME']; // Add more branches if needed
         return branches.map((branch, index) => (
-            <>
+            <div className='flex' key = {index}>
                 <input
                     type="checkbox"
                     id={`branchChoice-${branch}`}
                     name="branch"
+                    key = {index}
                     value={branch}
                     checked={data.branch.includes(branch)}
                     onChange={(e) => handleBranchCheckboxChange(e, branch)} />
                 <label className='mr-[2.5%] ml-[0.5%]' htmlFor={`branchChoice-${branch}`}>{branch}</label>
-            </>
+            </div>
         ));
     };
 
@@ -129,10 +130,23 @@ const AdminDash = () => {
         ));
     };
 
+    function handleCheckboxChange(event) {
+        const target = event.target;
+        const name = target.name;
+        const value = target.checked; // Get the checked state
+    
+        // Update your data object or state with the new value
+        setData({
+            ...data,
+            [name]: value
+        });
+    }
+    
+
     return (
         <div className="container-fluid homebody">
 
-            <div className="col-md-6 md-12 mx-auto signupsec">
+            <div className="col-md-6 md-12 mx-auto flex flex-col justify-around bg-white border-[1px] border-[#676767] rounded-[12px] py-[1%] px-[5%] my-[5%] mx-[15%]">
                 <Alert alert={alert} />
                 <div className="sgnhead">Create New Drive</div>
                 <form className='register_frm' id='register_frm' method="POST" >
@@ -209,15 +223,71 @@ const AdminDash = () => {
 
                             <fieldset className='md:col-span-2 '>
                                 <legend>Branch:</legend>
-                                <div className="branchdiv ">
+                                <div className="branchdiv flex justify-evenly">
                                     {renderBranchOptions()}
                                 </div>
                             </fieldset>
                         </div>
 
-                        {/* <input id='inptbox' value={data.year} onChange={handleInputs} name='year' type='text'></input> */}
+
+                        {/* for on campus  */}
+
+                        <div className="isextli">
+                            <input
+                                id="isOnonCampusCheckbox"
+                                name="isOnCampus"
+                                className="form-check-input"
+                                type="checkbox"
+                                checked={data.isOnCampus}
+                                value={true}
+                                onChange={handleCheckboxChange}
+                            />
+                            <label className="form-check-label" htmlFor="onCampusCheckbox">
+                                On Campus
+                            </label>
+                        </div>
+
+                        {/* external link  */}
+
+                        <div className="isextlink">
+                            <input
+                                id="isExtLink"
+                                name="isExtLink"
+                                className="form-check-input"
+                                type="checkbox"
+                                checked={data.isExtLink}
+                                value={true}
+                                onChange={handleCheckboxChange}
+                            />
+                            <label className="form-check-label" htmlFor="onCampusCheckbox">
+                                External Link
+                            </label>
+                        </div>
+
+
+                        {data.isExtLink ? (
+                            <div className='extlinkdiv md:col-span-2 text-center my-[2%]'> 
+                            <div className="form-floating">
+                                <input
+                                    id="ExtLinkInput"
+                                    name="ExtLink"
+                                    className="form-control text-center"
+                                    placeholder="External Link"
+                                    value={data.ExtLink}
+                                    onChange={handleInputs}
+                                    type="text"
+                                />
+                                <label className="doblbl w-full" htmlFor="ExtLinkInput">
+                                    External Link
+                                </label>
+                            </div>
+                            </div>
+                        ) : null}
+
 
                     </div>
+
+
                 </form>
                 <div className="sgnbtn">
 

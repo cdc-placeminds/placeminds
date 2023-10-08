@@ -7,7 +7,7 @@ const DriveCard = ({ datadrive }) => {
 
     const { setuserData, userData } = useUserData();
     const { showalert } = useAlert();
-    const {setLoadingcont} = useLoader();
+    const { setLoadingcont } = useLoader();
 
 
     //Here we are checking if user is applied to this drive initially or not, below expression return True or False
@@ -33,12 +33,18 @@ const DriveCard = ({ datadrive }) => {
     //TO check wheter user is eligible for drive or not
     const isEligible = datadrive.branch.some((branch) => userData.branch === branch);
 
+    const handleViewDtl = async (e) => {
+         //----------------------------Redirecting User to External Link for Applying------------------------------------
 
+         if (datadrive.isExtLink) {
+            window.open(datadrive.ExtLink, "_blank");
+        }
+    }
 
     const handleSubmit = async (e) => {
         setLoadingcont(true)
         try {
-
+           
             // ---------------------------Fetch API for Adding User Details to Google Sheet----------------------------------
 
             const sheeturl = `${process.env.REACT_APP_BASE_URL}/api/applyapi`
@@ -146,11 +152,11 @@ const DriveCard = ({ datadrive }) => {
             <div className="horline"></div>
             <div className="compdisc">
                 <div className="jobtype compdiscdiv">
-                    <p className="head">Date</p>
+                    <p className="head">Deadline</p>
                     <p className="subhead">{formatDeadline(datadrive)}</p>
                 </div>
                 <div className="ctc compdiscdiv">
-                    <p className="head">Registration Fees</p>
+                    <p className="head">CTC</p>
                     <p className="subhead">{datadrive.ctc}</p>
                 </div>
                 <div className="brelig compdiscdiv">
@@ -185,7 +191,7 @@ const DriveCard = ({ datadrive }) => {
                     <p className='text-[0.6rem] md:text-[0.8rem]'>{appliedstd} Applied</p>
                 </div>
                 <div className="drvbtns">
-                    <button className="viewdtl">View Details</button>
+                    <button className="viewdtl" onClick={handleViewDtl}>View Details</button>
                     {isDriveApplied ? (
                         <button className="applied_btn" disabled>Applied</button>
                     ) : (
@@ -193,7 +199,7 @@ const DriveCard = ({ datadrive }) => {
                             isDeadlineExpired ? (
                                 <button className="deadline_btn" disabled>Closed</button>
                             ) : (
-                                <button className="apnow_btn" onClick={handleSubmit}>Apply Now</button>
+                                <button className={` ${datadrive.isExtLink ? 'hidden' : ''} apnow_btn`} onClick={handleSubmit}>Apply Now</button>
                             )) : (
                             <button className="deadline_btn" disabled>Not Eligible</button>
                         )
